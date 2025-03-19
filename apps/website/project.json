@@ -1,0 +1,75 @@
+{
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/website/src",
+  "targets": {
+    "docusaurus-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus build"
+      },
+      "outputs": [
+        "{workspaceRoot}/dist/apps/website"
+      ]
+    },
+    "docusaurus-serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus start"
+      }
+    },
+    "docusaurus-swizzle": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus swizzle"
+      }
+    },
+    "docusaurus-deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus deploy"
+      }
+    },
+    "docusaurus-clear": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus clear"
+      }
+    },
+    "docusaurus-serve-built": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus serve"
+      }
+    },
+    "docusaurus-write-translations": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus write-translations"
+      }
+    },
+    "docusaurus-write-heading-ids": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "docusaurus write-heading-ids"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/website",
+        "command": "tsc"
+      }
+    }
+  },
+  "tags": []
+}

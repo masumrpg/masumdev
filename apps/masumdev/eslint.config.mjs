@@ -7,7 +7,9 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      'react/style-prop-object': 'off',
+    },
   },
   {
     ignores: ['.expo', 'web-build', 'cache', 'dist'],

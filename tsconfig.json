@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./apps/masumdev"
+    },
+    {
+      "path": "./libs/bottom-sheet"
+    },
+    {
+      "path": "./libs/rn-toast"
     }
   ]
 }

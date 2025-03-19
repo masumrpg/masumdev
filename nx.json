@@ -46,6 +46,25 @@
       "options": {
         "targetName": "lint"
       }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
     }
-  ]
+  ],
+  "targetDefaults": {
+    "docusaurus-build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "docusaurus-serve": {
+      "cache": false
+    }
+  }
 }

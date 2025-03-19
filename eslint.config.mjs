@@ -37,6 +37,8 @@ export default [
       '**/*.mjs',
     ],
     // Override or add rules here
-    rules: {},
+    rules: {
+      'react/style-prop-object': 'off',
+    },
   },
 ];

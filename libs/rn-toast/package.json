@@ -1,0 +1,46 @@
+{
+  "name": "@masumdev/rn-toast",
+  "version": "0.0.1",
+  "main": "./src/index.ts",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.esm.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.esm.d.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "keywords": [
+    "react-native",
+    "toast",
+    "notification",
+    "alert",
+    "mobile"
+  ],
+  "author": "Masum",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.60.0",
+    "react-native-reanimated": ">=2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.70.0",
+    "react": "^18.0.0",
+    "react-native": "^0.70.0",
+    "react-native-reanimated": "^2.0.0",
+    "typescript": "^4.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masumrpg/masumdev",
+    "directory": "libs/rn-toast"
+  }
+}
