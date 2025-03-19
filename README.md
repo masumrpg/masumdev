@@ -1,82 +1,92 @@
-# Masumdev
+# MasumDev React Native Libraries
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A monorepo containing high-quality React Native libraries and components, built with modern development practices and tools.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## 📦 Libraries
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/expo?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+### [@masumdev/bottom-sheet](./libs/bottom-sheet)
 
-## Finish your CI setup
+A highly customizable and gesture-responsive bottom sheet component for React Native applications.
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/WSFiS8wBgD)
+**Key Features:**
+- Customizable snap points (10% to 90% of screen height)
+- iOS and Android back gesture/button handling
+- Smooth animations using react-native-reanimated
+- Scrollable content support
+- Safe area support
 
+### [@masumdev/rn-toast](./libs/rn-toast)
 
-## Run tasks
+A lightweight toast component inspired by Samsung notifications, featuring smooth animations and anti-spam protection.
 
-To run the dev server for your app, use:
+**Key Features:**
+- Lightweight and performant
+- Smart queueing system
+- Customizable styling
+- TypeScript support
+- Works on iOS and Android
 
-```sh
-npx nx serve masumdev
+## 🛠️ Project Structure
+
+```
+├── apps/
+│   ├── masumdev/     # Demo application
+│   └── website/      # Documentation website
+├── libs/
+│   ├── bottom-sheet/ # Bottom sheet library
+│   └── rn-toast/     # Toast library
+└── tools/           # Build and development tools
 ```
 
-To create a production bundle:
+## 🚀 Getting Started
 
-```sh
-npx nx build masumdev
+### Prerequisites
+
+- Node.js (LTS version)
+- npm, yarn, pnpm, or bun
+- React Native development environment
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/masumrpg/masumdev.git
+cd masumdev
 ```
 
-To see all available targets to run for a project, run:
-
-```sh
-npx nx show project masumdev
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## 📱 Demo App
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+The demo application showcases all the libraries in action. To run it:
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/expo:app demo
+```bash
+cd apps/masumdev
+npm start
+# or
+yarn start
 ```
 
-To generate a new library, use:
+## 📖 Documentation
 
-```sh
-npx nx g @nx/react:lib mylib
-```
+Detailed documentation for each library is available in their respective directories:
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+- [Bottom Sheet Documentation](./libs/bottom-sheet/README.md)
+- [Toast Documentation](./libs/rn-toast/README.md)
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🤝 Contributing
 
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 📄 License
 
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/expo?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

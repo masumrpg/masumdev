@@ -27,7 +27,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/masumrpg/masumdev",
+    "url": "git+https://github.com/masumrpg/masumdev.git",
     "directory": "libs/bottom-sheet"
   },
   "peerDependencies": {
