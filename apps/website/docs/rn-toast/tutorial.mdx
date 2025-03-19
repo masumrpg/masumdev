@@ -1,0 +1,339 @@
+---
+sidebar_position: 5
+---
+
+# Tutorial
+
+🚀 Step-by-Step Guide to implement Toast notifications in React Native with smooth animations and anti-spam protection.
+
+## Video Tutorial
+Watch our detailed video guide for a hands-on implementation walkthrough:
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/ytdpXMd1fqU" frameborder="0" allowfullscreen></iframe>
+
+## Features
+
+- 🚀 Lightweight and performant
+- 🎨 Customizable styling
+- 🔄 Animation using React Native Reanimated
+- 📱 Works on iOS and Android
+- 📚 TypeScript support
+- 🧠 Smart queueing system for multiple toasts
+
+## Prerequisites
+Before you begin, make sure you have:
+- React Native project set up
+- Basic understanding of React Native and TypeScript
+
+## Installation
+
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native project. Using incompatible versions may cause unexpected behavior or crashes:
+
+```json
+{
+  "react": "^18.3.1",
+  "react-native": "^0.76.7",
+  "react-native-reanimated": "^2.0.0"
+}
+```
+:::
+
+1. Install the package using your preferred package manager:
+```bash
+npm install @masumdev/rn-toast
+# or
+yarn add @masumdev/rn-toast
+# or
+bun add @masumdev/rn-toast
+# or
+pnpm add @masumdev/rn-toast
+```
+
+2. Follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+
+## Basic Implementation
+
+:::danger Provider Placement
+Always place the Toaster component at the root level of your app. Incorrect provider placement can cause the toast notifications to malfunction.
+:::
+
+1. First, add the Toaster component to your app:
+
+```jsx
+import React from 'react';
+import { View } from 'react-native';
+import { Toaster } from '@masumdev/rn-toast';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <Toaster />
+      {/* Your app content */}
+    </View>
+  );
+}
+```
+
+2. Use the useToast hook in your components:
+
+```jsx
+import React from 'react';
+import { Button, View } from 'react-native';
+import { useToast } from '@masumdev/rn-toast';
+
+export default function MyComponent() {
+  const { showToast } = useToast();
+
+  const handlePress = () => {
+    showToast('Operation successful!', 'success');
+  };
+
+  return (
+    <View>
+      <Button title="Show Toast" onPress={handlePress} />
+    </View>
+  );
+}
+```
+
+## Advanced Usage
+
+### Toast Types
+
+:::tip Toast Types
+The library supports three types of toasts:
+- `info` (default)
+- `success`
+- `error`
+:::
+
+```jsx
+// Show an info toast
+showToast('This is an info message');
+
+// Show a success toast
+showToast('Operation successful!', 'success');
+
+// Show an error toast
+showToast('Something went wrong', 'error');
+```
+
+### Custom Configuration
+
+:::tip Customization
+You can customize the duration and animation speed of toasts to match your app's needs.
+:::
+
+```jsx
+// Custom duration (8 seconds)
+showToast('This will stay longer', 'info', { duration: 8000 });
+
+// Custom animation speed (200ms)
+showToast('Quick animation', 'success', { animationDuration: 200 });
+```
+
+### Customizing the Toaster Component
+
+```jsx
+import React from 'react';
+import { View } from 'react-native';
+import { Toaster } from '@masumdev/rn-toast';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <Toaster
+        defaultDuration={3000} // 3 seconds default duration
+        defaultAnimationDuration={300} // 300ms animation
+        customIcons={{
+          success: require('./assets/my-success-icon.png'),
+          error: require('./assets/my-error-icon.png'),
+          info: require('./assets/my-info-icon.png')
+        }}
+        customColors={{
+          success: { background: '#e6ffe6', text: '#006600' },
+          error: { background: '#ffe6e6', text: '#cc0000' },
+          info: { background: '#e6f2ff', text: '#0066cc' }
+        }}
+      />
+      {/* Your app content */}
+    </View>
+  );
+}
+```
+
+### Manual Toast Control
+
+:::tip Manual Control
+You can manually hide toasts using the hideToast function when needed.
+:::
+
+```jsx
+import React from 'react';
+import { Button, View } from 'react-native';
+import { useToast } from '@masumdev/rn-toast';
+
+export default function MyComponent() {
+  const { showToast, hideToast } = useToast();
+
+  const showMessage = () => {
+    showToast('This is a long toast message...', 'info', { duration: 10000 });
+  };
+
+  const hideMessage = () => {
+    hideToast(() => {
+      console.log('Toast was dismissed');
+    });
+  };
+
+  return (
+    <View>
+      <Button title="Show Toast" onPress={showMessage} />
+      <Button title="Hide Toast" onPress={hideMessage} />
+    </View>
+  );
+}
+```
+
+## API Reference
+
+### Toaster Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultDuration | number | 3000 | Default duration for toasts in milliseconds |
+| defaultAnimationDuration | number | 300 | Default animation duration in milliseconds |
+| customIcons | object | - | Custom icons for different toast types |
+| customColors | object | - | Custom colors for different toast types |
+
+### useToast Hook
+
+The hook returns an object with the following methods:
+
+| Method | Type | Description |
+|--------|------|-------------|
+| showToast | function | Shows a toast with message and type |
+| hideToast | function | Hides the current toast |
+
+### Gesture Handling
+
+:::tip
+Implement gesture handlers using the react-native-gesture-handler library for smooth interactions. Consider debouncing gesture callbacks for better performance.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+
+const { setContent, expand } = useBottomSheet();
+
+const CustomContent = () => {
+  const handleSwipeComplete = (direction) => {
+    if (direction === 'up') {
+      expand('90%');
+    } else if (direction === 'down') {
+      expand('30%');
+    }
+  };
+
+  return (
+    <GestureHandlerRootView>
+      <PanGestureHandler onGestureEvent={handleSwipeComplete}>
+        <View style={styles.container}>
+          <Text>Swipe up or down</Text>
+        </View>
+      </PanGestureHandler>
+    </GestureHandlerRootView>
+  );
+};
+```
+
+### Custom Animations
+
+:::tip
+Use Reanimated's native driver animations for optimal performance. Worklets run on the UI thread and provide smooth animations.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+import Animated, { withSpring } from 'react-native-reanimated';
+
+const AnimatedContent = () => {
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: withSpring(scale.value) }],
+  }));
+
+  return (
+    <Animated.View style={[styles.container, animatedStyle]}>
+      <Text>Animated Content</Text>
+    </Animated.View>
+  );
+};
+```
+
+## Common Use Cases
+
+### Modal Forms
+```tsx
+const handleOpenForm = () => {
+  setSheetTitle('New Item');
+  setContent(
+    <View style={{ padding: 16 }}>
+      <TextInput placeholder="Enter item name" />
+      <Button title="Submit" onPress={handleSubmit} />
+    </View>
+  );
+  expand('60%');
+};
+```
+
+### Action Sheets
+```tsx
+const handleOpenActions = () => {
+  setSheetTitle('Choose Action');
+  setContent(
+    <View style={{ padding: 16 }}>
+      <Pressable onPress={() => { /* action 1 */ }}>
+        <Text>Action 1</Text>
+      </Pressable>
+      <Pressable onPress={() => { /* action 2 */ }}>
+        <Text>Action 2</Text>
+      </Pressable>
+    </View>
+  );
+  expand('30%');
+};
+```
+
+## Troubleshooting
+
+:::tip Debugging
+Enable the React Native Debugger and monitor the component lifecycle to identify issues. Check the console for any warnings or errors related to gesture handling or animations.
+:::
+
+### Common Issues
+1. **Sheet not appearing**
+   - Ensure BottomSheetProvider is at the root level
+   - Check if content is being set correctly
+   - Verify all peer dependencies are properly installed
+
+2. **Gesture handling issues**
+   - Make sure react-native-gesture-handler is properly configured
+   - Check if GestureHandlerRootView wraps your app
+
+3. **Animation performance**
+   - Enable the native driver for animations
+   - Use Hermes engine for better performance
+   - Avoid heavy computations during animations
+
+2. **Gesture issues**
+   - Verify react-native-reanimated is properly installed
+   - Check for conflicting gesture handlers
+
+3. **Layout problems**
+   - Ensure proper usage of SafeAreaView
+   - Check for conflicting style properties
+
+For more examples and advanced usage, check out our [demo page](/docs/rn-toast/demo).

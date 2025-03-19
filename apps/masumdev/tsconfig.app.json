@@ -28,6 +28,9 @@
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
   "references": [
     {
+      "path": "../../libs/rn-toast/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/bottom-sheet/tsconfig.lib.json"
     }
   ]

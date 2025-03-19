@@ -4,6 +4,9 @@
   "include": [],
   "references": [
     {
+      "path": "../../libs/rn-toast"
+    },
+    {
       "path": "../../libs/bottom-sheet"
     },
     {

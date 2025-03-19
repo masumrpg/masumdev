@@ -1,0 +1,102 @@
+---
+sidebar_position: 2
+---
+
+# Installation
+
+## Prerequisites
+
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native or Expo project. Using incompatible versions may cause unexpected behavior or crashes:
+
+```json
+{
+  "react": "^18.3.1",
+  "react-native": "^0.76.7",
+  "react-native-reanimated": "^3.16.7",
+  "react-native-gesture-handler": "^2.20.2",
+  "react-native-safe-area-context": "^4.12.0",
+  "@react-navigation/native": "^6.x"
+}
+```
+
+### Installing prerequisites package
+
+:::tip Recommended Installation
+Use the following command to install all required peer dependencies at once:
+
+```bash
+npm install react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
+```
+:::
+
+## Expo Setup
+
+:::tip Expo Installation
+If you're using Expo, we recommend using `expo install` instead of `npm install` to ensure compatibility with your Expo SDK version.
+:::
+
+### Managed Workflow
+
+1. Install the required dependencies:
+
+```bash
+npx expo install react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
+```
+
+2. Update your `babel.config.js`:
+
+```js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin'],
+  };
+};
+```
+
+3. Add the following to your `app.json` or `app.config.js`:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      "react-native-reanimated"
+    ]
+  }
+}
+```
+
+## Troubleshooting
+
+:::danger Common Issues
+- For Reanimated issues, ensure you've rebuilt the app after installing the package
+- Make sure all peer dependencies versions match the requirements
+- If you encounter "Reanimated plugin not found" error, verify your babel.config.js is properly configured
+- Metro bundler cache issues can be resolved by clearing the cache: `npx react-native start --reset-cache`
+:::
+
+#### Using npm
+
+```bash
+npm install @masumdev/bottom-sheet
+```
+
+#### Using yarn
+
+```bash
+yarn add @masumdev/bottom-sheet
+```
+
+#### Using bun
+
+```bash
+bun add @masumdev/bottom-sheet
+```
+
+#### Using pnpm
+
+```bash
+pnpm add @masumdev/bottom-sheet
+```

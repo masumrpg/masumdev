@@ -1,0 +1,8 @@
+{
+  "label": "🔔 Toast",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "⚡ Create beautiful toast notifications with ease! 🚀 This powerful library offers a seamless way to implement elegant, customizable toast messages in your React Native apps. Perfect for alerts, notifications, and feedback! 💪 @masumdev/rn-toast"
+  }
+}

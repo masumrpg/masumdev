@@ -1,0 +1,56 @@
+---
+sidebar_position: 3
+---
+
+# Basic Setup
+
+:::tip
+Place the `Toaster` at the root of your app to ensure all components have access to the toast functionality. This is crucial for proper state management and performance optimization.
+:::
+
+1. Add `Toaster` your app:
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import { Toaster } from '@masumdev/rn-toast';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1 }}>
+      <Toaster />
+      {/* Your app content */}
+    </View>
+  );
+}
+```
+
+2. Use the `useToast` hook in your components:
+
+:::danger
+Never call `useToast` outside of a React component or in a conditional statement. This will lead to unexpected behavior and potential memory leaks.
+:::
+
+:::tip
+The `useToast` hook provides methods to show different types of toasts (success, error, info, warning). Choose the appropriate type based on your notification needs.
+:::
+
+```tsx
+import React from 'react';
+import { Button, View } from 'react-native';
+import { useToast } from '@masumdev/rn-toast';
+
+export default function MyComponent() {
+  const { showToast } = useToast();
+
+  const handlePress = () => {
+    showToast('Operation successful!', 'success');
+  };
+
+  return (
+    <View>
+      <Button title="Show Toast" onPress={handlePress} />
+    </View>
+  );
+}
+```

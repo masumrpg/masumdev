@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'React Native Components',
+  tagline: 'Beautiful and Reusable React Native Components',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -71,7 +71,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Masumdev',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -81,11 +81,11 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docs',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/masumrpg/masumdev',
           label: 'GitHub',
           position: 'right',
         },
@@ -98,25 +98,29 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Introduction',
               to: '/docs/intro',
+            },
+            {
+              label: 'Bottom Sheet',
+              to: '/docs/category/bottom-sheet',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Social Media',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Facebook',
+              href: 'https://www.facebook.com/masum.rpg',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/ma-sum-575068196',
             },
             {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: 'Instagram',
+              href: 'https://www.instagram.com/masum.rpg',
             },
           ],
         },
@@ -129,12 +133,12 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/masumrpg/masumdev',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Masumdev.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -2,46 +2,52 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# 🚀 Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to **MasumDev React Native Components** - a collection of high-quality, customizable React Native components designed to enhance your mobile app development experience! ✨
 
-## Getting Started
+## 📦 Available Components
 
-Get started by **creating a new site**.
+Discover our powerful components:
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### 🎯 Bottom Sheet
+A sleek bottom sheet with buttery-smooth animations!
+- 📐 Customizable snap points
+- 🎨 Beautiful backdrop effects
+- 🔄 Dynamic content loading
+- 💫 Smooth gesture controls
 
-### What you'll need
+> 💡 **Pro Tip**: Use the backdrop tap feature to dismiss the sheet for better UX!
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### 🔔 React Native Toast
+Elegant notifications that your users will love!
+- 🎨 Modern, clean design
+- 📍 Multiple positions
+- 🎯 Easy to integrate
+- ✨ Fully customizable
 
-## Generate a new site
+> 💡 **Pro Tip**: Keep toast messages short and clear for the best user experience!
 
-Generate a new Docusaurus site using the **classic template**.
+## 📚 Documentation
 
-The classic template will automatically be added to your project after you run the command:
+Dive into our detailed guides:
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+- [📖 Bottom Sheet Guide](./bottom-sheet/basic-usage)
+- [📖 Toast Guide](./rn-toast/basic-usage)
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## 🔮 Coming Soon
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Exciting updates on the horizon:
 
-## Start your site
+- 🎨 More UI components
+- ⚡️ Performance improvements
+- 🛠️ Advanced customization options
+- 🧩 Utility components
 
-Run the development server:
+## 🤝 Contributing
 
-```bash
-cd my-website
-npm run start
-```
+Join our community! Check out our [GitHub repository](https://github.com/masumrpg/masumdev) to start contributing. Every PR makes a difference! 💪
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+## 💬 Support
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Need help? Visit our [GitHub Issues](https://github.com/masumrpg/masumdev/issues) page. We're here to help you build amazing apps! 🌟
