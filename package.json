@@ -2,7 +2,9 @@
   "name": "@masumdev/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:app": "bunx nx run-many --target=build --all && bunx nx start masumdev"
+  },
   "private": true,
   "dependencies": {
     "@babel/preset-env": "^7.26.9",
