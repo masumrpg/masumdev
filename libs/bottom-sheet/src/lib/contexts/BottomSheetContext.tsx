@@ -12,7 +12,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 // Import untuk handle iOS back gesture
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import BottomSheetScrollView from "../components/BottomSheetScrollView";
-import { BottomSheetContextType, BottomSheetMethods, BottomSheetProviderProps } from "../types";
+import {
+  BottomSheetContextType,
+  BottomSheetMethods,
+  BottomSheetProviderProps,
+} from '../types';
 
 // Create Context with Default Value
 const BottomSheetContext = createContext<BottomSheetContextType | undefined>(

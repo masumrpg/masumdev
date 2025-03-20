@@ -1,13 +1,32 @@
 {
   "name": "@masumdev/bottom-sheet",
-  "version": "1.0.3",
-  "main": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "types": "./dist/index.esm.d.ts",
+  "version": "1.0.10",
+  "scripts": {
+    "build": "bob build"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.lib.json",
+          "tsc": "../../node_modules/.bin/tsc"
+        }
+      ]
+    ]
+  },
+  "main": "./dist/commonjs/index.js",
+  "module": "./dist/module/index.js",
+  "types": "./dist/typescript/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.esm.d.ts",
-      "import": "./src/index.ts",
+      "types": "./dist/typescript/index.d.ts",
+      "import": "./dist/module/index.js",
+      "require": "./dist/commonjs/index.js",
       "default": "./src/index.ts"
     },
     "./package.json": "./package.json"
@@ -40,7 +59,6 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
-    "typescript": "~5.3.3",
-    "rollup": "^4.9.6"
+    "typescript": "~5.3.3"
   }
 }

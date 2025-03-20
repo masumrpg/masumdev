@@ -1,4 +1,6 @@
-# @masumdev/rn-toast [![npm version](https://badge.fury.io/js/@masumdev%2Frn-toast.svg)](https://badge.fury.io/js/@masumdev%2Frn-toast)
+# @masumdev/rn-toast
+
+[![npm version](https://badge.fury.io/js/@masumdev%2Frn-toast.svg)](https://badge.fury.io/js/@masumdev%2Frn-toast)
 
 A simple toast for React Native, inspired by Samsung notifications. This library provides a lightweight toast component with smooth animations and anti-spam protection, ensuring a seamless user experience.
 
@@ -9,7 +11,7 @@ A simple toast for React Native, inspired by Samsung notifications. This library
   <img src="./demo-toast.gif" alt="Toast Demo" width="45%" height="auto" style="vertical-align: top;" />
 </p>
 
-## Youtube Tutorial
+### Tutorial Video
 <p align="center">
   <a href="https://www.youtube.com/watch?v=ytdpXMd1fqU" target="_blank">
     <img src="https://img.youtube.com/vi/ytdpXMd1fqU/maxresdefault.jpg"
@@ -19,6 +21,8 @@ A simple toast for React Native, inspired by Samsung notifications. This library
     />
   </a>
 </p>
+
+*Demo showing various toast notifications: success, error, and info types with smooth animations and anti-spam protection*
 
 ## Features
 
@@ -31,45 +35,26 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 
 ## Installation
 
-### Prerequisites
-
-Make sure you have these peer dependencies installed in your React Native project:
-
-```json
-{
-  "react": "^18.3.1",
-  "react-native": "^0.76.7",
-  "react-native-reanimated": "^2.0.0"
-}
-```
-
-### Using npm
-
 ```bash
 npm install @masumdev/rn-toast
-```
-
-### Using yarn
-
-```bash
+# or
 yarn add @masumdev/rn-toast
-```
-
-### Using bun
-
-```bash
+# or
+pnpm install @masumdev/rn-toast
+# or
 bun add @masumdev/rn-toast
 ```
 
-### Using pnpm
+### Dependencies
 
-```bash
-pnpm add @masumdev/rn-toast
-```
+This package requires the following peer dependencies:
+- `react-native-reanimated` >= 2.0.0
 
 Make sure to follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
-## Basic Usage
+## Usage
+
+### Basic Setup
 
 1. Add the `Toaster` component to your app's root component:
 
@@ -110,8 +95,6 @@ export default function MyComponent() {
 }
 ```
 
-## Advanced Usage
-
 ### Toast Types
 
 The library supports three types of toasts:
@@ -130,7 +113,7 @@ showToast('Operation successful!', 'success');
 showToast('Something went wrong', 'error');
 ```
 
-### Custom Configuration
+### Customization Options
 
 You can customize the duration and animation speed:
 
@@ -205,29 +188,10 @@ export default function MyComponent() {
 }
 ```
 
-## API Reference
-
-### Toaster Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultDuration | number | 3000 | Default duration for toasts in milliseconds |
-| defaultAnimationDuration | number | 300 | Default animation duration in milliseconds |
-| customIcons | object | - | Custom icons for different toast types |
-| customColors | object | - | Custom colors for different toast types |
-
-### useToast Hook
-
-The hook returns an object with the following methods:
-
-| Method | Type | Description |
-|--------|------|-------------|
-| showToast | function | Shows a toast with message and type |
-| hideToast | function | Hides the current toast |
-
 ## License
 
 MIT
+
 
 ## Author
 

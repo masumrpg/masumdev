@@ -16,14 +16,14 @@ import { useToast } from '@masumdev/rn-toast';
 export default function Index() {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
-  const {expand,setSheetTitle,setContent,close} = useBottomSheet();
-  const {showToast} = useToast()
+  const { expand, setSheetTitle, setContent, close } = useBottomSheet();
+  const { showToast } = useToast();
 
   const openSheet = () => {
-    setSheetTitle('What\'s next?');
-    setContent(<Button title="Close" onPress={close}/>);
+    setSheetTitle("What's next?");
+    setContent(<Button title="Close" onPress={close} />);
     expand();
-    showToast("Bottom Sheet Opened", "success");
+    showToast('Bottom Sheet Opened', 'success');
   };
 
   return (
@@ -36,7 +36,7 @@ export default function Index() {
         style={styles.scrollView}
       >
         <View style={styles.section}>
-          <Button title="Open sheet" onPress={openSheet}/>
+          <Button title="Open sheet" onPress={openSheet} />
           <Text style={styles.textLg}>Hello there,</Text>
           <Text
             style={[styles.textXL, styles.appTitleText]}
@@ -76,7 +76,9 @@ export default function Index() {
                 });
               }}
             >
-              <Text style={[styles.textMd, styles.textCenter]}>What's next?</Text>
+              <Text style={[styles.textMd, styles.textCenter]}>
+                What's next?
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -1,10 +1,9 @@
-import React from "react";
-import { StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedStyle,
-} from "react-native-reanimated";
-import { BackDropProps } from "../types";
+} from 'react-native-reanimated';
+import { BackDropProps } from '../types';
 
 const BackDrop = ({
   topAnimation,
@@ -19,7 +18,7 @@ const BackDrop = ({
       [closeHeight, openHeight],
       [0, 0.5]
     );
-    const display = opacity === 0 ? "none" : "flex";
+    const display = opacity === 0 ? 'none' : 'flex';
     return {
       opacity,
       display,
@@ -47,6 +46,6 @@ export default BackDrop;
 const styles = StyleSheet.create({
   backDrop: {
     ...StyleSheet.absoluteFillObject,
-    display: "none",
+    display: 'none',
   },
 });

@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, View } from "react-native";
-import React, {
+import {
   forwardRef,
   memo,
   useCallback,
@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -296,12 +296,12 @@ const styles = StyleSheet.create({
   },
   lineContainer: {
     marginVertical: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   line: {
     width: 50,
     height: 4,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     borderRadius: 20,
   },
 });

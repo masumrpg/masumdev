@@ -1,2 +1,1 @@
-export * from './contexts/BottomSheetContext';
-export * from './types';
+export * from './lib';

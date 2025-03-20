@@ -5,16 +5,19 @@ import { ToastOptions, ToastRef, ToastType } from "../types";
 class ToastManagerSingleton {
   private static instance: ToastManagerSingleton;
   private toastRef: ToastRef | null = null;
-  private listeners: Set<(ref: ToastRef) => void> = new Set();
-  private isAnimating: boolean = false;
+  // private listeners: Set<(ref: ToastRef) => void> = new Set();
+  private isAnimating = false;
   private queue: {
     message: string;
     type: ToastType;
     options?: ToastOptions;
   }[] = [];
-  private lastToastTime: number = 0;
+  private lastToastTime = 0;
 
-  private constructor() {}
+  // Private constructor to prevent direct instantiation
+  private constructor() {
+    // Initialize singleton instance
+  }
 
   /** Get the singleton instance of ToastManager. */
   static getInstance(): ToastManagerSingleton {
@@ -52,10 +55,10 @@ class ToastManagerSingleton {
   }
 
   /** Check if a toast request is valid */
-  private isValidToastRequest(message: string): boolean {
-    // Check if message is empty or just whitespace
-    return message !== undefined && message !== null && message.trim() !== "";
-  }
+  // private isValidToastRequest(message: string): boolean {
+  //   // Check if message is empty or just whitespace
+  //   return message !== undefined && message !== null && message.trim() !== "";
+  // }
 
   /** Show a toast message. */
   show(message: string, type: ToastType = "info", options?: ToastOptions) {
@@ -92,13 +95,13 @@ class ToastManagerSingleton {
   }
 
   // Add a listener for when the toast is ready
-  private onReady(callback: (ref: ToastRef) => void) {
-    if (this.toastRef) {
-      callback(this.toastRef);
-    } else {
-      this.listeners.add(callback);
-    }
-  }
+  // private onReady(callback: (ref: ToastRef) => void) {
+  //   if (this.toastRef) {
+  //     callback(this.toastRef);
+  //   } else {
+  //     this.listeners.add(callback);
+  //   }
+  // }
 }
 
 /** Singleton instance to manage toasts globally. */
