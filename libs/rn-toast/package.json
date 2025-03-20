@@ -1,6 +1,6 @@
 {
   "name": "@masumdev/rn-toast",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "homepage": "https://docs.masum.cloud/docs/category/-toast",
   "scripts": {
     "build": "bob build"
@@ -60,7 +60,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/masumrpg/rn-toast.git",
+    "url": "git+https://github.com/masumrpg/masumdev.git",
     "directory": "libs/rn-toast"
   }
 }
