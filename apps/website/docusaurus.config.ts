@@ -101,10 +101,6 @@ const config: Config = {
               label: 'Introduction',
               to: '/docs/intro',
             },
-            {
-              label: 'Bottom Sheet',
-              to: '/docs/category/bottom-sheet',
-            },
           ],
         },
         {
