@@ -1,19 +1,74 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+javascript:
+  label: JavaScript
+  permalink: /javascript
+  description: Articles about JavaScript programming language
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+react:
+  label: React
+  permalink: /react
+  description: React.js framework related content
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+nodejs:
+  label: Node.js
+  permalink: /nodejs
+  description: Node.js runtime and backend development
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+typescript:
+  label: TypeScript
+  permalink: /typescript
+  description: TypeScript programming language topics
+
+webdev:
+  label: Web Development
+  permalink: /webdev
+  description: General web development articles
+
+mobile:
+  label: Mobile Development
+  permalink: /mobile
+  description: Mobile app development topics
+
+programming:
+  label: Programming
+  permalink: /programming
+  description: General programming concepts and tips
+
+frontend:
+  label: Frontend
+  permalink: /frontend
+  description: Frontend development techniques and tools
+
+reactnative:
+  label: React Native
+  permalink: /react-native
+  description: Mobile app development with React Native framework
+
+expo:
+  label: Expo
+  permalink: /expo
+  description: Development with Expo framework for React Native
+
+mobile-development:
+  label: Mobile Development
+  permalink: /mobile-development
+  description: Mobile application development concepts and practices
+
+bottom-sheet:
+  label: Bottom Sheet
+  permalink: /bottom-sheet
+  description: Bottom sheet UI component implementations
+
+ui-components:
+  label: UI Components
+  permalink: /ui-components
+  description: User interface component development
+
+tutorials:
+  label: Tutorials
+  permalink: /tutorials
+  description: Step-by-step guides and educational content
+
+app-development:
+  label: App Development
+  permalink: /app-development
+  description: Application development processes and best practices
