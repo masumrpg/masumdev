@@ -19,11 +19,17 @@ import Animated, {
   withDelay,
   withTiming,
   cancelAnimation,
-} from "react-native-reanimated";
-import { ASSETS, CONTAINER_SIZE, PADDING, SCREEN_WIDTH } from "../constants";
-import { ToastComponentProps, ToastConfig, ToastOptions, ToastRef, ToastType } from "../types";
-import { styles } from "../styles";
-import { ToastManager } from "../managers/ToastManager";
+} from 'react-native-reanimated';
+import { ASSETS, CONTAINER_SIZE, PADDING, SCREEN_WIDTH } from '../constants';
+import {
+  ToastComponentProps,
+  ToastConfig,
+  ToastOptions,
+  ToastRef,
+  ToastType,
+} from '../types';
+import { styles } from '../styles';
+import { ToastManager } from '../managers/ToastManager';
 
 export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
   const {
@@ -59,11 +65,11 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
   useImperativeHandle(ref, () => ({
     show: (
       message: string,
-      type: ToastType = "info",
+      type: ToastType = 'info',
       options?: ToastOptions
     ) => {
       // Skip empty messages
-      if (!message || message.trim() === "") {
+      if (!message || message.trim() === '') {
         updateAnimationStatus(false);
         return;
       }
@@ -84,7 +90,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     const refObject = {
       show: (message: string, type: ToastType, options?: ToastOptions) => {
         // Skip empty messages
-        if (!message || message.trim() === "") {
+        if (!message || message.trim() === '') {
           updateAnimationStatus(false);
           return;
         }
@@ -132,7 +138,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
 
   // Animated styles
   const animatedContainerStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: transY.value }],
+    transform: [{ translateY: transY.value }] as any,
   }));
 
   const animatedInnerStyle = useAnimatedStyle(() => ({
@@ -158,7 +164,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     displayDuration: number
   ) {
     // Validate text content
-    if (!text || text.trim() === "") {
+    if (!text || text.trim() === '') {
       updateAnimationStatus(false);
       return;
     }
@@ -259,9 +265,9 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     }
 
     switch (config.type) {
-      case "success":
+      case 'success':
         return ASSETS.success;
-      case "error":
+      case 'error':
         return ASSETS.error;
       default:
         return ASSETS.info;
@@ -274,12 +280,12 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     }
 
     switch (config.type) {
-      case "success":
-        return "#d8e3d6";
-      case "error":
-        return "#d2c5c6";
+      case 'success':
+        return '#d8e3d6';
+      case 'error':
+        return '#d2c5c6';
       default:
-        return "#c5c9d2";
+        return '#c5c9d2';
     }
   }
 
@@ -289,17 +295,17 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     }
 
     switch (config.type) {
-      case "success":
-        return "#2a7e1a";
-      case "error":
-        return "#ce3f4a";
+      case 'success':
+        return '#2a7e1a';
+      case 'error':
+        return '#ce3f4a';
       default:
-        return "#3f82ce";
+        return '#3f82ce';
     }
   }
 
   // Only render if we have actual text content
-  if (!config.text || config.text.trim() === "") {
+  if (!config.text || config.text.trim() === '') {
     return null;
   }
 
@@ -311,7 +317,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
           <Text
             style={{
               color: getTextColor(),
-              fontWeight: "500",
+              fontWeight: '500',
               fontSize: 16,
             }}
             onLayout={onTextLayout}
@@ -340,7 +346,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
               style={[
                 {
                   color: getTextColor(),
-                  fontWeight: "500",
+                  fontWeight: '500',
                   fontSize: 16,
                 },
                 animatedTextStyle,

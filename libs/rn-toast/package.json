@@ -1,6 +1,7 @@
 {
   "name": "@masumdev/rn-toast",
-  "version": "1.0.13",
+  "version": "1.0.14",
+  "homepage": "https://docs.masum.cloud/docs/category/-toast",
   "scripts": {
     "build": "bob build"
   },
