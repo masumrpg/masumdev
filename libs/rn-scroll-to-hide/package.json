@@ -1,7 +1,7 @@
 {
-  "name": "@masumdev/rn-toast",
-  "version": "1.0.16",
-  "homepage": "https://docs.masum.cloud/docs/category/-toast",
+  "name": "@masumdev/rn-scroll-to-hide",
+  "version": "1.0.0",
+  "homepage": "https://docs.masum.cloud/docs/category/-rn-scroll-to-hide",
   "scripts": {
     "build": "bob build"
   },
@@ -38,13 +38,31 @@
   ],
   "keywords": [
     "react-native",
-    "toast",
-    "notification",
-    "alert",
+    "scroll",
+    "scroll-to-hide",
+    "hide",
+    "scroll-to",
+    "scroll-to-hide-header",
+    "scroll-to-hide-footer",
+    "scroll-to-hide-component",
+    "scroll-to-hide-view",
+    "scroll-to-hide-view-component",
+    "scroll-to-hide-view-header",
+    "scroll-to-hide-view-footer",
+    "scroll-to-hide-view-component-header",
+    "scroll-to-hide-view-component-footer",
+    "scroll-to-hide-view-component-header-footer",
+    "scroll-to-hide-view-component-header-footer-component",
+    "scroll-to-hide-view-component-header-footer-component-header",
     "mobile"
   ],
   "author": "Masum",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masumrpg/masumdev.git",
+    "directory": "libs/rn-scroll-to-hide"
+  },
   "peerDependencies": {
     "react": "^18.3.1",
     "react-native": "^0.76.9",
@@ -53,10 +71,5 @@
   "devDependencies": {
     "@types/react": "^18.3.12",
     "typescript": "^5.7.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/masumrpg/masumdev.git",
-    "directory": "libs/rn-toast"
   }
 }

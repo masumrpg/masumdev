@@ -11,6 +11,9 @@
     },
     {
       "path": "./libs/rn-toast"
+    },
+    {
+      "path": "./libs/rn-scroll-to-hide"
     }
   ]
 }

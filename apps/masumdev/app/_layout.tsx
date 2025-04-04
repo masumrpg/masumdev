@@ -1,7 +1,8 @@
+import 'react-native-reanimated';
 import { BottomSheetProvider } from '@masumdev/bottom-sheet';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import {Toaster} from '@masumdev/rn-toast'
+import { Toaster } from '@masumdev/rn-toast';
 
 export default function RootLayout() {
   return (
