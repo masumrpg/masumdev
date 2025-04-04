@@ -25,7 +25,13 @@
     "eslint.config.cjs",
     "eslint.config.mjs"
   ],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "hooks/useIsHeaderShown.ts"
+  ],
   "references": [
     {
       "path": "../../libs/rn-toast/tsconfig.lib.json"

@@ -110,6 +110,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
       // Clean up on unmount
       ToastManager.setToastRef(null);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Animation when text width changes
@@ -134,6 +135,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
         withTiming(1, { duration: config.animationDuration })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textWidth, config.text, config.visible, config.animationDuration]);
 
   // Animated styles

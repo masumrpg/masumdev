@@ -260,7 +260,6 @@ const useHideOnScroll = (
   };
 };
 
-export default useHideOnScroll;
-export { HideDirection };
+export { useHideOnScroll, HideDirection };
 export type { UseHideOnScrollOptions, UseHideOnScrollResult };
 
