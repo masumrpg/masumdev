@@ -1,0 +1,123 @@
+---
+sidebar_position: 4
+---
+
+# Advanced Usage
+
+### Custom Configuration
+
+:::tip
+The `useHideOnScroll` hook accepts various configuration options to customize the animation behavior and sensitivity.
+:::
+
+```tsx
+const header = useHideOnScroll({
+  // Required: Component height
+  height: 60,
+
+  // Optional: Animation duration in milliseconds
+  duration: 300,
+
+  // Optional: Minimum scroll distance to trigger hide/show
+  threshold: 10,
+
+  // Optional: Whether to hide when scrolling down
+  hideOnScrollDown: true,
+
+  // Optional: Direction to hide (UP or DOWN)
+  hideDirection: HideDirection.UP
+});
+```
+
+### Programmatic Control
+
+:::tip
+You can programmatically control the visibility of your component using the methods provided by the hook.
+:::
+
+```tsx
+import React from 'react';
+import { View, ScrollView, Button } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View style={[styles.header, header.animatedStyle]}>
+        <Text>Header</Text>
+        <Button
+          title="Toggle Header"
+          onPress={() => header.toggle()}
+        />
+        <Button
+          title="Show Header"
+          onPress={() => header.show()}
+        />
+        <Button
+          title="Hide Header"
+          onPress={() => header.hide()}
+        />
+      </Animated.View>
+
+      <ScrollView
+        onScroll={header.onScroll}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+    </View>
+  );
+}
+```
+
+### Multiple Components
+
+:::tip
+You can use multiple instances of `useHideOnScroll` to control different components independently.
+:::
+
+```tsx
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  const tabbar = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.DOWN
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View style={[styles.header, header.animatedStyle]}>
+        <Text>Header</Text>
+      </Animated.View>
+
+      <ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: header.scrollY } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+
+      <Animated.View style={[styles.tabbar, tabbar.animatedStyle]}>
+        <Text>Tabbar</Text>
+      </Animated.View>
+    </View>
+  );
+}
+```
+
+:::tip
+When using multiple components, make sure to properly handle the scroll events for each component.
+:::

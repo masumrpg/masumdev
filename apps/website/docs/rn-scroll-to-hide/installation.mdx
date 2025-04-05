@@ -1,0 +1,92 @@
+---
+sidebar_position: 2
+---
+
+# Installation
+
+## Prerequisites
+
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native or Expo project. Using incompatible versions may cause unexpected behavior or crashes:
+
+```json
+{
+  "react": "^18.3.1",
+  "react-native": "^0.76.9",
+  "react-native-reanimated": "^3.16.1"
+}
+```
+
+### Installing prerequisites package
+
+:::tip Recommended Installation
+Use the following command to install the required peer dependency:
+
+```bash
+npm install react-native-reanimated
+```
+:::
+
+## Expo Setup
+
+:::tip Expo Installation
+If you're using Expo, we recommend using `expo install` instead of `npm install` to ensure compatibility with your Expo SDK version.
+:::
+
+### Managed Workflow
+
+1. Install the required dependencies:
+
+```bash
+npx expo install react-native-reanimated
+```
+
+2. Update your `babel.config.js`:
+
+```js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin'],
+  };
+};
+```
+
+## Installing @masumdev/rn-scroll-to-hide
+
+Choose one of the following package managers to install the scroll-to-hide component:
+
+#### Using npm
+
+```bash
+npm install @masumdev/rn-scroll-to-hide
+```
+
+#### Using yarn
+
+```bash
+yarn add @masumdev/rn-scroll-to-hide
+```
+
+#### Using bun
+
+```bash
+bun add @masumdev/rn-scroll-to-hide
+```
+
+#### Using pnpm
+
+```bash
+pnpm add @masumdev/rn-scroll-to-hide
+```
+
+## Troubleshooting
+
+:::danger Common Issues
+- For Reanimated issues, ensure you've rebuilt the app after installing the package
+- Make sure all peer dependencies versions match the requirements
+- If you encounter "Reanimated plugin not found" error, verify your babel.config.js is properly configured
+- Metro bundler cache issues can be resolved by clearing the cache: `npx react-native start --reset-cache`
+- If animations are not working, check that Reanimated is properly configured in your babel.config.js
+:::

@@ -1,0 +1,91 @@
+---
+sidebar_position: 6
+---
+
+# API Reference
+
+## useHideOnScroll Hook
+
+:::tip Hook Configuration
+The `useHideOnScroll` hook provides a simple interface for creating scroll-based hide/show animations. It returns an object containing animation styles and control methods.
+:::
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| height | number | - | Required. Height of the component to animate |
+| duration | number | 300 | Animation duration in milliseconds |
+| threshold | number | 10 | Minimum scroll distance to trigger hide/show |
+| hideOnScrollDown | boolean | true | Whether to hide when scrolling down |
+| hideDirection | HideDirection | HideDirection.DOWN | Direction to hide the component |
+
+### Return Value
+
+The hook returns an object with the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| animatedStyle | object | Animated style object to be applied to your component |
+| scrollY | Animated.Value | The scroll position value |
+| isVisible | boolean | Current visibility state of the component |
+| show | () => void | Method to show the component |
+| hide | () => void | Method to hide the component |
+| toggle | () => void | Method to toggle component visibility |
+| onScroll | (event: NativeSyntheticEvent&lt;NativeScrollEvent&gt;) => void | Scroll event handler |
+
+## HideDirection Enum
+
+:::tip Direction Configuration
+Use the HideDirection enum to specify which direction your component should hide in.
+:::
+
+```tsx
+enum HideDirection {
+  UP = 'UP',
+  DOWN = 'DOWN'
+}
+```
+
+## Usage Example
+
+:::tip Implementation
+Here's a complete example showing how to use all the available API options:
+:::
+
+```tsx
+import React from 'react';
+import { View, ScrollView } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    duration: 300,
+    threshold: 10,
+    hideOnScrollDown: true,
+    hideDirection: HideDirection.UP
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View
+        style={[
+          styles.header,
+          header.animatedStyle
+        ]}
+      >
+        <Text>Header</Text>
+      </Animated.View>
+
+      <ScrollView
+        onScroll={header.onScroll}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+    </View>
+  );
+}
+```

@@ -1,0 +1,71 @@
+---
+sidebar_position: 3
+---
+
+# Basic Setup
+
+:::tip
+The `useHideOnScroll` hook provides a simple way to create hide/show animations for components based on scroll direction. This is perfect for headers, footers, or any component that should respond to scroll behavior.
+:::
+
+1. Import the necessary components:
+
+```tsx
+import React from 'react';
+import { View, ScrollView } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+```
+
+2. Set up your component with the hook:
+
+:::danger
+Make sure to provide the correct component height to the hook. An incorrect height value will result in improper animations.
+:::
+
+```tsx
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  const tabbar = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.DOWN
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View
+        style={[
+          styles.header,
+          header.animatedStyle
+        ]}
+      >
+        <Text>Header</Text>
+      </Animated.View>
+
+      <ScrollView
+        onScroll={header.onScroll}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+
+      <Animated.View
+        style={[
+          styles.tabbar,
+          tabbar.animatedStyle
+        ]}
+      >
+        <Text>Tabbar</Text>
+      </Animated.View>
+    </View>
+  );
+}
+```
+
+:::tip
+The `scrollEventThrottle={16}` prop ensures smooth 60fps animations by updating the scroll position every 16ms.
+:::

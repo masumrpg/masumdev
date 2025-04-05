@@ -1,0 +1,8 @@
+{
+  "label": "📜 Scroll to Hide",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "⚡ Create smooth scroll-to-hide animations with ease! 🚀 This powerful library offers a seamless way to implement elegant, customizable hide-on-scroll behavior in your React Native apps. Perfect for headers, navigation bars, and floating elements! 💪 @masumdev/rn-scroll-to-hide"
+  }
+}
