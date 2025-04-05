@@ -4,6 +4,12 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 
 [![npm version](https://badge.fury.io/js/@masumdev%2Frn-toast.svg)](https://badge.fury.io/js/@masumdev%2Frn-toast)
 
+<div align="center">
+  <img src="https://img.shields.io/badge/NEW-2025-brightgreen?style=for-the-badge" alt="New Feature" />
+  <img src="https://img.shields.io/badge/NEW-Custom_Position-brightgreen?style=for-the-badge" alt="New Feature" />
+</div>
+
+
 ## Demo
 
 <p align="center">
@@ -32,6 +38,7 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 - 📱 Works on iOS and Android
 - 📚 TypeScript support
 - 🧠 Smart queueing system for multiple toasts
+- ✨ **NEW!** Custom toast positioning from top
 
 ## Installation
 
@@ -124,8 +131,8 @@ showToast('This will stay longer', 'info', { duration: 8000 });
 // Custom animation speed (200ms)
 showToast('Quick animation', 'success', { animationDuration: 200 });
 
-// Custom position from top (120px)
-showToast('Custom position', 'info', { position: 120 });
+// ✨ NEW FEATURE! Custom position from top (120px)
+showToast('Custom position', 'info', { position: 120 }); // Customize the distance from top!
 ```
 
 ### Customizing the Toaster Component
