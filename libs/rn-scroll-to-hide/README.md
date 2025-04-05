@@ -7,8 +7,8 @@ A lightweight and performant React Native hook for creating hide/show animations
 ## Demo
 
 <p align="center">
-  <img src="./demo-header.gif" alt="Header Demo" width="45%" height="auto" style="vertical-align: top;" />
-  <img src="./demo-tabbar.gif" alt="Tabbar Demo" width="45%" height="auto" style="vertical-align: top;" />
+  <img src="./android.gif" alt="Header Demo" width="45%" height="auto" style="vertical-align: top;" />
+  <img src="./iphone.gif" alt="Tabbar Demo" width="45%" height="auto" style="vertical-align: top;" />
 </p>
 
 ## Features
