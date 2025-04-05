@@ -1,7 +1,7 @@
 {
   "name": "@masumdev/rn-scroll-to-hide",
-  "version": "1.0.0",
-  "homepage": "https://docs.masum.cloud/docs/category/-rn-scroll-to-hide",
+  "version": "1.0.1",
+  "homepage": "https://docs.masum.cloud/docs/category/-scroll-to-hide",
   "scripts": {
     "build": "bob build"
   },
