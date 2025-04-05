@@ -14,6 +14,12 @@ enum HideDirection {
   DOWN = 'down',
 }
 
+// New enum for scroll direction detection
+enum ScrollDirection {
+  UP = 'up',
+  DOWN = 'down',
+}
+
 interface UseHideOnScrollOptions {
   /**
    * Height of the component to be hidden (in pixels)
@@ -36,12 +42,12 @@ interface UseHideOnScrollOptions {
   threshold?: number;
 
   /**
-   * If true, component will be hidden when scrolling down
-   * If false, component will be hidden when scrolling up
-   * Useful for customizing behavior based on UI requirements
-   * @default true
+   * Direction of scroll that triggers hiding the component
+   * 'DOWN' - hide component when scrolling down (default)
+   * 'UP' - hide component when scrolling up
+   * @default ScrollDirection.DOWN
    */
-  hideOnScrollDown?: boolean;
+  scrollDirection?: ScrollDirection;
 
   /**
    * Direction in which the component will be hidden
@@ -119,7 +125,7 @@ interface UseHideOnScrollResult {
  *   height: 80,
  *   threshold: 20,        // More scroll needed to trigger
  *   duration: 200,        // Faster animation
- *   hideOnScrollDown: false, // Hide when scrolling up instead
+ *   scrollDirection: ScrollDirection.UP, // Hide when scrolling up instead
  *   hideDirection: HideDirection.UP
  * });
  *
@@ -164,7 +170,7 @@ const useHideOnScroll = (
     height,
     duration = 300,
     threshold = 10,
-    hideOnScrollDown = true,
+    scrollDirection = ScrollDirection.DOWN,
     hideDirection = HideDirection.DOWN,
   } = options;
 
@@ -217,7 +223,10 @@ const useHideOnScroll = (
     if (Math.abs(diff) < threshold) return;
 
     // Determine whether to show or hide based on scroll direction
-    const shouldHide = hideOnScrollDown ? diff > 0 : diff < 0;
+    const isScrollingDown = diff > 0;
+    const shouldHide =
+      (scrollDirection === ScrollDirection.DOWN && isScrollingDown) ||
+      (scrollDirection === ScrollDirection.UP && !isScrollingDown);
 
     // Update visibility
     isVisible.value = withTiming(shouldHide ? 0 : 1, { duration });
@@ -260,6 +269,5 @@ const useHideOnScroll = (
   };
 };
 
-export { useHideOnScroll, HideDirection };
+export { useHideOnScroll, HideDirection, ScrollDirection };
 export type { UseHideOnScrollOptions, UseHideOnScrollResult };
-

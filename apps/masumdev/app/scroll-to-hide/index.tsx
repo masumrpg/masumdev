@@ -9,7 +9,11 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+import {
+  useHideOnScroll,
+  HideDirection,
+  ScrollDirection,
+} from '@masumdev/rn-scroll-to-hide';
 import { Ionicons } from '@expo/vector-icons'; // Pastikan Anda memiliki @expo/vector-icons
 
 const TABBAR_HEIGHT = 70;
@@ -22,7 +26,7 @@ export default function ScrollToHideScreen() {
     height: TABBAR_HEIGHT,
     duration: 300,
     threshold: 5,
-    hideOnScrollDown: true,
+    scrollDirection: ScrollDirection.DOWN,
     hideDirection: HideDirection.DOWN,
   });
 
@@ -30,7 +34,7 @@ export default function ScrollToHideScreen() {
     height: HEADER_HEIGHT,
     duration: 300,
     threshold: 5,
-    hideOnScrollDown: true,
+    scrollDirection: ScrollDirection.DOWN,
     hideDirection: HideDirection.UP,
   });
 

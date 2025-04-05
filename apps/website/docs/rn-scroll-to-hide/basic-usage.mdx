@@ -8,62 +8,102 @@ sidebar_position: 3
 The `useHideOnScroll` hook provides a simple way to create hide/show animations for components based on scroll direction. This is perfect for headers, footers, or any component that should respond to scroll behavior.
 :::
 
-1. Import the necessary components:
+- Basic Usage:
 
 ```tsx
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
-```
 
-2. Set up your component with the hook:
-
-:::danger
-Make sure to provide the correct component height to the hook. An incorrect height value will result in improper animations.
-:::
-
-```tsx
 export default function App() {
   const header = useHideOnScroll({
     height: 60,
     hideDirection: HideDirection.UP
   });
 
-  const tabbar = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.DOWN
-  });
-
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <Animated.View
         style={[
           styles.header,
           header.animatedStyle
         ]}
       >
-        <Text>Header</Text>
+        <Text style={styles.headerText}>Header</Text>
       </Animated.View>
 
       <ScrollView
         onScroll={header.onScroll}
         scrollEventThrottle={16}
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
       >
         {/* Your content */}
+        <Text style={styles.content}>Your content here</Text>
+        <Text style={styles.content}>Scroll up to hide the header</Text>
+        {Array(20).fill(0).map((_, index) => (
+          <View key={index} style={styles.item}>
+            <Text>Item {index + 1}</Text>
+          </View>
+        ))}
       </ScrollView>
-
-      <Animated.View
-        style={[
-          styles.tabbar,
-          tabbar.animatedStyle
-        ]}
-      >
-        <Text>Tabbar</Text>
-      </Animated.View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  header: {
+    height: 60,
+    backgroundColor: '#3498db',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  headerText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  scrollView: {
+    flex: 1,
+    marginTop: 60, // Same as header height
+  },
+  contentContainer: {
+    paddingHorizontal: 15,
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
+  content: {
+    fontSize: 16,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  item: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+  },
+});
 ```
 
 :::tip
