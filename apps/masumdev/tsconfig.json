@@ -7,7 +7,7 @@
       "path": "../../libs/rn-toast"
     },
     {
-      "path": "../../libs/bottom-sheet"
+      "path": "../../libs/rn-bottom-sheet"
     },
     {
       "path": "./tsconfig.app.json"

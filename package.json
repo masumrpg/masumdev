@@ -78,10 +78,8 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/bottom-sheet",
     "libs/rn-toast",
     "libs/rn-scroll-to-hide",
-    "libs/rn-bottom-sheet",
-    "libs/rn-test"
+    "libs/rn-bottom-sheet"
   ]
 }

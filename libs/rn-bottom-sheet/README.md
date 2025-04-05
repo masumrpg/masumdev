@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
 ### Custom Configuration
 
 ```jsx
-import { BottomSheetProvider } from '@masumdev/bottom-sheet';
+import { BottomSheetProvider } from '@masumdev/rn-bottom-sheet';
 
 <BottomSheetProvider
   defaultSnapTo="50%"
@@ -270,7 +270,7 @@ import { BottomSheetProvider } from '@masumdev/bottom-sheet';
 ### Dynamic Height Adjustment
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 const { expand, setContent } = useBottomSheet();
 

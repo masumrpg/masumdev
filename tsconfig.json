@@ -7,9 +7,6 @@
       "path": "./apps/masumdev"
     },
     {
-      "path": "./libs/bottom-sheet"
-    },
-    {
       "path": "./libs/rn-toast"
     },
     {
@@ -18,8 +15,5 @@
     {
       "path": "./libs/rn-bottom-sheet"
     },
-    {
-      "path": "./libs/rn-test"
-    }
   ]
 }

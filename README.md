@@ -4,7 +4,7 @@ A monorepo containing high-quality React Native libraries and components, built 
 
 ## 📦 Libraries
 
-### [@masumdev/bottom-sheet](./libs/bottom-sheet)
+### [@masumdev/rn-bottom-sheet](./libs/rn-bottom-sheet)
 
 A highly customizable and gesture-responsive bottom sheet component for React Native applications.
 
@@ -33,7 +33,7 @@ A lightweight toast component inspired by Samsung notifications, featuring smoot
 │   ├── masumdev/     # Demo application
 │   └── website/      # Documentation website
 ├── libs/
-│   ├── bottom-sheet/ # Bottom sheet library
+│   ├── rn-bottom-sheet/ # Bottom sheet library
 │   └── rn-toast/     # Toast library
 └── tools/           # Build and development tools
 ```

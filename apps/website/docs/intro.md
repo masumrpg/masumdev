@@ -32,7 +32,7 @@ Elegant notifications that your users will love!
 
 Dive into our detailed guides:
 
-- [📖 Bottom Sheet Guide](./bottom-sheet/basic-usage)
+- [📖 Bottom Sheet Guide](./rn-bottom-sheet/basic-usage)
 - [📖 Toast Guide](./rn-toast/basic-usage)
 
 ## 🔮 Coming Soon

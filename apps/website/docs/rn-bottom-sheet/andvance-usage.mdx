@@ -15,7 +15,7 @@ Avoiding wrapping BottomSheetProvider multiple times in your app as it can lead 
 :::
 
 ```jsx
-import { BottomSheetProvider } from '@masumdev/bottom-sheet';
+import { BottomSheetProvider } from '@masumdev/rn-bottom-sheet';
 
 <BottomSheetProvider
   defaultSnapTo="50%"
@@ -39,7 +39,7 @@ Avoid using multiple scrollable components within the bottom sheet as it may int
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 import { ScrollView } from 'react-native';
 
 const ScrollableContent = () => {
@@ -75,7 +75,7 @@ Avoid loading too much data at once. Implement proper pagination to maintain per
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 import { FlatList } from 'react-native';
 
 const ListContent = () => {
@@ -109,7 +109,7 @@ Avoid frequent content updates that might cause performance issues. Use proper s
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 const DynamicContent = () => {
   const { setContent, expand, close } = useBottomSheet();
@@ -147,7 +147,7 @@ Failure to remove event listeners or clean up resources can lead to memory leaks
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 const NavigationSheet = () => {

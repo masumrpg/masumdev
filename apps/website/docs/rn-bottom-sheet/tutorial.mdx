@@ -36,11 +36,11 @@ Make sure you have these peer dependencies installed in your React Native or Exp
 
 1. Install the package using your preferred package manager:
 ```bash
-npm install @masumdev/bottom-sheet
+npm install @masumdev/rn-bottom-sheet
 # or
-yarn add @masumdev/bottom-sheet
+yarn add @masumdev/rn-bottom-sheet
 # or
-bun add @masumdev/bottom-sheet
+bun add @masumdev/rn-bottom-sheet
 ```
 
 2. Install required peer dependencies:
@@ -97,7 +97,7 @@ Always place the BottomSheetProvider at the root level of your app, preferably a
 1. First, wrap your app with the BottomSheetProvider:
 
 ```tsx
-import { BottomSheetProvider } from '@masumdev/bottom-sheet';
+import { BottomSheetProvider } from '@masumdev/rn-bottom-sheet';
 
 export default function App() {
   return (
@@ -111,7 +111,7 @@ export default function App() {
 2. Use the useBottomSheet hook in your components:
 
 ```tsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 export default function MyComponent() {
   const { expand, close, setContent, setSheetTitle } = useBottomSheet();
@@ -137,7 +137,7 @@ export default function MyComponent() {
 Untuk konten yang panjang, gunakan varian ScrollView:
 
 ```tsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 export default function ScrollableContent() {
   const { expand, setContent, setSheetTitle, setVariant } = useBottomSheet();
@@ -169,7 +169,7 @@ export default function ScrollableContent() {
 Untuk menampilkan daftar item, gunakan varian FlatList:
 
 ```tsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 export default function ListContent() {
   const { expand, setSheetTitle, setVariant, setListData, setRenderItem } = useBottomSheet();
@@ -264,7 +264,7 @@ Implement gesture handlers using the react-native-gesture-handler library for sm
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 
 const { setContent, expand } = useBottomSheet();
 
@@ -296,7 +296,7 @@ Use Reanimated's native driver animations for optimal performance. Worklets run 
 :::
 
 ```jsx
-import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
 import Animated, { withSpring } from 'react-native-reanimated';
 
 const AnimatedContent = () => {
@@ -377,4 +377,4 @@ Enable the React Native Debugger and monitor the component lifecycle to identify
    - Ensure proper usage of SafeAreaView
    - Check for conflicting style properties
 
-For more examples and advanced usage, check out our [demo page](/docs/bottom-sheet/demo).
+For more examples and advanced usage, check out our [demo page](/docs/rn-bottom-sheet/demo).
