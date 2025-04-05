@@ -11,6 +11,17 @@ A lightweight and performant React Native hook for creating hide/show animations
   <img src="./iphone.gif" alt="Tabbar Demo" width="45%" height="auto" style="vertical-align: top;" />
 </p>
 
+## Youtube Tutorial
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=udjs1sdXJTU" target="_blank">
+    <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg"
+      alt="React Native Toast Demo"
+      width="600"
+      style="border-radius: 10px"
+    />
+  </a>
+</p>
+
 ## Features
 
 - 🚀 Lightweight and performant
