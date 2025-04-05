@@ -4,14 +4,14 @@ import {
   useImperativeHandle,
   forwardRef,
   useEffect,
-} from "react";
+} from 'react';
 import {
   Image,
   LayoutChangeEvent,
   View,
   Text,
   ImageSourcePropType,
-} from "react-native";
+} from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -35,6 +35,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
   const {
     defaultDuration = 4000,
     defaultAnimationDuration = 400,
+    defaultPosition = 80, // Add default position
     customIcons,
     customColors,
   } = props;
@@ -45,6 +46,7 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     visible: false,
     duration: defaultDuration,
     animationDuration: defaultAnimationDuration,
+    position: defaultPosition, // Add position to config
   });
 
   const [textWidth, setTextWidth] = useState(0);
@@ -63,22 +65,20 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
   };
 
   useImperativeHandle(ref, () => ({
-    show: (
-      message: string,
-      type: ToastType = 'info',
-      options?: ToastOptions
-    ) => {
+    show: (message: string, type?: ToastType, options?: ToastOptions) => {
       // Skip empty messages
       if (!message || message.trim() === '') {
         updateAnimationStatus(false);
         return;
       }
 
+      const actualType = type || 'info'; // Default to 'info' if type is undefined
       const animationDuration =
         options?.animationDuration || defaultAnimationDuration;
       const duration = options?.duration || defaultDuration;
+      const position = options?.position || defaultPosition; // Get position from options
 
-      showToast(message, type, animationDuration, duration);
+      showToast(message, actualType, animationDuration, duration, position);
     },
     hide: (callback?: () => void) => {
       hideToast(callback);
@@ -87,19 +87,21 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
 
   // Register with the global ToastManager
   useEffect(() => {
-    const refObject = {
-      show: (message: string, type: ToastType, options?: ToastOptions) => {
+    const refObject: ToastRef = {
+      show: (message: string, type?: ToastType, options?: ToastOptions) => {
         // Skip empty messages
         if (!message || message.trim() === '') {
           updateAnimationStatus(false);
           return;
         }
 
+        const actualType = type || 'info'; // Default to 'info' if type is undefined
         const animationDuration =
           options?.animationDuration || defaultAnimationDuration;
         const duration = options?.duration || defaultDuration;
+        const position = options?.position || defaultPosition; // Get position from options
 
-        showToast(message, type, animationDuration, duration);
+        showToast(message, actualType, animationDuration, duration, position);
       },
       hide: hideToast,
     };
@@ -163,7 +165,8 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     text: string,
     type: ToastType,
     animationDuration: number,
-    displayDuration: number
+    displayDuration: number,
+    position: number // Add position parameter
   ) {
     // Validate text content
     if (!text || text.trim() === '') {
@@ -195,12 +198,13 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
       visible: true,
       duration: displayDuration,
       animationDuration,
+      position, // Add position to config
     });
 
     // Ensure text width is properly measured on next cycle
     setTimeout(() => {
-      // Show toast
-      transY.value = withTiming(80, { duration: animationDuration });
+      // Show toast with custom position
+      transY.value = withTiming(position, { duration: animationDuration });
 
       // Auto-hide after duration
       timer.current = setTimeout(() => {
@@ -362,4 +366,4 @@ export const Toast = forwardRef<ToastRef, ToastComponentProps>((props, ref) => {
     </>
   );
 });
-Toast.displayName = "Toast";
+Toast.displayName = 'Toast';

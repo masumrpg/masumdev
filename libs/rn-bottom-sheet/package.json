@@ -1,6 +1,6 @@
 {
   "name": "@masumdev/rn-bottom-sheet",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "homepage": "https://docs.masum.cloud/docs/category/-bottom-sheet",
   "scripts": {
     "build": "bob build"
@@ -20,7 +20,7 @@
       ]
     ]
   },
-  "main": "./src/index.ts",
+  "main": "./dist/commonjs/index.js",
   "module": "./dist/module/index.js",
   "types": "./dist/typescript/index.d.ts",
   "exports": {

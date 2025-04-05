@@ -14,7 +14,11 @@ export default function ToastScreen() {
         <Text style={styles.buttonText}>Info</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => toast.showToast('Success Toast', 'success')}
+        onPress={() =>
+          toast.showToast('Success Toast', 'success', {
+            position: 20,
+          })
+        }
         style={[styles.button, styles.greenButton]}
       >
         <Text style={styles.buttonText}>Success</Text>

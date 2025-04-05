@@ -115,7 +115,7 @@ showToast('Something went wrong', 'error');
 
 ### Customization Options
 
-You can customize the duration and animation speed:
+You can customize the duration, animation speed, and position from top:
 
 ```jsx
 // Custom duration (8 seconds)
@@ -123,6 +123,9 @@ showToast('This will stay longer', 'info', { duration: 8000 });
 
 // Custom animation speed (200ms)
 showToast('Quick animation', 'success', { animationDuration: 200 });
+
+// Custom position from top (120px)
+showToast('Custom position', 'info', { position: 120 });
 ```
 
 ### Customizing the Toaster Component
