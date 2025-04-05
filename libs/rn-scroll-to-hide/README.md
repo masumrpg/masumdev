@@ -1,8 +1,8 @@
 # @masumdev/rn-scroll-to-hide
 
-[![npm version](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide.svg)](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide)
-
 A lightweight and performant React Native hook for creating hide/show animations on scroll. Perfect for headers, footers, or any component that should hide based on scroll direction. Built with smooth animations and optimized performance.
+
+[![npm version](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide.svg)](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide)
 
 ## Demo
 

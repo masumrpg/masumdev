@@ -37,7 +37,7 @@
       "path": "../../libs/rn-toast/tsconfig.lib.json"
     },
     {
-      "path": "../../libs/bottom-sheet/tsconfig.lib.json"
+      "path": "../../libs/rn-bottom-sheet/tsconfig.lib.json"
     }
   ]
 }

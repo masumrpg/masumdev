@@ -1,0 +1,134 @@
+---
+sidebar_position: 6
+---
+
+# API Reference
+
+## BottomSheetProvider Props
+
+:::tip Provider Configuration
+Wrap your app with BottomSheetProvider at the root level to ensure the bottom sheet functionality is available throughout your application. This enables you to use the useBottomSheet hook in any nested component.
+:::
+
+:::danger Memory Management
+Avoid creating new function references for onStateChange prop on each render. Use useCallback for event handlers to prevent unnecessary re-renders.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultSnapTo | "10%" \| "20%" \| "30%" \| "40%" \| "50%" \| "60%" \| "70%" \| "80%" \| "90%" | "70%" | Default height of the bottom sheet when opened |
+| maxSnapTo | "10%" \| "20%" \| "30%" \| "40%" \| "50%" \| "60%" \| "70%" \| "80%" \| "90%" | "90%" | Maximum height the bottom sheet can expand to |
+| backgroundColor | string | "#FFFFFF" | Background color of the bottom sheet container |
+| backDropColor | string | "rgba(0,0,0,0.5)" | Color of the backdrop overlay when sheet is open |
+| onStateChange | (isOpen: boolean) => void | - | Callback function triggered when bottom sheet state changes |
+| children | ReactNode | - | The content to be wrapped by the BottomSheetProvider |
+
+## useBottomSheet Hook
+
+:::tip Performance Optimization
+Use the useBottomSheet hook at the component level where you need bottom sheet functionality. Destructure only the methods you need to minimize unnecessary re-renders.
+:::
+
+:::danger State Management
+Do not call setContent or setSheetTitle outside of event handlers or effects. Calling these during render can cause infinite re-render loops.
+:::
+
+The `useBottomSheet` hook provides methods to control the bottom sheet. Here's a detailed reference of the returned object:
+
+| Property/Method | Type | Description |
+|----------------|------|-------------|
+| isOpen | boolean | Current state of the bottom sheet (true if open, false if closed) |
+| isLoading | boolean | Loading state of the bottom sheet |
+| expand | (snapTo?: "10%" \| "20%" \| "30%" \| "40%" \| "50%" \| "60%" \| "70%" \| "80%" \| "90%") => void | Opens the bottom sheet. Optionally specify a height using snapTo parameter |
+| close | () => void | Closes the bottom sheet |
+| toggle | (snapTo?: string) => void | Toggles the bottom sheet state between open and closed. Optionally specify a height |
+| setContent | (content: ReactNode) => void | Sets the content to be displayed inside the bottom sheet |
+| setSheetTitle | (title: string) => void | Sets the title displayed at the top of the bottom sheet |
+| setSnapTo | (value: string) => void | Dynamically changes the height of an opened bottom sheet |
+| variant | "scroll" \| "flatlist" | Current variant of the bottom sheet (ScrollView or FlatList) |
+| setVariant | (variant: "scroll" \| "flatlist") => void | Changes the bottom sheet variant between ScrollView and FlatList |
+| setListData | (data: any[]) => void | Sets the data array for FlatList variant |
+| setRenderItem | (renderer: (info: any) => ReactNode) => void | Sets the render function for FlatList items |
+
+## Usage Examples
+
+:::tip Best Practices
+Always provide a way for users to close the bottom sheet (e.g., close button, backdrop press). This ensures a better user experience and prevents users from getting stuck.
+:::
+
+:::danger Content Management
+Avoid setting heavy or complex content directly in the bottom sheet. Instead, memoize the content or load it asynchronously to maintain smooth animations.
+:::
+
+```jsx
+// BottomSheetProvider setup
+import { BottomSheetProvider } from '@masumdev/bottom-sheet';
+
+function App() {
+  return (
+    <BottomSheetProvider
+      defaultSnapTo="50%"
+      maxSnapTo="90%"
+      backgroundColor="#ffffff"
+      backDropColor="rgba(0, 0, 0, 0.5)"
+      onStateChange={(isOpen) => console.log('Sheet state:', isOpen)}
+      variant="scroll" // or 'flatlist'
+      flatListProps={{ // Optional FlatList props
+        keyExtractor: (item) => item.id,
+        showsVerticalScrollIndicator: false
+      }}
+    >
+      {/* Your app content */}
+    </BottomSheetProvider>
+  );
+}
+
+// Using ScrollView variant
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+
+function ScrollViewExample() {
+  const { expand, setContent, setSheetTitle } = useBottomSheet();
+
+  const showScrollContent = () => {
+    setSheetTitle('Scrollable Content');
+    setContent(
+      <View style={{ padding: 16 }}>
+        <Text>This content will be scrollable</Text>
+        {/* Add more content here */}
+      </View>
+    );
+    expand('60%');
+  };
+
+  return <Button title="Show ScrollView" onPress={showScrollContent} />;
+}
+
+// Using FlatList variant
+function FlatListExample() {
+  const {
+    expand,
+    setVariant,
+    setListData,
+    setRenderItem,
+    setSheetTitle
+  } = useBottomSheet();
+
+  const showListContent = () => {
+    setSheetTitle('List Content');
+    setVariant('flatlist');
+    setListData([
+      { id: '1', title: 'Item 1' },
+      { id: '2', title: 'Item 2' },
+      // Add more items
+    ]);
+    setRenderItem(({ item }) => (
+      <View style={{ padding: 16, borderBottomWidth: 1, borderColor: '#eee' }}>
+        <Text>{item.title}</Text>
+      </View>
+    ));
+    expand('70%');
+  };
+
+  return <Button title="Show FlatList" onPress={showListContent} />;
+}
+```

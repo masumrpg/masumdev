@@ -1,0 +1,176 @@
+---
+sidebar_position: 4
+---
+
+# Advanced Usage
+
+### Custom Configuration
+
+:::tip
+Wrap your BottomSheetProvider at the root level of your app to ensure proper context propagation. Consider using a separate component for the sheet content to optimize re-renders.
+:::
+
+:::danger
+Avoiding wrapping BottomSheetProvider multiple times in your app as it can lead to unexpected behavior and memory leaks.
+:::
+
+```jsx
+import { BottomSheetProvider } from '@masumdev/bottom-sheet';
+
+<BottomSheetProvider
+  defaultSnapTo="50%"
+  maxSnapTo="80%"
+  backgroundColor="#F5F5F5"
+  backDropColor="rgba(0,0,0,0.7)"
+  onStateChange={(isOpen) => console.log('Sheet is open:', isOpen)}
+>
+  <App />
+</BottomSheetProvider>
+```
+
+### ScrollView Integration
+
+:::tip
+When using ScrollView inside the bottom sheet, make sure to handle scroll events properly to maintain smooth interactions.
+:::
+
+:::danger
+Avoid using multiple scrollable components within the bottom sheet as it may interfere with the sheet's gesture handling.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { ScrollView } from 'react-native';
+
+const ScrollableContent = () => {
+  const { expand } = useBottomSheet();
+
+  return (
+    <ScrollView
+      style={styles.scrollView}
+      onScrollEndDrag={({ nativeEvent }) => {
+        const { contentOffset, contentSize, layoutMeasurement } = nativeEvent;
+        const isEndReached = contentOffset.y + layoutMeasurement.height >= contentSize.height;
+        if (isEndReached) {
+          expand('80%');
+        }
+      }}
+    >
+      <View style={styles.content}>
+        <Text>Scrollable Content</Text>
+      </View>
+    </ScrollView>
+  );
+};
+```
+
+### FlatList Integration
+
+:::tip
+Use FlatList for rendering large lists of data efficiently. The bottom sheet will automatically handle the scroll behavior.
+:::
+
+:::danger
+Avoid loading too much data at once. Implement proper pagination to maintain performance.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { FlatList } from 'react-native';
+
+const ListContent = () => {
+  const { expand } = useBottomSheet();
+  const [data, setData] = useState([]);
+
+  const loadMoreData = () => {
+    // Implement your data loading logic
+    expand('80%');
+  };
+
+  return (
+    <FlatList
+      data={data}
+      renderItem={({ item }) => <ListItem item={item} />}
+      onEndReached={loadMoreData}
+      onEndReachedThreshold={0.5}
+    />
+  );
+};
+```
+
+### Dynamic Content Management
+
+:::tip
+Use the setContent method to dynamically update the sheet's content based on user interactions.
+:::
+
+:::danger
+Avoid frequent content updates that might cause performance issues. Use proper state management.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+
+const DynamicContent = () => {
+  const { setContent, expand, close } = useBottomSheet();
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const showNextStep = () => {
+    setCurrentStep(prev => {
+      const next = prev + 1;
+      if (next > 3) {
+        close();
+        return 1;
+      }
+      setContent(<StepContent step={next} />);
+      expand(next === 3 ? '80%' : '50%');
+      return next;
+    });
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title="Next Step" onPress={showNextStep} />
+    </View>
+  );
+};
+```
+
+### Navigation Integration
+
+:::tip
+Implement proper cleanup in useEffect to prevent memory leaks and ensure smooth navigation handling.
+:::
+
+:::danger
+Failure to remove event listeners or clean up resources can lead to memory leaks and app crashes.
+:::
+
+```jsx
+import { useBottomSheet } from '@masumdev/bottom-sheet';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+
+const NavigationSheet = () => {
+  const { close } = useBottomSheet();
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (!isFocused) {
+      close();
+    }
+  }, [isFocused]);
+
+  const handleNavigation = () => {
+    close();
+    navigation.navigate('NextScreen');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title="Navigate" onPress={handleNavigation} />
+    </View>
+  );
+};
+```
+```

@@ -1,0 +1,141 @@
+---
+sidebar_position: 3
+---
+
+# Basic Usage
+
+## Setup Provider
+
+:::tip
+Place the `BottomSheetProvider` at the root of your app to ensure all components have access to the bottom sheet functionality. This is crucial for proper state management and performance optimization.
+:::
+
+```jsx
+import React from 'react';
+import { View } from 'react-native';
+import { BottomSheetProvider } from '@masumdev/rn-bottom-sheet';
+
+export default function App() {
+  return (
+    <BottomSheetProvider>
+      <View style={{ flex: 1 }}>
+        {/* Your app content */}
+      </View>
+    </BottomSheetProvider>
+  );
+}
+```
+
+## Using the Hook
+
+:::danger Important
+Never call `useBottomSheet` outside of a React component or in a conditional statement. This will lead to unexpected behavior and potential memory leaks.
+:::
+
+```jsx
+import React from 'react';
+import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
+
+export default function MyComponent() {
+  const { expand, collapse, setContent, setSheetTitle } = useBottomSheet({
+    snapPoints: ['25%', '50%', '75%'],
+    initialSnap: 1,
+    enablePanDownToClose: true,
+    enableOverDrag: true,
+  });
+
+  const showScrollableContent = () => {
+    setSheetTitle('Scrollable Content');
+    setContent(
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Section 1</Text>
+        <Text style={styles.content}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Text>
+        <Text style={styles.title}>Section 2</Text>
+        <Text style={styles.content}>
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </Text>
+        <Button title="Close" onPress={collapse} />
+      </ScrollView>
+    );
+    expand();
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title="Show Bottom Sheet" onPress={showScrollableContent} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  content: {
+    fontSize: 16,
+    marginBottom: 16,
+    lineHeight: 24,
+  },
+});
+```
+
+## Features
+
+### Multiple Snap Points
+
+```jsx
+const { expand } = useBottomSheet({
+  snapPoints: ['25%', '50%', '75%'],
+  initialSnap: 1, // Starts at 50%
+});
+```
+
+### Gesture Control
+
+```jsx
+const { expand } = useBottomSheet({
+  enablePanDownToClose: true, // Enable swipe down to close
+  enableOverDrag: true, // Allow dragging beyond max height
+});
+```
+
+### Dynamic Content
+
+```jsx
+const { setContent, expand } = useBottomSheet();
+
+const updateContent = () => {
+  setContent(<YourCustomComponent />);
+  expand();
+};
+```
+
+### Custom Header
+
+```jsx
+const { setSheetTitle, setHeaderRight, expand } = useBottomSheet();
+
+const showWithCustomHeader = () => {
+  setSheetTitle('Custom Header');
+  setHeaderRight(
+    <Button title="Done" onPress={collapse} />
+  );
+  expand();
+};
+```
+
+:::tip Best Practices
+- Use appropriate snap points based on content size
+- Implement proper gesture handling
+- Consider device screen sizes when setting heights
+- Handle content updates efficiently
+:::
