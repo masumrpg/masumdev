@@ -38,6 +38,12 @@
     },
     {
       "path": "../../libs/rn-bottom-sheet/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/rn-scroll-to-hide/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/rn-qrcode-pack/tsconfig.lib.json"
     }
   ]
 }

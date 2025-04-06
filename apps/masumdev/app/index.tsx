@@ -10,6 +10,7 @@ import {
   AlignVerticalJustifyEnd,
   Bell,
   GalleryHorizontal,
+  QrCode,
 } from 'lucide-react-native';
 
 export default function HomeScreen() {
@@ -31,6 +32,12 @@ export default function HomeScreen() {
       title: 'Rn Scroll To Hide',
       path: '/scroll-to-hide',
       icon: <GalleryHorizontal size={30} color={'black'} />,
+    },
+    {
+      id: 4,
+      title: 'Rn Qr Code Pack',
+      path: '/qrcode-pack',
+      icon: <QrCode size={30} color={'black'} />,
     },
   ];
 

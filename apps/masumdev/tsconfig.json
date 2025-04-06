@@ -10,6 +10,12 @@
       "path": "../../libs/rn-bottom-sheet"
     },
     {
+      "path": "../../libs/rn-scroll-to-hide"
+    },
+    {
+      "path": "../../libs/rn-qrcode-pack"
+    },
+    {
       "path": "./tsconfig.app.json"
     }
   ]

@@ -15,5 +15,8 @@
     {
       "path": "./libs/rn-bottom-sheet"
     },
+    {
+      "path": "./libs/rn-qrcode-pack"
+    }
   ]
 }
