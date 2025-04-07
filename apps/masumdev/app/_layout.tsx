@@ -2,8 +2,12 @@ import 'react-native-reanimated';
 import { Stack, usePathname } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
+const nonHeaderPatshs = ['/scroll-to-hide', '/qrcode-pack/qr-scanner'];
+
 export default function RootLayout() {
   const pathName = usePathname();
+
+  const isNonHeaderPath = nonHeaderPatshs.includes(pathName);
 
   const formattedTitle =
     pathName === '/'
@@ -23,7 +27,7 @@ export default function RootLayout() {
           title: formattedTitle,
           headerTitleAlign: 'center',
           headerBackTitle: 'Back',
-          headerShown: pathName === '/scroll-to-hide' ? false : true,
+          headerShown: isNonHeaderPath ? false : true,
         }}
       />
     </>

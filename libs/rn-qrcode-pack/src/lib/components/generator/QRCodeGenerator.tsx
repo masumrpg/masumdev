@@ -1,10 +1,8 @@
 /**
- * A React Native component for generating customizable QR codes.
- *
- * This component generates SVG-based QR codes that can be customized with
- * different colors, sizes, and error correction levels. It supports both
+ * A Rea   * This component generates SVG-based QR codes t * different colors, sizes, and error correction levels. It supports both
  * light and dark themes, and allows for transparent backgrounds.
  *
+
  * @module QRCodeGenerator
  * @requires qrcode
  * @requires react
@@ -14,105 +12,10 @@
 
 import QR from 'qrcode';
 import { useEffect, useState } from 'react';
-import { View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
-
-// Color name to hex mapping for common colors
-const COLOR_MAP = {
-  red: '#FF0000',
-  green: '#00FF00',
-  blue: '#0000FF',
-  black: '#000000',
-  white: '#FFFFFF',
-  yellow: '#FFFF00',
-  purple: '#800080',
-  orange: '#FFA500',
-  gray: '#808080',
-  pink: '#FFC0CB',
-  // Add more colors as needed
-};
-
-/**
- * Color map interface for type safety
- */
-interface ColorMap {
-  [colorName: string]: string;
-}
-
-/**
- * Converts a color name to its hex representation
- *
- * @param {string} color - Color name or existing color code
- * @returns {string | undefined} - Hex color code or original value if not a known color name
- */
-const convertColorToHex = (color: string | undefined): string | undefined => {
-  if (!color) return color;
-
-  // If already a hex code, rgb(), rgba(), hsl(), or hsla(), return as is
-  if (
-    color.startsWith('#') ||
-    color.startsWith('rgb') ||
-    color.startsWith('hsl')
-  ) {
-    return color;
-  }
-
-  // Convert color name to lowercase for case-insensitive matching
-  const colorLower = color.toLowerCase();
-
-  // Return hex code for known color name or original value if not found
-  return (COLOR_MAP as ColorMap)[colorLower] || color;
-};
-
-/**
- * Checks if a color string is a valid hex color
- *
- * @param {string} color - The color string to validate
- * @returns {boolean} - True if the color is a valid hex color
- */
-const isValidHexColor = (color: string): boolean => {
-  // Validate hex colors (3 or 6 digits with optional # prefix)
-  return /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i.test(color);
-};
-
-/**
- * Props for the QRCodeGenerator component.
- *
- * @typedef {Object} QRCodeGeneratorProps
- * @property {string} value - The data to encode in the QR code
- * @property {number} [size=200] - The width and height of the QR code in pixels
- * @property {string} [color] - Foreground color of the QR code (defaults based on theme)
- *   Can be any valid CSS color string like:
- *   - Named colors: 'red', 'blue', 'black', 'white', etc.
- *   - Hex values: '#FF5733', '#000', etc.
- *   - RGB/RGBA: 'rgb(255, 0, 0)', 'rgba(0, 0, 255, 0.5)', etc.
- *   - HSL/HSLA: 'hsl(120, 100%, 50%)', 'hsla(240, 100%, 50%, 0.8)', etc.
- * @property {string} [backgroundColor] - Background color of the QR code (defaults based on theme)
- *   Accepts the same color formats as the color property, plus 'transparent' for no background
- *   - Named colors: 'red', 'blue', 'black', 'white', etc.
- *   - Hex values: '#FF5733', '#000', etc.
- *   - RGB/RGBA: 'rgb(255, 0, 0)', 'rgba(0, 0, 255, 0.5)', etc.
- *   - HSL/HSLA: 'hsl(120, 100%, 50%)', 'hsla(240, 100%, 50%, 0.8)', etc.
- *   - 'transparent': Creates a QR code with no background
- * @property {'L'|'M'|'Q'|'H'} [errorCorrectionLevel='M'] - QR code error correction level:
- *   - L: Approx 7% of codewords can be restored
- *   - M: Approx 15% of codewords can be restored
- *   - Q: Approx 25% of codewords can be restored
- *   - H: Approx 30% of codewords can be restored
- * @property {number} [quietZone=0] - Size of the quiet zone (margin) around the QR code
- * @property {ViewStyle} [style] - Additional styles to apply to the container View
- * @property {'light'|'dark'} [theme='light'] - Color theme that determines default colors if not specified
- */
-export type QRCodeGeneratorProps = {
-  value: string;
-  size?: number;
-  color?: string;
-  backgroundColor?: string;
-  errorCorrectionLevel?: 'L' | 'M' | 'Q' | 'H';
-  quietZone?: number;
-  style?: ViewStyle;
-  theme?: 'light' | 'dark';
-};
+import { QRCodeGeneratorProps } from '../../types/generator';
+import { convertColorToHex, isValidHexColor } from '../../utils/generator';
 
 /**
  * Generates a QR code as an SVG image.
@@ -131,6 +34,7 @@ export type QRCodeGeneratorProps = {
  * @param {number} [props.quietZone=0] - Margin around the QR code
  * @param {ViewStyle} [props.style] - Additional container styles
  * @param {'light'|'dark'} [props.theme='light'] - Color theme
+ * @param {(svg: string) => void} [props.getRef] - Callback to receive the SVG string
  *
  * @returns {JSX.Element|null} The QR code component or null when generating
  *
@@ -175,6 +79,7 @@ export function QRCodeGenerator({
   quietZone = 0,
   style,
   theme = 'light',
+  getRef,
 }: QRCodeGeneratorProps) {
   const [svg, setSvg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -255,6 +160,13 @@ export function QRCodeGenerator({
     defaultBgColor,
   ]);
 
+  // Add effect to handle getRef callback
+  useEffect(() => {
+    if (getRef && svg) {
+      getRef(svg);
+    }
+  }, [svg, getRef]);
+
   // Display error if QR generation failed
   if (error) {
     console.warn(`QRCodeGenerator error: ${error}`);
@@ -270,12 +182,3 @@ export function QRCodeGenerator({
     </View>
   );
 }
-
-// Export the default prop values and other constants for external use if needed
-export const QRCodeDefaults = {
-  COLOR_MAP,
-  defaultSize: 200,
-  defaultErrorCorrectionLevel: 'M' as const,
-  defaultQuietZone: 0,
-  defaultTheme: 'light' as const,
-};

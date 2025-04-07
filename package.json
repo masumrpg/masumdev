@@ -23,6 +23,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^5.2.0",
     "expo": "~52.0.11",
+    "expo-camera": "^16.0.18",
+    "expo-haptics": "^14.0.1",
     "expo-router": "~4.0.20",
     "expo-splash-screen": "~0.29.13",
     "expo-status-bar": "~2.0.0",
