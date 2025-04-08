@@ -101,6 +101,17 @@ type QRGradientProps = {
   onGradientIdGenerated?: (gradientId: string) => void;
 } & (LinearProps | RadialProps);
 
+type QREyeProps = {
+  x: number;
+  y: number;
+  cellSize: number;
+  eyeOptions: EyeOptions;
+  defaultColor: string;
+  defaultBackgroundColor: string;
+  keyPrefix: string;
+  asMask?: boolean;
+};
+
 export type {
   EyeCornerRadius,
   EyeLayerRadius,
@@ -114,4 +125,5 @@ export type {
   LinearProps,
   RadialProps,
   QRGradientProps,
+  QREyeProps,
 };
