@@ -34,7 +34,11 @@ export const QRCodeGenerator = ({
 
   if (gradient?.maskLogo) {
     return (
-      <Svg width={size} height={size}>
+      <Svg
+        width={size}
+        height={size}
+        style={{ backgroundColor: 'transparent' }}
+      >
         {/* Background */}
         <Rect width={size} height={size} fill={backgroundColor} />
 
@@ -98,7 +102,7 @@ export const QRCodeGenerator = ({
   }
 
   return gradient ? (
-    <Svg width={size} height={size}>
+    <Svg width={size} height={size} style={{ backgroundColor: 'transparent' }}>
       {/* Background */}
       <Rect width={size} height={size} fill={backgroundColor} />
 
@@ -159,7 +163,7 @@ export const QRCodeGenerator = ({
       {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
     </Svg>
   ) : (
-    <Svg width={size} height={size}>
+    <Svg width={size} height={size} style={{ backgroundColor: 'transparent' }}>
       <Rect width={size} height={size} fill={backgroundColor} />
 
       {matrix.map((row, y) =>

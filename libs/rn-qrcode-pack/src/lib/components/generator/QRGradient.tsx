@@ -57,7 +57,11 @@ export const QRGradient = ({
   }, [onGradientIdGenerated]);
 
   return (
-    <Svg width={width} height={height}>
+    <Svg
+      width={width}
+      height={height}
+      style={{ backgroundColor: 'transparent' }}
+    >
       <Defs>
         {gradientProps.type === 'linear' ? (
           (() => {
@@ -108,7 +112,6 @@ export const QRGradient = ({
         )}
 
         <Mask id={maskId}>
-          <Rect width={width} height={height} fill="black" />
           <G fill="white">{children}</G>
         </Mask>
       </Defs>

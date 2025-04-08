@@ -18,17 +18,15 @@ const QRCodeGeneratorScreen = () => {
         }}
         value="https://github.com/masumdev"
         size={300}
-        // color="#000000"
-        backgroundColor="#ffffff"
         logo={{
           source: require('../../../assets/icon.png'),
           size: 0.2, // 20% dari ukuran QR
-          backgroundColor: '#ffffff',
           borderRadius: 16,
           borderColor: '#000000',
           borderWidth: 4,
           padding: 8,
         }}
+        backgroundColor="transparent"
         // piece={{
         //   shape: 'rounded',
         //   color: '#000000',
@@ -65,7 +63,7 @@ export default QRCodeGeneratorScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
