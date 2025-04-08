@@ -9,6 +9,7 @@ type QRPieceProps = {
   pieceOptions: PieceOptions;
   defaultColor: string;
   keyPrefix: string;
+  asMask?: boolean;
 };
 
 export const QRPiece = ({
@@ -19,12 +20,15 @@ export const QRPiece = ({
   pieceOptions,
   defaultColor,
   keyPrefix,
+  asMask = false, // ← default: false (normal mode)
 }: QRPieceProps) => {
   if (!cell) return null;
 
+  const color = asMask ? 'white' : defaultColor;
+
   const {
     shape = 'square',
-    color: pieceColor = defaultColor,
+    color: pieceColor = color,
     size: pieceSize = 1,
     opacity = 1,
     borderRadius = 0,

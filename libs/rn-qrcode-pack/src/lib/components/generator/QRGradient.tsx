@@ -9,43 +9,38 @@ import {
   Mask,
   G,
 } from 'react-native-svg';
+import { GradientDirection, QRGradientProps } from '../../types/generator';
 
-type GradientStop = {
-  offset: string;
-  color: string;
-  opacity?: number;
+const getLinearCoords = (
+  direction: GradientDirection | undefined,
+  width: number,
+  height: number
+) => {
+  switch (direction) {
+    case 'to-right':
+      return { x1: '0', y1: '0', x2: String(width), y2: '0' };
+    case 'to-left':
+      return { x1: String(width), y1: '0', x2: '0', y2: '0' };
+    case 'to-bottom':
+      return { x1: '0', y1: '0', x2: '0', y2: String(height) };
+    case 'to-top':
+      return { x1: '0', y1: String(height), x2: '0', y2: '0' };
+    case 'to-bottom-right':
+      return { x1: '0', y1: '0', x2: String(width), y2: String(height) };
+    case 'to-bottom-left':
+      return { x1: String(width), y1: '0', x2: '0', y2: String(height) };
+    case 'to-top-right':
+      return { x1: '0', y1: String(height), x2: String(width), y2: '0' };
+    case 'to-top-left':
+      return { x1: String(width), y1: String(height), x2: '0', y2: '0' };
+    default:
+      return { x1: '0', y1: '0', x2: String(width), y2: '0' };
+  }
 };
-
-type LinearProps = {
-  type: 'linear';
-  x1?: string;
-  y1?: string;
-  x2?: string;
-  y2?: string;
-  stops: GradientStop[];
-};
-
-type RadialProps = {
-  type: 'radial';
-  cx?: string;
-  cy?: string;
-  r?: string;
-  fx?: string;
-  fy?: string;
-  stops: GradientStop[];
-};
-
-type QRGradientProps = {
-  width: number;
-  height: number;
-  id?: string;
-  children: React.ReactNode;
-  onGradientIdGenerated?: (gradientId: string) => void;
-} & (LinearProps | RadialProps);
 
 export const QRGradient = ({
-  width,
-  height,
+  width = 300,
+  height = 300,
   id = 'qrGradient',
   children,
   onGradientIdGenerated,
@@ -58,31 +53,39 @@ export const QRGradient = ({
     if (onGradientIdGenerated) {
       onGradientIdGenerated(gradientId);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onGradientIdGenerated]);
 
   return (
     <Svg width={width} height={height}>
       <Defs>
-        {/* Gradient */}
         {gradientProps.type === 'linear' ? (
-          <LinearGradient
-            id={gradientId}
-            gradientUnits="userSpaceOnUse"
-            x1={gradientProps.x1 ?? '0'}
-            y1={gradientProps.y1 ?? '0'}
-            x2={gradientProps.x2 ?? String(width)}
-            y2={gradientProps.y2 ?? '0'}
-          >
-            {gradientProps.stops.map((stop, i) => (
-              <Stop
-                key={i}
-                offset={stop.offset}
-                stopColor={stop.color}
-                stopOpacity={stop.opacity ?? 1}
-              />
-            ))}
-          </LinearGradient>
+          (() => {
+            const coords = getLinearCoords(
+              gradientProps.direction,
+              width,
+              height
+            );
+            return (
+              <LinearGradient
+                id={gradientId}
+                gradientUnits="userSpaceOnUse"
+                x1={gradientProps.x1 ?? coords.x1}
+                y1={gradientProps.y1 ?? coords.y1}
+                x2={gradientProps.x2 ?? coords.x2}
+                y2={gradientProps.y2 ?? coords.y2}
+              >
+                {gradientProps.stops.map((stop, i) => (
+                  <Stop
+                    key={i}
+                    offset={stop.offset}
+                    stopColor={stop.color}
+                    stopOpacity={stop.opacity ?? 1}
+                  />
+                ))}
+              </LinearGradient>
+            );
+          })()
         ) : (
           <RadialGradient
             id={gradientId}
@@ -104,16 +107,12 @@ export const QRGradient = ({
           </RadialGradient>
         )}
 
-        {/* ✅ Mask: NORMAL behavior */}
         <Mask id={maskId}>
-          {/* Black background = hidden */}
           <Rect width={width} height={height} fill="black" />
-          {/* Children (QR parts) painted white = shown */}
           <G fill="white">{children}</G>
         </Mask>
       </Defs>
 
-      {/* Apply gradient and mask */}
       <Rect
         width={width}
         height={height}

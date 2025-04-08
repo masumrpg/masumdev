@@ -9,6 +9,7 @@ type QREyeProps = {
   defaultColor: string;
   defaultBackgroundColor: string;
   keyPrefix: string;
+  asMask?: boolean;
 };
 
 const normalizeRadius = (r: EyeLayerRadius = 0): EyeCornerRadius => {
@@ -61,10 +62,13 @@ export const QREye = ({
   defaultColor,
   defaultBackgroundColor,
   keyPrefix,
+  asMask = false,
 }: QREyeProps) => {
+  const color = asMask ? 'white' : defaultColor;
+
   const {
     shape = 'square',
-    color: eyeColor = defaultColor,
+    color: eyeColor = color,
     backgroundColor: eyeBg = defaultBackgroundColor,
     radiusOuter = 0,
     radiusInner = 0,
@@ -82,19 +86,9 @@ export const QREye = ({
 
   return shape === 'circle' ? (
     <G key={keyPrefix}>
-      <Circle
-        cx={center.x}
-        cy={center.y}
-        r={cellSize * 3.5}
-        fill={eyeColor}
-      />
+      <Circle cx={center.x} cy={center.y} r={cellSize * 3.5} fill={eyeColor} />
       <Circle cx={center.x} cy={center.y} r={cellSize * 2.5} fill={eyeBg} />
-      <Circle
-        cx={center.x}
-        cy={center.y}
-        r={cellSize * 1.5}
-        fill={eyeColor}
-      />
+      <Circle cx={center.x} cy={center.y} r={cellSize * 1.5} fill={eyeColor} />
     </G>
   ) : (
     <G key={keyPrefix}>

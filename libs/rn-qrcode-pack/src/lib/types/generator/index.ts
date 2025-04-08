@@ -25,7 +25,7 @@ type PieceOptions = {
 };
 
 type LogoOptions = {
-  source: string;
+  source: number | string;
   size?: number; // Size as percentage of total QR code size (0.0-1.0)
   backgroundColor?: string;
   borderRadius?: number;
@@ -34,15 +34,15 @@ type LogoOptions = {
   padding?: number; // Padding inside logo background
 };
 
-export type {
-  EyeCornerRadius,
-  EyeLayerRadius,
-  EyeOptions,
-  PieceOptions,
-  LogoOptions,
+type QRCodeGradientConfig = Omit<
+  QRGradientProps,
+  'width' | 'height' | 'children'
+> & {
+  maskLogo?: boolean;
+  direction?: GradientDirection;
 };
 
-export type QRCodeGeneratorProps = {
+type QRCodeGeneratorProps = {
   value: string;
   size?: number;
   piece?: PieceOptions;
@@ -54,4 +54,64 @@ export type QRCodeGeneratorProps = {
   logo?: LogoOptions;
   color?: string;
   backgroundColor?: string;
+  gradient?: QRCodeGradientConfig;
+};
+
+type GradientStop = {
+  offset: string;
+  color: string;
+  opacity?: number;
+};
+
+type GradientDirection =
+  | 'to-right'
+  | 'to-left'
+  | 'to-bottom'
+  | 'to-top'
+  | 'to-bottom-right'
+  | 'to-bottom-left'
+  | 'to-top-right'
+  | 'to-top-left';
+
+type LinearProps = {
+  type: 'linear';
+  direction?: GradientDirection;
+  x1?: string;
+  y1?: string;
+  x2?: string;
+  y2?: string;
+  stops: GradientStop[];
+};
+
+type RadialProps = {
+  type: 'radial';
+  cx?: string;
+  cy?: string;
+  r?: string;
+  fx?: string;
+  fy?: string;
+  stops: GradientStop[];
+};
+
+type QRGradientProps = {
+  width: number;
+  height: number;
+  id?: string;
+  children: React.ReactNode;
+  onGradientIdGenerated?: (gradientId: string) => void;
+} & (LinearProps | RadialProps);
+
+export type {
+  EyeCornerRadius,
+  EyeLayerRadius,
+  EyeOptions,
+  PieceOptions,
+  LogoOptions,
+  QRCodeGradientConfig,
+  QRCodeGeneratorProps,
+  GradientStop,
+  GradientDirection,
+  LinearProps,
+  RadialProps,
+  QRGradientProps,
 };
