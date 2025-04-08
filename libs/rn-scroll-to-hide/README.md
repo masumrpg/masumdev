@@ -2,7 +2,13 @@
 
 A lightweight and performant React Native hook for creating hide/show animations on scroll. Perfect for headers, footers, or any component that should hide based on scroll direction. Built with smooth animations and optimized performance.
 
-[![npm version](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide.svg)](https://badge.fury.io/js/@masumdev%2Frn-scroll-to-hide)
+<div style="display: flex; gap: 8px;">
+  <img src="https://img.shields.io/npm/v/@masumdev%2Frn-scroll-to-hide" alt="npm version" />
+  <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-scroll-to-hide" alt="npm downloads" />
+  <img src="https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg" alt="platforms" />
+  <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
+  <img src="https://img.shields.io/badge/New-2025-brightgreen" alt="New Feature" />
+</div>
 
 ## Demo
 
@@ -13,13 +19,15 @@ A lightweight and performant React Native hook for creating hide/show animations
 
 ## Youtube Tutorial
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=udjs1sdXJTU" target="_blank">
-    <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg"
-      alt="React Native Toast Demo"
-      width="600"
-      style="border-radius: 10px"
-    />
-  </a>
+  <iframe
+    width="100%"
+    height="500"
+    src="https://www.youtube.com/embed/udjs1sdXJTU"
+    title="React Native Toast Demo"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
 </p>
 
 ## Features
@@ -34,22 +42,36 @@ A lightweight and performant React Native hook for creating hide/show animations
 
 ## Installation
 
-```bash
-npm install @masumdev/rn-scroll-to-hide
-# or
-yarn add @masumdev/rn-scroll-to-hide
-# or
-pnpm install @masumdev/rn-scroll-to-hide
-# or
-bun add @masumdev/rn-scroll-to-hide
-```
+### Prerequisites
 
-### Dependencies
+1. Make sure you have these peer dependencies installed in your React Native project:
 
-This package requires the following peer dependencies:
-- `react-native-reanimated` >= 3.0.0
+    ```json
+    {
+      "react-native-reanimated": "^3.16.7",
+    }
+    ```
 
-Make sure to follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+    ```bash
+    npm install react react-native react-native-reanimated
+    # or
+    yarn add react react-native react-native-reanimated
+    # or
+    pnpm add react react-native react-native-reanimated
+    # or
+    bun add react react-native react-native-reanimated
+    ```
+2. Install the library:
+
+    ```bash
+    npm install @masumdev/rn-scroll-to-hide
+    # or
+    yarn add @masumdev/rn-scroll-to-hide
+    # or
+    pnpm install @masumdev/rn-scroll-to-hide
+    # or
+    bun add @masumdev/rn-scroll-to-hide
+    ```
 
 ## Usage
 
@@ -247,7 +269,7 @@ const header = useHideOnScroll({
   height: 60, // Component height (required)
   duration: 300, // Animation duration in ms (default: 300)
   threshold: 10, // Minimum scroll distance to trigger (default: 10)
-  hideOnScrollDown: true, // Hide when scrolling down (default: true)
+  scrollDirection: ScrollDirecton.DOWN, // Hide when scrolling down (default: DOWN)
   hideDirection: HideDirection.UP // Direction to hide (default: DOWN)
 });
 ```
@@ -297,19 +319,3 @@ const handleModalOpen = () => {
 ## License
 
 MIT
-
-## Author
-
-**Ma'sum** - *React Native Developer from Indonesia*
-
-I'm a React Native developer passionate about creating smooth and performant mobile applications. This scroll-to-hide library is part of my commitment to the React Native community, providing simple yet powerful solutions for common UI needs.
-
-- 📱 React Native Developer
-- 🇮🇩 Based in Indonesia
-- 🔧 Focused on building reusable and performant components
-- 💻 Open source contributor
-
-Feel free to reach out for questions, suggestions, or collaborations!
-
----
-Built with ❤️ in Indonesia

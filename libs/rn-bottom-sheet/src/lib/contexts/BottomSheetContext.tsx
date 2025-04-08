@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   createContext,
   useContext,
@@ -55,6 +56,7 @@ export const BottomSheetProvider: React.FC<BottomSheetProviderProps> = ({
   const [sheetVariant, setSheetVariant] = useState<'scroll' | 'flatlist'>(
     variant
   );
+
   const [listData, setListData] = useState<any[]>([]);
   const [renderItem, setRenderItem] = useState<any>(null);
   const navigation = useNavigation();
@@ -136,6 +138,7 @@ export const BottomSheetProvider: React.FC<BottomSheetProviderProps> = ({
   const handleSetRenderItem = useCallback(
     (renderer: (info: any) => ReactNode) => {
       // Wrap the provided renderer with null checks
+
       const safeRenderer = (info: any) => {
         // If info or info.item is null/undefined, return null or a placeholder
         if (!info || info.item === null || info.item === undefined) {
@@ -226,7 +229,6 @@ export const BottomSheetProvider: React.FC<BottomSheetProviderProps> = ({
   // Add safeguard for renderItem in case it's still null
   const safeRenderItem =
     renderItem ||
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (({ item }: { item: any }) => (
       <Text style={{ padding: 20 }}>No item renderer provided</Text>
     ));

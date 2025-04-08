@@ -2,13 +2,23 @@
 sidebar_position: 3
 ---
 
-# Basic Setup
+# Basic Usage
 
 :::tip
 The `useHideOnScroll` hook provides a simple way to create hide/show animations for components based on scroll direction. This is perfect for headers, footers, or any component that should respond to scroll behavior.
 :::
 
-- Basic Usage:
+## Table of Contents
+- [Basic Usage](#basic-usage)
+
+## Basic Usage:
+The `useHideOnScroll` hook provides a powerful and flexible way to create smooth hide/show animations for components based on scroll direction. This is particularly useful for implementing dynamic headers, footers, or any UI element that should respond to user scrolling behavior.
+
+Here's a basic example demonstrating how to use the hook to create a header that hides when scrolling up and shows when scrolling down: down:
+
+:::tip
+The `scrollEventThrottle={16}` prop ensures smooth 60fps animations by updating the scroll position every 16ms.
+:::
 
 ```tsx
 import React from 'react';
@@ -106,6 +116,14 @@ const styles = StyleSheet.create({
 });
 ```
 
-:::tip
-The `scrollEventThrottle={16}` prop ensures smooth 60fps animations by updating the scroll position every 16ms.
+:::tip Video Tutorial
+<div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
+  <a href="/docs/rn-scroll-to-hide/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+    <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
+      <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
+      <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>
+      <p style={{ margin: '10px 0 0', color: 'rgb(51, 54, 51)' }}>Follow our step-by-step guide to integrate and customize the scroll-to-hide component in your React Native application</p>
+    </div>
+  </a>
+</div>
 :::

@@ -4,6 +4,14 @@ sidebar_position: 2
 
 # Installation
 
+## Table of Contents
+- [Prerequisites](#prerequisites)
+  - [Installing prerequisites package](#installing-prerequisites-package)
+- [Expo Setup](#expo-setup)
+  - [Managed Workflow](#managed-workflow)
+- [Installation Library](#installation-library)
+- [Troubleshooting](#troubleshooting)
+
 ## Prerequisites
 
 :::danger Peer Dependencies
@@ -15,7 +23,8 @@ Make sure you have these peer dependencies installed in your React Native or Exp
   "react-native": "^0.76.7",
   "react-native-reanimated": "^3.16.7",
   "react-native-gesture-handler": "^2.20.2",
-  "react-native-safe-area-context": "^4.12.0"
+  "react-native-safe-area-context": "^4.12.0",
+  "@react-navigation/native": "^6.x"
 }
 ```
 
@@ -24,8 +33,21 @@ Make sure you have these peer dependencies installed in your React Native or Exp
 :::tip Recommended Installation
 Use the following command to install all required peer dependencies at once:
 
+- Using npm
 ```bash
-npm install react-native-reanimated react-native-gesture-handler react-native-safe-area-context
+npm install react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
+```
+- Using yarn
+```bash
+yarn add react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
+```
+- Using bun
+```bash
+bun add react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
+```
+- Using pnpm
+```bash
+pnpm add react-native-reanimated react-native-gesture-handler react-native-safe-area-context @react-navigation/native
 ```
 :::
 
@@ -55,25 +77,9 @@ module.exports = function (api) {
 };
 ```
 
-3. Add the following to your `app.json` or `app.config.js`:
-
-```json
-{
-  "expo": {
-    "plugins": [
-      "react-native-reanimated"
-    ]
-  }
-}
-```
-
-## Troubleshooting
-
-:::danger Common Issues
-- For Reanimated issues, ensure you've rebuilt the app after installing the package
-- Make sure all peer dependencies versions match the requirements
-- If you encounter "Reanimated plugin not found" error, verify your babel.config.js is properly configured
-- Metro bundler cache issues can be resolved by clearing the cache: `npx react-native start --reset-cache`
+## Installation Library
+:::tip Library Installation
+Install the `@masumdev/rn-bottom-sheet` package using your preferred package manager.
 :::
 
 #### Using npm
@@ -99,3 +105,24 @@ bun add @masumdev/rn-bottom-sheet
 ```bash
 pnpm add @masumdev/rn-bottom-sheet
 ```
+
+## Troubleshooting
+
+:::danger Common Issues
+- For Reanimated issues, ensure you've rebuilt the app after installing the package
+- Make sure all peer dependencies versions match the requirements
+- If you encounter "Reanimated plugin not found" error, verify your babel.config.js is properly configured
+- Metro bundler cache issues can be resolved by clearing the cache: `npm start -c`
+:::
+
+:::tip Video Tutorial
+<div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
+  <a href="/docs/rn-bottom-sheet/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+    <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
+      <img src="https://img.youtube.com/vi/oBM0lh7tcyY/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
+      <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>
+      <p style={{ margin: '10px 0 0', color: 'rgb(51, 54, 51)' }}>Step-by-step tutorial on integrating and customizing the bottom sheet component in your React Native application</p>
+    </div>
+  </a>
+</div>
+:::

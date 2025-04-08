@@ -2,11 +2,13 @@
 
 A simple toast for React Native, inspired by Samsung notifications. This library provides a lightweight toast component with smooth animations and anti-spam protection, ensuring a seamless user experience.
 
-[![npm version](https://badge.fury.io/js/@masumdev%2Frn-toast.svg)](https://badge.fury.io/js/@masumdev%2Frn-toast)
-
-<div align="center">
-  <img src="https://img.shields.io/badge/NEW-2025-brightgreen?style=for-the-badge" alt="New Feature" />
-  <img src="https://img.shields.io/badge/NEW-Custom_Position-brightgreen?style=for-the-badge" alt="New Feature" />
+<div style="display: flex; gap: 8px;">
+  <img src="https://img.shields.io/npm/v/@masumdev%2Frn-toast" alt="npm version" />
+  <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-toast" alt="npm downloads" />
+  <img src="https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg" alt="platforms" />
+  <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
+  <img src="https://img.shields.io/badge/New-2025-brightgreen" alt="New Feature" />
+  <img src="https://img.shields.io/badge/New-Custom_Position-brightgreen" alt="New Feature" />
 </div>
 
 
@@ -19,13 +21,15 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 
 ### Tutorial Video
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=ytdpXMd1fqU" target="_blank">
-    <img src="https://img.youtube.com/vi/ytdpXMd1fqU/maxresdefault.jpg"
-      alt="React Native Toast Demo"
-      width="600"
-      style="border-radius: 10px"
-    />
-  </a>
+  <iframe
+    width="100%"
+    height="500"
+    src="https://www.youtube.com/embed/ytdpXMd1fqU"
+    title="React Native Toast Demo"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
 </p>
 
 *Demo showing various toast notifications: success, error, and info types with smooth animations and anti-spam protection*
@@ -42,22 +46,34 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 
 ## Installation
 
-```bash
-npm install @masumdev/rn-toast
-# or
-yarn add @masumdev/rn-toast
-# or
-pnpm install @masumdev/rn-toast
-# or
-bun add @masumdev/rn-toast
-```
+1. Make sure you have these peer dependencies installed in your React Native project:
 
-### Dependencies
+    ```json
+    {
+      "react-native-reanimated": "^3.xx",
+    }
+    ```
 
-This package requires the following peer dependencies:
-- `react-native-reanimated` >= 2.0.0
+    ```bash
+    npm install react react-native react-native-reanimated
+    # or
+    yarn add react react-native react-native-reanimated
+    # or
+    pnpm add react react-native react-native-reanimated
+    # or
+    bun add react react-native react-native-reanimated
+    ```
+2. Install the library:
 
-Make sure to follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+    ```bash
+    npm install @masumdev/rn-toast
+    # or
+    yarn add @masumdev/rn-toast
+    # or
+    pnpm install @masumdev/rn-toast
+    # or
+    bun add @masumdev/rn-toast
+    ```
 
 ## Usage
 
@@ -65,42 +81,42 @@ Make sure to follow the [react-native-reanimated installation instructions](http
 
 1. Add the `Toaster` component to your app's root component:
 
-```jsx
-import React from 'react';
-import { View } from 'react-native';
-import { Toaster } from '@masumdev/rn-toast';
+    ```jsx
+    import React from 'react';
+    import { View } from 'react-native';
+    import { Toaster } from '@masumdev/rn-toast';
 
-export default function App() {
-  return (
-    <View style={{ flex: 1 }}>
-      <Toaster />
-      {/* Your app content */}
-    </View>
-  );
-}
-```
+    export default function App() {
+      return (
+        <View style={{ flex: 1 }}>
+          <Toaster />
+          {/* Your app content */}
+        </View>
+      );
+    }
+    ```
 
 2. Use the `useToast` hook in your components:
 
-```jsx
-import React from 'react';
-import { Button, View } from 'react-native';
-import { useToast } from '@masumdev/rn-toast';
+    ```jsx
+    import React from 'react';
+    import { Button, View } from 'react-native';
+    import { useToast } from '@masumdev/rn-toast';
 
-export default function MyComponent() {
-  const { showToast } = useToast();
+    export default function MyComponent() {
+      const { showToast } = useToast();
 
-  const handlePress = () => {
-    showToast('Operation successful!', 'success');
-  };
+      const handlePress = () => {
+        showToast('Operation successful!', 'success');
+      };
 
-  return (
-    <View>
-      <Button title="Show Toast" onPress={handlePress} />
-    </View>
-  );
-}
-```
+      return (
+        <View>
+          <Button title="Show Toast" onPress={handlePress} />
+        </View>
+      );
+    }
+    ```
 
 ### Toast Types
 
@@ -201,20 +217,3 @@ export default function MyComponent() {
 ## License
 
 MIT
-
-
-## Author
-
-**Ma'sum** - *React Native Developer from Indonesia*
-
-I'm a React Native developer passionate about creating smooth and performant mobile applications. This toast library is part of my commitment to the React Native community, providing simple yet powerful solutions for common UI needs.
-
-- 📱 React Native Developer
-- 🇮🇩 Based in Indonesia
-- 🔧 Focused on building reusable and performant components
-- 💻 Open source contributor
-
-Feel free to reach out for questions, suggestions, or collaborations!
-
----
-Built with ❤️ in Indonesia

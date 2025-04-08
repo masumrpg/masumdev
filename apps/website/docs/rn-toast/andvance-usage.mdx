@@ -4,7 +4,13 @@ sidebar_position: 4
 
 # Advanced Usage
 
-### Toast Types
+## Table of Contents
+- [Toast Types](#toast-types)
+- [Custom Configuration](#custom-configuration)
+- [Customizing the Toaster Component](#customizing-the-toaster-component)
+- [Manual Toast Control](#manual-toast-control)
+
+## Toast Types
 
 :::tip
 The library supports three types of toasts that can be used to convey different types of messages: info (default), success, and error.
@@ -23,9 +29,10 @@ showToast('Operation successful!', 'success');
 
 // Show an error toast
 showToast('Something went wrong', 'error');
+
 ```
 
-### Custom Configuration
+## Custom Configuration
 
 :::tip
 You can customize the duration and animation speed of toasts to match your app's requirements. Longer durations are suitable for important messages.
@@ -41,9 +48,12 @@ showToast('This will stay longer', 'info', { duration: 8000 });
 
 // Custom animation speed (200ms)
 showToast('Quick animation', 'success', { animationDuration: 200 });
+
+// ✨ NEW FEATURE! Custom position from top (120px)
+showToast('Custom position', 'info', { position: 120 }); // Customize the distance from top!
 ```
 
-### Customizing the Toaster Component
+## Customizing the Toaster Component
 
 :::tip
 Customize the default behavior and appearance of the Toaster component by providing custom icons and colors for different toast types.
@@ -81,7 +91,7 @@ export default function App() {
 }
 ```
 
-### Manual Toast Control
+## Manual Toast Control
 
 :::tip
 Use the hideToast function for scenarios where you need programmatic control over toast dismissal, such as when completing an async operation.
@@ -100,7 +110,7 @@ export default function MyComponent() {
   const { showToast, hideToast } = useToast();
 
   const showMessage = () => {
-    showToast('This is a long toast message...', 'info', { duration: 10000 });
+    showToast('Custom position', 'info', { position: 120 });
   };
 
   const hideMessage = () => {
@@ -117,3 +127,15 @@ export default function MyComponent() {
   );
 }
 ```
+
+:::tip Video Tutorial
+<div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
+  <a href="/docs/rn-toast/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+    <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
+      <img src="https://img.youtube.com/vi/ytdpXMd1fqU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
+      <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>
+      <p style={{ margin: '10px 0 0', color: 'rgb(51, 54, 51)' }}>Follow our step-by-step guide to integrate and customize the toast component in your React Native application</p>
+    </div>
+  </a>
+</div>
+:::

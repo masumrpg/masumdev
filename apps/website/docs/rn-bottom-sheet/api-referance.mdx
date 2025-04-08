@@ -4,6 +4,10 @@ sidebar_position: 6
 
 # API Reference
 
+## Table of Contents
+- [BottomSheetProvider Props](#bottomsheetprovider-props)
+- [useBottomSheet Hook](#usebottomsheet-hook)
+
 ## BottomSheetProvider Props
 
 :::tip Provider Configuration
@@ -49,86 +53,3 @@ The `useBottomSheet` hook provides methods to control the bottom sheet. Here's a
 | setVariant | (variant: "scroll" \| "flatlist") => void | Changes the bottom sheet variant between ScrollView and FlatList |
 | setListData | (data: any[]) => void | Sets the data array for FlatList variant |
 | setRenderItem | (renderer: (info: any) => ReactNode) => void | Sets the render function for FlatList items |
-
-## Usage Examples
-
-:::tip Best Practices
-Always provide a way for users to close the bottom sheet (e.g., close button, backdrop press). This ensures a better user experience and prevents users from getting stuck.
-:::
-
-:::danger Content Management
-Avoid setting heavy or complex content directly in the bottom sheet. Instead, memoize the content or load it asynchronously to maintain smooth animations.
-:::
-
-```jsx
-// BottomSheetProvider setup
-import { BottomSheetProvider } from '@masumdev/rn-bottom-sheet';
-
-function App() {
-  return (
-    <BottomSheetProvider
-      defaultSnapTo="50%"
-      maxSnapTo="90%"
-      backgroundColor="#ffffff"
-      backDropColor="rgba(0, 0, 0, 0.5)"
-      onStateChange={(isOpen) => console.log('Sheet state:', isOpen)}
-      variant="scroll" // or 'flatlist'
-      flatListProps={{ // Optional FlatList props
-        keyExtractor: (item) => item.id,
-        showsVerticalScrollIndicator: false
-      }}
-    >
-      {/* Your app content */}
-    </BottomSheetProvider>
-  );
-}
-
-// Using ScrollView variant
-import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
-
-function ScrollViewExample() {
-  const { expand, setContent, setSheetTitle } = useBottomSheet();
-
-  const showScrollContent = () => {
-    setSheetTitle('Scrollable Content');
-    setContent(
-      <View style={{ padding: 16 }}>
-        <Text>This content will be scrollable</Text>
-        {/* Add more content here */}
-      </View>
-    );
-    expand('60%');
-  };
-
-  return <Button title="Show ScrollView" onPress={showScrollContent} />;
-}
-
-// Using FlatList variant
-function FlatListExample() {
-  const {
-    expand,
-    setVariant,
-    setListData,
-    setRenderItem,
-    setSheetTitle
-  } = useBottomSheet();
-
-  const showListContent = () => {
-    setSheetTitle('List Content');
-    setVariant('flatlist');
-    setListData([
-      { id: '1', title: 'Item 1' },
-      { id: '2', title: 'Item 2' },
-      // Add more items
-    ]);
-    setRenderItem(({ item }) => (
-      <View style={{ padding: 16, borderBottomWidth: 1, borderColor: '#eee' }}>
-        <Text>{item.title}</Text>
-      </View>
-    ));
-    expand('70%');
-  };
-
-  return <Button title="Show FlatList" onPress={showListContent} />;
-}
-```

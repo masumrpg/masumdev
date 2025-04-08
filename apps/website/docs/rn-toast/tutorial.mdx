@@ -6,6 +6,14 @@ sidebar_position: 5
 
 🚀 Step-by-Step Guide to implement Toast notifications in React Native with smooth animations and anti-spam protection.
 
+## Table of Contents
+- [Video Tutorial](#video-tutorial)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Basic Implementation](#basic-implementation)
+- [Advanced Usage](#advanced-usage)
+
 ## Video Tutorial
 Watch our detailed video guide for a hands-on implementation walkthrough:
 
@@ -195,145 +203,3 @@ export default function MyComponent() {
   );
 }
 ```
-
-## API Reference
-
-### Toaster Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultDuration | number | 3000 | Default duration for toasts in milliseconds |
-| defaultAnimationDuration | number | 300 | Default animation duration in milliseconds |
-| customIcons | object | - | Custom icons for different toast types |
-| customColors | object | - | Custom colors for different toast types |
-
-### useToast Hook
-
-The hook returns an object with the following methods:
-
-| Method | Type | Description |
-|--------|------|-------------|
-| showToast | function | Shows a toast with message and type |
-| hideToast | function | Hides the current toast |
-
-### Gesture Handling
-
-:::tip
-Implement gesture handlers using the react-native-gesture-handler library for smooth interactions. Consider debouncing gesture callbacks for better performance.
-:::
-
-```jsx
-import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
-
-const { setContent, expand } = useBottomSheet();
-
-const CustomContent = () => {
-  const handleSwipeComplete = (direction) => {
-    if (direction === 'up') {
-      expand('90%');
-    } else if (direction === 'down') {
-      expand('30%');
-    }
-  };
-
-  return (
-    <GestureHandlerRootView>
-      <PanGestureHandler onGestureEvent={handleSwipeComplete}>
-        <View style={styles.container}>
-          <Text>Swipe up or down</Text>
-        </View>
-      </PanGestureHandler>
-    </GestureHandlerRootView>
-  );
-};
-```
-
-### Custom Animations
-
-:::tip
-Use Reanimated's native driver animations for optimal performance. Worklets run on the UI thread and provide smooth animations.
-:::
-
-```jsx
-import { useBottomSheet } from '@masumdev/rn-bottom-sheet';
-import Animated, { withSpring } from 'react-native-reanimated';
-
-const AnimatedContent = () => {
-  const scale = useSharedValue(1);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: withSpring(scale.value) }],
-  }));
-
-  return (
-    <Animated.View style={[styles.container, animatedStyle]}>
-      <Text>Animated Content</Text>
-    </Animated.View>
-  );
-};
-```
-
-## Common Use Cases
-
-### Modal Forms
-```tsx
-const handleOpenForm = () => {
-  setSheetTitle('New Item');
-  setContent(
-    <View style={{ padding: 16 }}>
-      <TextInput placeholder="Enter item name" />
-      <Button title="Submit" onPress={handleSubmit} />
-    </View>
-  );
-  expand('60%');
-};
-```
-
-### Action Sheets
-```tsx
-const handleOpenActions = () => {
-  setSheetTitle('Choose Action');
-  setContent(
-    <View style={{ padding: 16 }}>
-      <Pressable onPress={() => { /* action 1 */ }}>
-        <Text>Action 1</Text>
-      </Pressable>
-      <Pressable onPress={() => { /* action 2 */ }}>
-        <Text>Action 2</Text>
-      </Pressable>
-    </View>
-  );
-  expand('30%');
-};
-```
-
-## Troubleshooting
-
-:::tip Debugging
-Enable the React Native Debugger and monitor the component lifecycle to identify issues. Check the console for any warnings or errors related to gesture handling or animations.
-:::
-
-### Common Issues
-1. **Sheet not appearing**
-   - Ensure BottomSheetProvider is at the root level
-   - Check if content is being set correctly
-   - Verify all peer dependencies are properly installed
-
-2. **Gesture handling issues**
-   - Make sure react-native-gesture-handler is properly configured
-   - Check if GestureHandlerRootView wraps your app
-
-3. **Animation performance**
-   - Enable the native driver for animations
-   - Use Hermes engine for better performance
-   - Avoid heavy computations during animations
-
-2. **Gesture issues**
-   - Verify react-native-reanimated is properly installed
-   - Check for conflicting gesture handlers
-
-3. **Layout problems**
-   - Ensure proper usage of SafeAreaView
-   - Check for conflicting style properties
-
-For more examples and advanced usage, check out our [demo page](/docs/rn-toast/demo).
