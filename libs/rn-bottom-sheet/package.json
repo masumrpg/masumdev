@@ -1,6 +1,6 @@
 {
   "name": "@masumdev/rn-bottom-sheet",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://docs.masum.cloud/docs/category/-bottom-sheet",
   "scripts": {
     "build": "bob build"

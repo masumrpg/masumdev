@@ -19,15 +19,13 @@ A lightweight and performant React Native hook for creating hide/show animations
 
 ## Youtube Tutorial
 <p align="center">
-  <iframe
-    width="100%"
-    height="500"
-    src="https://www.youtube.com/embed/udjs1sdXJTU"
-    title="React Native Toast Demo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <a href="https://www.youtube.com/watch?v=udjs1sdXJTU" target="_blank">
+    <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg"
+      alt="React Native Toast Demo"
+      width="600"
+      style="border-radius: 10px"
+    />
+  </a>
 </p>
 
 ## Features

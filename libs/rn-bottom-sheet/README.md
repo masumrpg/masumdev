@@ -20,15 +20,13 @@ A highly customizable and gesture-responsive bottom sheet component for React Na
 
 ## Youtube Tutorial
 <p align="center">
-  <iframe
-    width="100%"
-    height="500"
-    src="https://www.youtube.com/embed/oBM0lh7tcyY"
-    title="React Native Bottom Sheet Demo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <a href="https://www.youtube.com/watch?v=oBM0lh7tcyY" target="_blank">
+    <img src="https://img.youtube.com/vi/oBM0lh7tcyY/maxresdefault.jpg"
+      alt="React Native Toast Demo"
+      width="600"
+      style="border-radius: 10px"
+    />
+  </a>
 </p>
 
 ## Features

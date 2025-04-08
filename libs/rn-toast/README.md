@@ -21,16 +21,15 @@ A simple toast for React Native, inspired by Samsung notifications. This library
 
 ### Tutorial Video
 <p align="center">
-  <iframe
-    width="100%"
-    height="500"
-    src="https://www.youtube.com/embed/ytdpXMd1fqU"
-    title="React Native Toast Demo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <a href="https://www.youtube.com/watch?v=ytdpXMd1fqU" target="_blank">
+    <img src="https://img.youtube.com/vi/ytdpXMd1fqU/maxresdefault.jpg"
+      alt="React Native Toast Demo"
+      width="600"
+      style="border-radius: 10px"
+    />
+  </a>
 </p>
+
 
 *Demo showing various toast notifications: success, error, and info types with smooth animations and anti-spam protection*
 
@@ -213,6 +212,42 @@ export default function MyComponent() {
   );
 }
 ```
+
+## API Reference
+
+### ToasterProvider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| position | number | 80 | Position where toasts will appear from top |
+| duration | number | 3000 | Default duration (in ms) for toasts to remain visible |
+| offset | number | 16 | Distance from the edge of the screen |
+| backgroundColor | string | "#333333" | Default background color for toasts |
+| textColor | string | "#FFFFFF" | Default text color for toasts |
+| successColor | string | "#4CAF50" | Background color for success toasts |
+| errorColor | string | "#F44336" | Background color for error toasts |
+| infoColor | string | "#2196F3" | Background color for info toasts |
+| warningColor | string | "#FF9800" | Background color for warning toasts |
+| animationDuration | number | 300 | Duration of show/hide animations |
+| onToastDismiss | (id: string) => void | - | Callback when a toast is dismissed |
+| children | ReactNode | - | The content to be wrapped by ToasterProvider |
+
+### useToast Hook
+
+The `useToast` hook provides methods to display and control toasts. Here's a detailed reference of the returned object:
+
+| Method/Property | Type | Description |
+|----------------|------|-------------|
+| showToast | (message: string, options?: ToastOptions) => string | Shows a basic toast with default styling |
+| hideToast | (id: string) => void | Manually hides a specific toast by its ID |
+
+#### ToastOptions
+
+| Option | Type | Description |
+|--------|------|-------------|
+| duration | number | Time in ms the toast should remain visible |
+| backgroundColor | string | Custom background color for this toast |
+| textColor | string | Custom text color for this toast |
 
 ## License
 
