@@ -31,7 +31,7 @@ A highly customizable and gesture-responsive bottom sheet component for React Na
 
 ## Features
 
-- 🎯 Customizable snap points (10% to 90% of screen height)
+- 🎯 Customizable snap points (10% to 100% of screen height)
 - 🎨 Customizable background and backdrop colors
 - 📱 iOS and Android back gesture/button handling
 - 💫 Smooth animations and gestures using react-native-reanimated
@@ -188,7 +188,7 @@ const showHalfSheet = () => {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | defaultSnapTo | string | '70%' | Default height of the bottom sheet |
-| maxSnapTo | string | '90%' | Maximum height the bottom sheet can expand to |
+| maxSnapTo | string | '100%' | Maximum height the bottom sheet can expand to |
 | backgroundColor | string | '#FFFFFF' | Background color of the bottom sheet |
 | backDropColor | string | 'rgba(0,0,0,0.5)' | Color of the backdrop overlay |
 | onStateChange | function | - | Callback when bottom sheet state changes |
