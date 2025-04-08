@@ -13,7 +13,7 @@ export const QRCodeGenerator = ({
   eye,
   logo,
   color = '#000',
-  backgroundColor = '#fff',
+  backgroundColor = 'transparent',
   gradient,
 }: QRCodeGeneratorProps) => {
   const matrix = useGenerateQrCode({ value, logo });
