@@ -17,6 +17,7 @@ export const QREye = ({
   const {
     shape = 'square',
     color: eyeColor = color,
+    innerColor: innerEyeColor = eyeColor,
     backgroundColor: eyeBg = defaultBackgroundColor,
     radiusOuter = 0,
     radiusInner = 0,
@@ -77,7 +78,7 @@ export const QREye = ({
             cx={center.x}
             cy={center.y}
             r={cellSize * 1.5}
-            fill={eyeColor}
+            fill={innerEyeColor}
           />
         </G>
       </>
@@ -152,7 +153,7 @@ export const QREye = ({
             3 * cellSize,
             rCenter
           )}
-          fill={eyeColor}
+          fill={innerEyeColor}
         />
       </G>
     </>

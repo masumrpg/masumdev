@@ -10,6 +10,7 @@ type EyeLayerRadius = number | EyeCornerRadius;
 type EyeOptions = {
   shape?: 'square' | 'circle';
   color?: string;
+  innerColor?: string;
   backgroundColor?: string;
   radiusOuter?: EyeLayerRadius;
   radiusInner?: EyeLayerRadius;
@@ -47,6 +48,7 @@ type QRCodeGeneratorProps = {
   size?: number;
   piece?: PieceOptions;
   eye?: Partial<{
+    shape: 'square' | 'circle';
     topLeft: EyeOptions;
     topRight: EyeOptions;
     bottomLeft: EyeOptions;
@@ -55,6 +57,7 @@ type QRCodeGeneratorProps = {
   color?: string;
   backgroundColor?: string;
   gradient?: QRCodeGradientConfig;
+  includeBackground?: boolean;
 };
 
 type GradientStop = {

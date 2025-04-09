@@ -1,3 +1,4 @@
+import React from 'react';
 import { Svg, Rect } from 'react-native-svg';
 import { QRCodeGeneratorProps } from '../../types/generator';
 import { useGenerateQrCode } from '../../hooks/generator';
@@ -5,6 +6,7 @@ import { QRLogo } from './QRLogo';
 import { QREye } from './QREye';
 import { QRPiece } from './QRPiece';
 import { QRGradient } from './QRGradient';
+import { QRBgStyle } from './QRBgStyle';
 
 export const QRCodeGenerator = ({
   value,
@@ -15,6 +17,7 @@ export const QRCodeGenerator = ({
   color = '#000',
   backgroundColor = 'transparent',
   gradient,
+  includeBackground = false,
 }: QRCodeGeneratorProps) => {
   const matrix = useGenerateQrCode({ value, logo });
 
@@ -32,187 +35,110 @@ export const QRCodeGenerator = ({
     return inTopLeft || inTopRight || inBottomLeft;
   };
 
-  if (gradient?.maskLogo) {
-    return (
+  const renderSvgContent = (children: React.ReactNode) => {
+    const svg = (
       <Svg
         width={size}
         height={size}
         style={{ backgroundColor: 'transparent' }}
       >
-        {/* Background */}
         <Rect width={size} height={size} fill={backgroundColor} />
-
-        {/* QR with Gradient Mask */}
-        <QRGradient width={size} height={size} {...gradient}>
-          {matrix.map((row, y) =>
-            row.map((cell, x) => {
-              if (isInEye(x, y)) return null;
-              return (
-                <QRPiece
-                  key={`piece-${x}-${y}`}
-                  x={x}
-                  y={y}
-                  cell={cell}
-                  cellSize={cellSize}
-                  pieceOptions={piece || {}}
-                  defaultColor="white"
-                  keyPrefix={`piece-${x}-${y}`}
-                  asMask
-                />
-              );
-            })
-          )}
-
-          <QREye
-            x={0}
-            y={0}
-            cellSize={cellSize}
-            eyeOptions={eye?.topLeft || {}}
-            defaultColor="white"
-            defaultBackgroundColor="black"
-            asMask
-            keyPrefix="eye-tl"
-          />
-          <QREye
-            x={size - cellSize * 7}
-            y={0}
-            cellSize={cellSize}
-            eyeOptions={eye?.topRight || {}}
-            defaultColor="white"
-            defaultBackgroundColor="black"
-            asMask
-            keyPrefix="eye-tr"
-          />
-          <QREye
-            x={0}
-            y={size - cellSize * 7}
-            cellSize={cellSize}
-            eyeOptions={eye?.bottomLeft || {}}
-            defaultColor="white"
-            defaultBackgroundColor="black"
-            asMask
-            keyPrefix="eye-bl"
-          />
-
-          {/* Logo masked */}
-          {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
-        </QRGradient>
+        {children}
       </Svg>
     );
-  }
 
-  return gradient ? (
-    <Svg width={size} height={size} style={{ backgroundColor: 'transparent' }}>
-      {/* Background */}
-      <Rect width={size} height={size} fill={backgroundColor} />
+    return includeBackground ? <QRBgStyle>{svg}</QRBgStyle> : svg;
+  };
 
-      {/* QR with Gradient Mask */}
-      <QRGradient width={size} height={size} {...gradient}>
-        {matrix.map((row, y) =>
-          row.map((cell, x) => {
-            if (isInEye(x, y)) return null;
-            return (
-              <QRPiece
-                key={`piece-${x}-${y}`}
-                x={x}
-                y={y}
-                cell={cell}
-                cellSize={cellSize}
-                pieceOptions={piece || {}}
-                defaultColor="white"
-                keyPrefix={`piece-${x}-${y}`}
-                asMask
-              />
-            );
-          })
-        )}
-
-        <QREye
-          x={0}
-          y={0}
-          cellSize={cellSize}
-          eyeOptions={eye?.topLeft || {}}
-          defaultColor="white"
-          defaultBackgroundColor="black"
-          asMask
-          keyPrefix="eye-tl"
-        />
-        <QREye
-          x={size - cellSize * 7}
-          y={0}
-          cellSize={cellSize}
-          eyeOptions={eye?.topRight || {}}
-          defaultColor="white"
-          defaultBackgroundColor="black"
-          asMask
-          keyPrefix="eye-tr"
-        />
-        <QREye
-          x={0}
-          y={size - cellSize * 7}
-          cellSize={cellSize}
-          eyeOptions={eye?.bottomLeft || {}}
-          defaultColor="white"
-          defaultBackgroundColor="black"
-          asMask
-          keyPrefix="eye-bl"
-        />
-      </QRGradient>
-
-      {/* Logo on top */}
-      {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
-    </Svg>
-  ) : (
-    <Svg width={size} height={size} style={{ backgroundColor: 'transparent' }}>
-      <Rect width={size} height={size} fill={backgroundColor} />
-
-      {matrix.map((row, y) =>
-        row.map((cell, x) => {
-          if (isInEye(x, y)) return null;
-          return (
-            <QRPiece
-              key={`piece-${x}-${y}`}
-              x={x}
-              y={y}
-              cell={cell}
-              cellSize={cellSize}
-              pieceOptions={piece || {}}
-              defaultColor={color}
-              keyPrefix={`piece-${x}-${y}`}
-            />
-          );
-        })
-      )}
-
+  const renderEyes = (
+    defaultColor: string,
+    defaultBackgroundColor: string,
+    asMask?: boolean
+  ) => (
+    <>
       <QREye
         x={0}
         y={0}
         cellSize={cellSize}
         eyeOptions={eye?.topLeft || {}}
-        defaultColor={color}
-        defaultBackgroundColor={backgroundColor}
+        defaultColor={defaultColor}
+        defaultBackgroundColor={defaultBackgroundColor}
         keyPrefix="eye-tl"
+        {...(asMask ? { asMask } : {})}
       />
       <QREye
         x={size - cellSize * 7}
         y={0}
         cellSize={cellSize}
         eyeOptions={eye?.topRight || {}}
-        defaultColor={color}
-        defaultBackgroundColor={backgroundColor}
+        defaultColor={defaultColor}
+        defaultBackgroundColor={defaultBackgroundColor}
         keyPrefix="eye-tr"
+        {...(asMask ? { asMask } : {})}
       />
       <QREye
         x={0}
         y={size - cellSize * 7}
         cellSize={cellSize}
         eyeOptions={eye?.bottomLeft || {}}
-        defaultColor={color}
-        defaultBackgroundColor={backgroundColor}
+        defaultColor={defaultColor}
+        defaultBackgroundColor={defaultBackgroundColor}
         keyPrefix="eye-bl"
+        {...(asMask ? { asMask } : {})}
       />
+    </>
+  );
 
+  const renderPieces = (defaultColor: string, asMask?: boolean) =>
+    matrix.map((row, y) =>
+      row.map((cell, x) => {
+        if (isInEye(x, y)) return null;
+        return (
+          <QRPiece
+            key={`piece-${x}-${y}`}
+            x={x}
+            y={y}
+            cell={cell}
+            cellSize={cellSize}
+            pieceOptions={piece || {}}
+            defaultColor={defaultColor}
+            keyPrefix={`piece-${x}-${y}`}
+            {...(asMask ? { asMask } : {})}
+          />
+        );
+      })
+    );
+
+  // --- CASE 1: Gradient with maskLogo
+  if (gradient?.maskLogo) {
+    return renderSvgContent(
+      <QRGradient width={size} height={size} {...gradient}>
+        {renderPieces('white', true)}
+        {renderEyes('white', 'black', true)}
+        {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
+      </QRGradient>
+    );
+  }
+
+  // --- CASE 2: Gradient without mask
+  if (gradient) {
+    return renderSvgContent(
+      <>
+        <QRGradient width={size} height={size} {...gradient}>
+          {renderPieces('white', true)}
+          {renderEyes('white', 'black', true)}
+        </QRGradient>
+        {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
+      </>
+    );
+  }
+
+  // --- CASE 3: Plain QR (no gradient)
+  return renderSvgContent(
+    <>
+      {renderPieces(color)}
+      {renderEyes(color, backgroundColor)}
       {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
-    </Svg>
+    </>
   );
 };
