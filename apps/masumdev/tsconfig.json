@@ -4,16 +4,7 @@
   "include": [],
   "references": [
     {
-      "path": "../../libs/rn-toast"
-    },
-    {
-      "path": "../../libs/rn-bottom-sheet"
-    },
-    {
-      "path": "../../libs/rn-scroll-to-hide"
-    },
-    {
-      "path": "../../libs/rn-qrcode-pack"
+      "path": "../../libs/*"
     },
     {
       "path": "./tsconfig.app.json"
