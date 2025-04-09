@@ -1,3 +1,5 @@
+import { QRCodeErrorCorrectionLevel } from 'qrcode';
+
 type EyeCornerRadius = {
   tl?: number;
   tr?: number;
@@ -8,13 +10,14 @@ type EyeCornerRadius = {
 type EyeLayerRadius = number | EyeCornerRadius;
 
 type EyeOptions = {
-  shape?: 'square' | 'circle';
+  shape?: 'square' | 'circle' | 'dot';
   color?: string;
   innerColor?: string;
   backgroundColor?: string;
   radiusOuter?: EyeLayerRadius;
   radiusInner?: EyeLayerRadius;
   radiusCenter?: EyeLayerRadius;
+  dotSizeRatio?: number;
 };
 
 type PieceOptions = {
@@ -43,21 +46,37 @@ type QRCodeGradientConfig = Omit<
   direction?: GradientDirection;
 };
 
+type ImageSource = string | ReturnType<typeof require>;
+
+type QRImageProps = {
+  children: React.ReactNode;
+  size: number;
+  imageUri: ImageSource;
+  imageSize?: number;
+};
+
+type QRCodeVersion = 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+type ImageOptions = QRImageProps;
+
 type QRCodeGeneratorProps = {
   value: string;
   size?: number;
+  color?: string;
+  gradient?: QRCodeGradientConfig;
+  logo?: LogoOptions;
+  image?: ImageOptions;
+  backgroundColor?: string;
   piece?: PieceOptions;
   eye?: Partial<{
-    shape: 'square' | 'circle';
     topLeft: EyeOptions;
     topRight: EyeOptions;
     bottomLeft: EyeOptions;
   }>;
-  logo?: LogoOptions;
-  color?: string;
-  backgroundColor?: string;
-  gradient?: QRCodeGradientConfig;
   includeBackground?: boolean;
+  version?: QRCodeVersion;
+  maxVersion?: QRCodeVersion;
+  errorCorrectionLevel?: QRCodeErrorCorrectionLevel;
 };
 
 type GradientStop = {
@@ -129,4 +148,9 @@ export type {
   RadialProps,
   QRGradientProps,
   QREyeProps,
+  QRCodeVersion,
+  QRImageProps,
+  ImageOptions,
+  ImageSource,
+  QRCodeErrorCorrectionLevel,
 };

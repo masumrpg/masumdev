@@ -22,6 +22,7 @@ export const QREye = ({
     radiusOuter = 0,
     radiusInner = 0,
     radiusCenter = 0,
+    dotSizeRatio = 0.5,
   } = eyeOptions;
 
   const rOuter = normalizeRadius(radiusOuter);
@@ -32,6 +33,47 @@ export const QREye = ({
     x: x + cellSize * 3.5,
     y: y + cellSize * 3.5,
   };
+
+  if (shape === 'dot') {
+    return (
+      <G key={keyPrefix}>
+        {Array.from({ length: 7 }).map((_, row) =>
+          Array.from({ length: 7 }).map((_, col) => {
+            const cx = x + col * cellSize + cellSize / 2;
+            const cy = y + row * cellSize + cellSize / 2;
+
+            const isCenter = row >= 2 && row <= 4 && col >= 2 && col <= 4;
+            const isInner = row >= 1 && row <= 5 && col >= 1 && col <= 5;
+
+            const fill = isCenter ? innerEyeColor : isInner ? eyeBg : eyeColor;
+
+            const radius = cellSize * dotSizeRatio;
+
+            if (isInner && !isCenter) {
+              const isInnerCorner =
+                (row === 1 && col === 1) ||
+                (row === 1 && col === 5) ||
+                (row === 5 && col === 1) ||
+                (row === 5 && col === 5);
+              if (!isInnerCorner) {
+                return null;
+              }
+            }
+
+            return (
+              <Circle
+                key={`${keyPrefix}-dot-rounded-${row}-${col}`}
+                cx={cx}
+                cy={cy}
+                r={radius}
+                fill={asMask ? 'white' : fill}
+              />
+            );
+          })
+        )}
+      </G>
+    );
+  }
 
   return shape === 'circle' ? (
     asMask ? (

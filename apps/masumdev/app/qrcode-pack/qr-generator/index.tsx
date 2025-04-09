@@ -10,17 +10,19 @@ const QRCodeGeneratorScreen = () => {
           value="https://github.com/masumrpg"
           size={200}
           includeBackground
+          version={3}
         />
 
-        {/* Circle */}
+        {/* Dot */}
         <QRCodeGenerator
-          value="https://github.com/masumrpg"
+          value="https://github.com/masumrpg-dot"
           size={200}
-          eye={
-            {
-              // topLeft: { shape: 'circle' },
-            }
-          }
+          color="pink"
+          eye={{
+            topLeft: { shape: 'dot' },
+            topRight: { shape: 'dot' },
+            bottomLeft: { shape: 'dot' },
+          }}
           piece={{
             shape: 'circle',
             size: 1,

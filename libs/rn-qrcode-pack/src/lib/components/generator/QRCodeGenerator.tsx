@@ -7,19 +7,30 @@ import { QREye } from './QREye';
 import { QRPiece } from './QRPiece';
 import { QRGradient } from './QRGradient';
 import { QRBgStyle } from './QRBgStyle';
+import { QRImage } from './QRImage';
 
 export const QRCodeGenerator = ({
   value,
   size = 256,
+  color = '#000',
+  gradient,
+  image,
+  logo,
+  backgroundColor = 'transparent',
   piece,
   eye,
-  logo,
-  color = '#000',
-  backgroundColor = 'transparent',
-  gradient,
   includeBackground = false,
+  version,
+  maxVersion,
+  errorCorrectionLevel,
 }: QRCodeGeneratorProps) => {
-  const matrix = useGenerateQrCode({ value, logo });
+  const matrix = useGenerateQrCode({
+    value,
+    logo,
+    version,
+    maxVersion,
+    errorCorrectionLevel,
+  });
 
   if (matrix.length === 0) {
     return null;
@@ -133,7 +144,18 @@ export const QRCodeGenerator = ({
     );
   }
 
-  // --- CASE 3: Plain QR (no gradient)
+  // --- CASE 3: Image
+  if (image) {
+    return renderSvgContent(
+      <QRImage size={size} imageUri={image.imageUri} imageSize={image.imageUri}>
+        {renderPieces(color)}
+        {renderEyes(color, backgroundColor)}
+        {logo && <QRLogo logo={logo} size={size} matrix={matrix} />}
+      </QRImage>
+    );
+  }
+
+  // --- CASE 4: Plain QR (no gradient)
   return renderSvgContent(
     <>
       {renderPieces(color)}
