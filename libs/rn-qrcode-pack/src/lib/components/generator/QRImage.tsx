@@ -1,43 +1,33 @@
-import { View } from 'react-native';
-import { Svg, Defs, Mask, Image as SvgImage, G } from 'react-native-svg';
-import { ImageSource, QRImageProps } from '../../types/generator';
-
-const resolveImageSource = (imageUri: ImageSource) => {
-  if (typeof imageUri === 'string') {
-    return { uri: imageUri };
-  }
-  return imageUri;
-};
+import { Svg, Defs, Mask, Rect, G } from 'react-native-svg';
+import { QRImageProps } from '../../types/generator';
 
 const QRImage = ({
   children,
   size,
-  imageUri,
-  imageSize = 256,
+  source,
+  imageSize = size,
 }: QRImageProps) => {
-  const resolvedImage = resolveImageSource(imageUri);
+  const imageX = (size - imageSize) / 2;
+  const imageY = (size - imageSize) / 2;
+  const maskId = 'qr-mask';
 
   return (
-    <View style={{ width: size, height: size }}>
-      <Svg width={size} height={size}>
-        <Defs>
-          <Mask id="qr-mask">
-            <G>
-              {children}
-            </G>
-          </Mask>
-        </Defs>
+    <Svg width={size} height={size}>
+      <Defs>
+        <Mask id={maskId}>
+          <G fill="white">{children}</G>
+        </Mask>
+      </Defs>
 
-        <SvgImage
-          width={imageSize}
-          height={imageSize}
-          href={resolvedImage}
-          preserveAspectRatio="xMidYMid slice"
-          mask="url(#qr-mask)"
-        />
-      </Svg>
-    </View>
+      {/* Gambar menggunakan komponen SVG yang disediakan */}
+      <G x={imageX} y={imageY} width={imageSize} height={imageSize}>
+        {source}
+      </G>
+
+      {/* Overlay dengan QR code mask */}
+      <Rect width={size} height={size} fill="black" mask={`url(#${maskId})`} />
+    </Svg>
   );
 };
 
-export {QRImage};
+export { QRImage };

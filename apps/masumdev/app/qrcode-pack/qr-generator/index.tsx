@@ -1,4 +1,5 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { LogoSvg } from '../../../components/LogoSvg';
 import { QRCodeGenerator } from '@masumdev/rn-qrcode-pack';
 
 const QRCodeGeneratorScreen = () => {
@@ -11,6 +12,9 @@ const QRCodeGeneratorScreen = () => {
           size={200}
           includeBackground
           version={3}
+          image={{
+            source: <LogoSvg />,
+          }}
         />
 
         {/* Dot */}

@@ -1,4 +1,5 @@
 import { QRCodeErrorCorrectionLevel } from 'qrcode';
+import React from 'react';
 
 type EyeCornerRadius = {
   tl?: number;
@@ -46,18 +47,16 @@ type QRCodeGradientConfig = Omit<
   direction?: GradientDirection;
 };
 
-type ImageSource = string | ReturnType<typeof require>;
-
 type QRImageProps = {
   children: React.ReactNode;
   size: number;
-  imageUri: ImageSource;
+  source: React.ReactNode;
   imageSize?: number;
 };
 
 type QRCodeVersion = 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-type ImageOptions = QRImageProps;
+type ImageOptions = Omit<QRImageProps, 'children' | 'size'>;
 
 type QRCodeGeneratorProps = {
   value: string;
@@ -151,6 +150,5 @@ export type {
   QRCodeVersion,
   QRImageProps,
   ImageOptions,
-  ImageSource,
   QRCodeErrorCorrectionLevel,
 };
