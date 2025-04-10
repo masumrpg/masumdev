@@ -79,7 +79,7 @@ export const QRGradient = ({
                 x2={gradientProps.x2 ?? coords.x2}
                 y2={gradientProps.y2 ?? coords.y2}
               >
-                {gradientProps.stops.map((stop, i) => (
+                {gradientProps.colors.map((stop, i) => (
                   <Stop
                     key={i}
                     offset={stop.offset}
@@ -100,7 +100,7 @@ export const QRGradient = ({
             fx={gradientProps.fx ?? gradientProps.cx ?? String(width / 2)}
             fy={gradientProps.fy ?? gradientProps.cy ?? String(height / 2)}
           >
-            {gradientProps.stops.map((stop, i) => (
+            {gradientProps.colors.map((stop, i) => (
               <Stop
                 key={i}
                 offset={stop.offset}

@@ -122,6 +122,10 @@ const QRCodeGeneratorScreen = () => {
               padding: 5,
               borderRadius: 99,
             }}
+            version={3}
+            piece={{
+              shape: 'dot',
+            }}
             eye={{
               topRight: {
                 shape: 'circle',
@@ -149,14 +153,7 @@ const QRCodeGeneratorScreen = () => {
           <QRCodeGenerator
             value="Rain Qr Code"
             size={qrSize}
-            // color="#2074a7"
-            gradient={{
-              type: 'radial',
-              stops: [
-                { color: 'green', offset: '80%', opacity: 0.5 },
-                { color: 'red', offset: '50%' },
-              ],
-            }}
+            color="#2074a7"
             version={2}
             eye={{
               topLeft: {
@@ -201,6 +198,110 @@ const QRCodeGeneratorScreen = () => {
               size: 1,
             }}
             includeBackground
+          />
+        </View>
+
+        {/* Radial Gradient */}
+        <View>
+          <QRTitle title="Radial Gradient Qr Code" />
+          <QRCodeGenerator
+            value="Radial Gradient Qr Code"
+            size={qrSize}
+            includeBackground
+            version={3}
+            eye={{
+              topRight: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              topLeft: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              bottomLeft: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+            }}
+            gradient={{
+              type: 'radial',
+              colors: [
+                {
+                  offset: '10%',
+                  color: '#FFF242', // White center
+                  opacity: 0.5,
+                },
+                {
+                  offset: '100%',
+                  color: '#228B22', // Forest green
+                  opacity: 0.8,
+                },
+              ],
+            }}
+          />
+        </View>
+
+        {/* Radial Gradient */}
+        <View>
+          <QRTitle title="Radial Gradient Qr Code" />
+          <QRCodeGenerator
+            value="Radial Gradient Qr Code"
+            size={qrSize}
+            includeBackground
+            version={3}
+            eye={{
+              topRight: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              topLeft: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              bottomLeft: {
+                shape: 'square',
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+            }}
+            gradient={{
+              type: 'radial',
+              colors: [
+                {
+                  offset: '10%',
+                  color: '#FFF242', // White center
+                  opacity: 0.5,
+                },
+                {
+                  offset: '100%',
+                  color: '#228B22', // Forest green
+                  opacity: 0.8,
+                },
+              ],
+            }}
           />
         </View>
       </View>

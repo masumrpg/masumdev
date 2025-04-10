@@ -128,8 +128,10 @@ type QRCodeGeneratorProps = {
   errorCorrectionLevel?: QRCodeErrorCorrectionLevel;
 };
 
-type GradientStop = {
-  offset: string;
+type Percentage = `${number}%`;
+
+type GradientColor = {
+  offset: Percentage;
   color: string;
   opacity?: number;
 };
@@ -151,7 +153,7 @@ type LinearProps = {
   y1?: string;
   x2?: string;
   y2?: string;
-  stops: GradientStop[];
+  colors: GradientColor[];
 };
 
 type RadialProps = {
@@ -161,7 +163,7 @@ type RadialProps = {
   r?: string;
   fx?: string;
   fy?: string;
-  stops: GradientStop[];
+  colors: GradientColor[];
 };
 
 type QRGradientProps = {
@@ -203,7 +205,7 @@ export type {
   LogoOptions,
   QRCodeGradientConfig,
   QRCodeGeneratorProps,
-  GradientStop,
+  GradientColor as GradientStop,
   GradientDirection,
   LinearProps,
   RadialProps,
