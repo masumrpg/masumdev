@@ -10,10 +10,9 @@ const QRCodeGeneratorScreen = () => {
           value="https://github.com/masumrpg"
           size={200}
           includeBackground
-          version={3}
-          imageClip={{
-            href: require('../../../assets/logo.png'),
-          }}
+          // imageClip={{
+          //   href: require('../../../assets/logo.png'),
+          // }}
         />
 
         {/* Dot */}

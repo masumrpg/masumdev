@@ -1,9 +1,10 @@
 import { Svg, Defs, Image as SVGImage, G, ClipPath } from 'react-native-svg';
 import { QRImageProps } from '../../types/generator';
 
-const QRImage = ({ children, size, source }: QRImageProps) => {
+const QRImage = ({ children, size, source, baseClip }: QRImageProps) => {
   return (
     <Svg width={size} height={size}>
+      {baseClip}
       <Defs>
         <ClipPath id={'image'}>
           <G>{children}</G>

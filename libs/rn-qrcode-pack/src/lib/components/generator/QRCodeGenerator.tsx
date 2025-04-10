@@ -147,7 +147,16 @@ export const QRCodeGenerator = ({
   // --- CASE 3: Image
   if (imageClip) {
     return renderSvgContent(
-      <QRImage size={size} source={imageClip}>
+      <QRImage
+        size={size}
+        source={imageClip}
+        baseClip={
+          <>
+            {renderPieces(color)}
+            {renderEyes(color, backgroundColor)}
+          </>
+        }
+      >
         {renderPieces('white', true)}
         {renderEyes('white', 'black', true)}
       </QRImage>
