@@ -18,4 +18,16 @@ config.resolver.nodeModulesPaths = [
 // Add additional resolver patterns for local packages
 config.resolver.sourceExts = ['js', 'jsx', 'json', 'ts', 'tsx'];
 
+// Override package resolution to use source files directly
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (moduleName.startsWith('@masumdev/')) {
+    const packageName = moduleName.split('/')[1];
+    return {
+      filePath: path.resolve(workspaceRoot, `libs/${packageName}/src/index.ts`),
+      type: 'sourceFile',
+    };
+  }
+  return context.resolveRequest(context, moduleName, platform);
+};
+
 module.exports = config;

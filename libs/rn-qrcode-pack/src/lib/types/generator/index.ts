@@ -1,5 +1,6 @@
 import { QRCodeErrorCorrectionLevel } from 'qrcode';
 import React from 'react';
+import { ImageProps } from 'react-native-svg';
 
 type EyeCornerRadius = {
   tl?: number;
@@ -50,13 +51,10 @@ type QRCodeGradientConfig = Omit<
 type QRImageProps = {
   children: React.ReactNode;
   size: number;
-  source: React.ReactNode;
-  imageSize?: number;
+  source: ImageProps;
 };
 
 type QRCodeVersion = 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
-type ImageOptions = Omit<QRImageProps, 'children' | 'size'>;
 
 type QRCodeGeneratorProps = {
   value: string;
@@ -64,7 +62,7 @@ type QRCodeGeneratorProps = {
   color?: string;
   gradient?: QRCodeGradientConfig;
   logo?: LogoOptions;
-  image?: ImageOptions;
+  imageClip?: ImageProps;
   backgroundColor?: string;
   piece?: PieceOptions;
   eye?: Partial<{
@@ -149,6 +147,5 @@ export type {
   QREyeProps,
   QRCodeVersion,
   QRImageProps,
-  ImageOptions,
   QRCodeErrorCorrectionLevel,
 };

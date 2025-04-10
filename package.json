@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "bunx nx start masumdev",
-    "start:app": "bunx nx run-many --target=build --all && bunx nx start masumdev"
+    "start:clear": "bun run nx reset && bun start --clear",
+    "build": "bunx nx run-many --target=build --all"
   },
   "private": true,
   "dependencies": {
