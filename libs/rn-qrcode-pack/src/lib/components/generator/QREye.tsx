@@ -1,5 +1,10 @@
 import { G, Circle, Path, Defs, Mask, Rect } from 'react-native-svg';
-import { DotShapeProps, QREyeProps } from '../../types/generator';
+import {
+  DotShapeProps,
+  EyeSize,
+  QREyeProps,
+  SquareRadius,
+} from '../../types/generator';
 import { normalizeRadius, roundedRectPath } from '../../utils/generator';
 
 export const QREye = ({
@@ -15,15 +20,36 @@ export const QREye = ({
   const color = asMask ? 'white' : defaultColor;
 
   const {
-    shape = 'square',
+    shape = 'shape',
     color: eyeColor = color,
     innerColor: innerEyeColor = eyeColor,
     backgroundColor: eyeBg = defaultBackgroundColor,
+    dotSizeRatio = 0.5,
+  } = eyeOptions;
+
+  const squareSize: EyeSize | undefined =
+    shape === 'square' && 'size' in eyeOptions ? eyeOptions.size : {};
+  const {
+    outer: squareSizeOuter, // 7
+    center: squareSizeCenter, // 5
+    inner: squareSizeInner, // 3
+  } = squareSize || {};
+
+  const squareRadius: SquareRadius | undefined =
+    shape === 'square' && 'radius' in eyeOptions ? eyeOptions.radius : {};
+  const {
     radiusOuter = 0,
     radiusInner = 0,
     radiusCenter = 0,
-    dotSizeRatio = 0.5,
-  } = eyeOptions;
+  } = squareRadius || {};
+
+  const circleSize: EyeSize | undefined =
+    shape === 'circle' && 'size' in eyeOptions ? eyeOptions.size : {};
+  const {
+    outer: outerCircleSize,
+    center: centerCircleSize,
+    inner: innerCircleSize,
+  } = circleSize || {};
 
   const rOuter = normalizeRadius(radiusOuter);
   const rInner = normalizeRadius(radiusInner);
@@ -56,14 +82,19 @@ export const QREye = ({
         <Circle
           cx={center.x}
           cy={center.y}
-          r={cellSize * 3.5}
+          r={cellSize * (outerCircleSize ? outerCircleSize + 2.5 : 3.5)}
           fill={eyeColor}
         />
-        <Circle cx={center.x} cy={center.y} r={cellSize * 2.5} fill={eyeBg} />
         <Circle
           cx={center.x}
           cy={center.y}
-          r={cellSize * 1.5}
+          r={cellSize * (centerCircleSize ? centerCircleSize + 1.5 : 2.5)}
+          fill={eyeBg}
+        />
+        <Circle
+          cx={center.x}
+          cy={center.y}
+          r={cellSize * (innerCircleSize ? innerCircleSize + 0.5 : 1.5)}
           fill={eyeColor}
         />
       </G>
@@ -75,13 +106,13 @@ export const QREye = ({
             <Circle
               cx={center.x}
               cy={center.y}
-              r={cellSize * 3.5}
+              r={cellSize * (outerCircleSize ? outerCircleSize + 2.5 : 3.5)}
               fill={'white'}
             />
             <Circle
               cx={center.x}
               cy={center.y}
-              r={cellSize * 2.5}
+              r={cellSize * (centerCircleSize ? centerCircleSize + 1.5 : 2.5)}
               fill={'black'}
             />
           </Mask>
@@ -90,11 +121,16 @@ export const QREye = ({
           <Rect width="100%" height="100%" fill={eyeColor} />
         </G>
         <G key={keyPrefix}>
-          <Circle cx={center.x} cy={center.y} r={cellSize * 2.5} fill={eyeBg} />
           <Circle
             cx={center.x}
             cy={center.y}
-            r={cellSize * 1.5}
+            r={cellSize * (centerCircleSize ? centerCircleSize + 1.5 : 2.5)}
+            fill={eyeBg}
+          />
+          <Circle
+            cx={center.x}
+            cy={center.y}
+            r={cellSize * (innerCircleSize ? innerCircleSize + 0.5 : 1.5)}
             fill={innerEyeColor}
           />
         </G>
@@ -103,25 +139,39 @@ export const QREye = ({
   ) : asMask ? (
     <G key={keyPrefix}>
       <Path
-        d={roundedRectPath(x, y, 7 * cellSize, 7 * cellSize, rOuter)}
+        d={roundedRectPath(
+          x +
+            (cellSize * (7 - (squareSizeOuter ? squareSizeOuter + 6 : 7))) / 2,
+          y +
+            (cellSize * (7 - (squareSizeOuter ? squareSizeOuter + 6 : 7))) / 2,
+          (squareSizeOuter ? squareSizeOuter + 6 : 7) * cellSize,
+          (squareSizeOuter ? squareSizeOuter + 6 : 7) * cellSize,
+          rOuter
+        )}
         fill={eyeColor}
       />
       <Path
         d={roundedRectPath(
-          x + cellSize,
-          y + cellSize,
-          5 * cellSize,
-          5 * cellSize,
+          x +
+            (cellSize * (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+              2,
+          y +
+            (cellSize * (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+              2,
+          (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
+          (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
           rInner
         )}
         fill={eyeBg}
       />
       <Path
         d={roundedRectPath(
-          x + cellSize * 2,
-          y + cellSize * 2,
-          3 * cellSize,
-          3 * cellSize,
+          x +
+            (cellSize * (7 - (squareSizeInner ? squareSizeInner + 2 : 3))) / 2,
+          y +
+            (cellSize * (7 - (squareSizeInner ? squareSizeInner + 2 : 3))) / 2,
+          (squareSizeInner ? squareSizeInner + 2 : 3) * cellSize,
+          (squareSizeInner ? squareSizeInner + 2 : 3) * cellSize,
           rCenter
         )}
         fill={eyeColor}
@@ -133,15 +183,31 @@ export const QREye = ({
         <Mask id={`square-mask-${keyPrefix}`}>
           <Rect width="100%" height="100%" fill="black" />
           <Path
-            d={roundedRectPath(x, y, 7 * cellSize, 7 * cellSize, rOuter)}
+            d={roundedRectPath(
+              x +
+                (cellSize * (7 - (squareSizeOuter ? squareSizeOuter + 6 : 7))) /
+                  2,
+              y +
+                (cellSize * (7 - (squareSizeOuter ? squareSizeOuter + 6 : 7))) /
+                  2,
+              (squareSizeOuter ? squareSizeOuter + 6 : 7) * cellSize,
+              (squareSizeOuter ? squareSizeOuter + 6 : 7) * cellSize,
+              rOuter
+            )}
             fill={'white'}
           />
           <Path
             d={roundedRectPath(
-              x + cellSize,
-              y + cellSize,
-              5 * cellSize,
-              5 * cellSize,
+              x +
+                (cellSize *
+                  (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+                  2,
+              y +
+                (cellSize *
+                  (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+                  2,
+              (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
+              (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
               rInner
             )}
             fill={'black'}
@@ -154,20 +220,28 @@ export const QREye = ({
       <G key={keyPrefix}>
         <Path
           d={roundedRectPath(
-            x + cellSize,
-            y + cellSize,
-            5 * cellSize,
-            5 * cellSize,
+            x +
+              (cellSize * (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+                2,
+            y +
+              (cellSize * (7 - (squareSizeCenter ? squareSizeCenter + 4 : 5))) /
+                2,
+            (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
+            (squareSizeCenter ? squareSizeCenter + 4 : 5) * cellSize,
             rInner
           )}
           fill={eyeBg}
         />
         <Path
           d={roundedRectPath(
-            x + cellSize * 2,
-            y + cellSize * 2,
-            3 * cellSize,
-            3 * cellSize,
+            x +
+              (cellSize * (7 - (squareSizeInner ? squareSizeInner + 2 : 3))) /
+                2,
+            y +
+              (cellSize * (7 - (squareSizeInner ? squareSizeInner + 2 : 3))) /
+                2,
+            (squareSizeInner ? squareSizeInner + 2 : 3) * cellSize,
+            (squareSizeInner ? squareSizeInner + 2 : 3) * cellSize,
             rCenter
           )}
           fill={innerEyeColor}

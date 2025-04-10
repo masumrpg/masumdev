@@ -11,16 +11,67 @@ type EyeCornerRadius = {
 
 type EyeLayerRadius = number | EyeCornerRadius;
 
-type EyeOptions = {
-  shape?: 'square' | 'circle' | 'dot' | 'triangle' | 'heart';
-  color?: string;
-  innerColor?: string;
-  backgroundColor?: string;
+type EyeSize = {
+  /**
+   * The size multiplier for the outer circle of the eye pattern
+   * @default 1
+   * @example
+   * ```typescript
+   *outerCircle: 1.2 // Makes the outer circle 20% larger
+   * ```
+   */
+  outer?: number;
+
+  /**
+   * The size multiplier for the center circle of the eye pattern
+   * @default 1
+   * @example
+   * ```typescript
+   * centerCircle: 0.8 // Makes the center circle 20% smaller
+   * ```
+   */
+  center?: number;
+
+  /**
+   * The size multiplier for the inner circle of the eye pattern
+   * @default 1
+   * @example
+   * ```typescript
+   * innerCircle: 0.5 // Makes the inner circle half the default size
+   * ```
+   */
+  inner?: number;
+};
+
+type SquareRadius = {
   radiusOuter?: EyeLayerRadius;
   radiusInner?: EyeLayerRadius;
   radiusCenter?: EyeLayerRadius;
+};
+
+type BaseEyeOptions = {
+  color?: string;
+  innerColor?: string;
+  backgroundColor?: string;
   dotSizeRatio?: number;
 };
+
+type SquareEyeOptions = BaseEyeOptions & {
+  shape: 'square';
+  radius?: SquareRadius;
+  size?: EyeSize;
+};
+
+type CircleEyeOptions = BaseEyeOptions & {
+  shape: 'circle';
+  size?: EyeSize;
+};
+
+type OtherShapeEyeOptions = BaseEyeOptions & {
+  shape?: 'dot' | 'triangle' | 'heart';
+};
+
+type EyeOptions = CircleEyeOptions | OtherShapeEyeOptions | SquareEyeOptions;
 
 type PieceOptions = {
   shape?: 'square' | 'dot' | 'rounded' | 'heart' | 'triangle' | 'rain';
@@ -55,7 +106,7 @@ type QRImageProps = {
   baseClip?: React.ReactNode;
 };
 
-type QRCodeVersion = 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+type QRCodeVersion = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 type QRCodeGeneratorProps = {
   value: string;
@@ -162,4 +213,10 @@ export type {
   QRImageProps,
   QRCodeErrorCorrectionLevel,
   DotShapeProps,
+  CircleEyeOptions,
+  EyeSize,
+  SquareEyeOptions,
+  SquareRadius,
+  OtherShapeEyeOptions,
+  BaseEyeOptions,
 };

@@ -1,10 +1,12 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { QRCodeGenerator } from '@masumdev/rn-qrcode-pack';
 import React from 'react';
+import QRTitle from '../../../components/QRTitle';
 // import * as FileSystem from 'expo-file-system';
 // import { captureRef } from 'react-native-view-shot';
 
 const QRCodeGeneratorScreen = () => {
+  const qrSize = 250;
   const ref = React.useRef(null);
 
   // const handlePress = async () => {
@@ -53,63 +55,154 @@ const QRCodeGeneratorScreen = () => {
     <ScrollView style={{ flex: 1 }}>
       <View style={styles.container}>
         {/* Basic */}
-        <QRCodeGenerator
-          value="https://github.com/masumrpg"
-          size={300}
-          includeBackground
-          // imageClip={{
-          //   href: require('../../../assets/logo.png'),
-          // }}
-        />
+        <View>
+          <QRTitle title="Basic Qr Code" />
+          <QRCodeGenerator
+            value="Basic Qr Code"
+            size={qrSize}
+            includeBackground
+            // imageClip={{
+            //   href: require('../../../assets/logo.png'),
+            // }}
+          />
+        </View>
+
+        {/* Heart */}
+        <View>
+          <QRTitle title="Heart Qr Code" />
+          <QRCodeGenerator
+            value="Heart Qr Code"
+            size={qrSize}
+            color="pink"
+            eye={{
+              topLeft: { shape: 'heart' },
+              topRight: { shape: 'heart' },
+              bottomLeft: { shape: 'heart' },
+            }}
+            piece={{
+              shape: 'heart',
+              size: 1,
+            }}
+            includeBackground
+          />
+        </View>
 
         {/* Dot */}
-        <QRCodeGenerator
-          value="https://github.com/masumrpg-dot"
-          size={300}
-          color="pink"
-          eye={{
-            topLeft: { shape: 'heart' },
-            topRight: { shape: 'heart' },
-            bottomLeft: { shape: 'heart' },
-          }}
-          piece={{
-            shape: 'heart',
-            size: 1,
-          }}
-          includeBackground
-        />
+        <View>
+          <QRTitle title="Dot Qr Code" />
+          <QRCodeGenerator
+            value="Heart Qr Code"
+            size={qrSize}
+            color="#483D8B"
+            eye={{
+              topLeft: { shape: 'dot' },
+              topRight: { shape: 'dot' },
+              bottomLeft: { shape: 'dot' },
+            }}
+            piece={{
+              shape: 'dot',
+              size: 1,
+            }}
+            includeBackground
+          />
+        </View>
 
         {/* With Logo */}
-        <QRCodeGenerator
-          ref={ref}
-          value="https://github.com/masumrpg-with-logo"
-          size={300}
-          logo={{
-            source: require('../../../assets/logo.png'),
-            size: 50,
-            backgroundColor: 'white',
-            padding: 5,
-            borderRadius: 99,
-          }}
-          eye={{
-            topRight: {
-              shape: 'circle',
-              color: 'green',
-              innerColor: 'black',
-            },
-            bottomLeft: {
-              shape: 'circle',
-              color: 'green',
-              innerColor: 'black',
-            },
-            topLeft: {
-              shape: 'circle',
-              color: 'green',
-              innerColor: 'black',
-            },
-          }}
-          includeBackground
-        />
+        <View>
+          <QRTitle title="With Logo Qr Code" />
+
+          <QRCodeGenerator
+            ref={ref}
+            value="With Logo Qr Code"
+            size={qrSize}
+            logo={{
+              source: require('../../../assets/logo.png'),
+              size: 50,
+              backgroundColor: 'white',
+              padding: 5,
+              borderRadius: 99,
+            }}
+            eye={{
+              topRight: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'black',
+              },
+              bottomLeft: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'black',
+              },
+              topLeft: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'black',
+              },
+            }}
+            includeBackground
+          />
+        </View>
+
+        {/* Rain Effect */}
+        <View>
+          <QRTitle title="Rain Qr Code" />
+          <QRCodeGenerator
+            value="Rain Qr Code"
+            size={qrSize}
+            // color="#2074a7"
+            gradient={{
+              type: 'radial',
+              stops: [
+                { color: 'green', offset: '80%', opacity: 0.5 },
+                { color: 'red', offset: '50%' },
+              ],
+            }}
+            version={2}
+            eye={{
+              topLeft: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              topRight: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              bottomLeft: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+            }}
+            piece={{
+              shape: 'rain',
+              size: 1,
+            }}
+            includeBackground
+          />
+        </View>
       </View>
     </ScrollView>
   );

@@ -13,8 +13,8 @@ export { QRBgStyle };
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
+    padding: 25,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
