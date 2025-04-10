@@ -9,21 +9,24 @@ import { QRGradient } from './QRGradient';
 import { QRBgStyle } from './QRBgStyle';
 import { QRImage } from './QRImage';
 
-export const QRCodeGenerator = ({
-  value,
-  size = 256,
-  color = '#000',
-  gradient,
-  imageClip,
-  logo,
-  backgroundColor = 'transparent',
-  piece,
-  eye,
-  includeBackground = false,
-  version,
-  maxVersion,
-  errorCorrectionLevel,
-}: QRCodeGeneratorProps) => {
+const QRCodeGeneratorSVG = (
+  {
+    value,
+    size = 256,
+    color = '#000',
+    gradient,
+    imageClip,
+    logo,
+    backgroundColor = 'transparent',
+    piece,
+    eye,
+    includeBackground = false,
+    version,
+    maxVersion,
+    errorCorrectionLevel,
+  }: QRCodeGeneratorProps,
+  ref?: React.ForwardedRef<Svg> | null
+) => {
   const matrix = useGenerateQrCode({
     value,
     logo,
@@ -49,6 +52,7 @@ export const QRCodeGenerator = ({
   const renderSvgContent = (children: React.ReactNode) => {
     const svg = (
       <Svg
+        ref={ref}
         width={size}
         height={size}
         style={{ backgroundColor: 'transparent' }}
@@ -172,3 +176,7 @@ export const QRCodeGenerator = ({
     </>
   );
 };
+
+const QRCodeGenerator = React.forwardRef(QRCodeGeneratorSVG);
+QRCodeGenerator.displayName = 'QRCodeGenerator';
+export { QRCodeGenerator };
