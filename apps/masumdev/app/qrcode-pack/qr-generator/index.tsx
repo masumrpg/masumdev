@@ -55,7 +55,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Basic */}
         <QRCodeGenerator
           value="https://github.com/masumrpg"
-          size={200}
+          size={300}
           includeBackground
           // imageClip={{
           //   href: require('../../../assets/logo.png'),
@@ -65,15 +65,15 @@ const QRCodeGeneratorScreen = () => {
         {/* Dot */}
         <QRCodeGenerator
           value="https://github.com/masumrpg-dot"
-          size={200}
+          size={300}
           color="pink"
           eye={{
-            topLeft: { shape: 'dot' },
-            topRight: { shape: 'dot' },
-            bottomLeft: { shape: 'dot' },
+            topLeft: { shape: 'heart' },
+            topRight: { shape: 'heart' },
+            bottomLeft: { shape: 'heart' },
           }}
           piece={{
-            shape: 'circle',
+            shape: 'heart',
             size: 1,
           }}
           includeBackground
@@ -83,7 +83,7 @@ const QRCodeGeneratorScreen = () => {
         <QRCodeGenerator
           ref={ref}
           value="https://github.com/masumrpg-with-logo"
-          size={200}
+          size={300}
           logo={{
             source: require('../../../assets/logo.png'),
             size: 50,

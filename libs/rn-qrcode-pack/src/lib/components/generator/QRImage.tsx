@@ -2,11 +2,12 @@ import { Svg, Defs, Image as SVGImage, G, ClipPath } from 'react-native-svg';
 import { QRImageProps } from '../../types/generator';
 
 const QRImage = ({ children, size, source, baseClip }: QRImageProps) => {
+  const clipId = 'imageClip';
   return (
     <Svg width={size} height={size}>
       {baseClip}
       <Defs>
-        <ClipPath id={'image'}>
+        <ClipPath id={clipId}>
           <G>{children}</G>
         </ClipPath>
       </Defs>
@@ -18,7 +19,7 @@ const QRImage = ({ children, size, source, baseClip }: QRImageProps) => {
         height="100%"
         preserveAspectRatio="xMaxYMax slice"
         {...source}
-        clipPath="url(#image)"
+        clipPath={`url(#${clipId})`}
       />
     </Svg>
   );

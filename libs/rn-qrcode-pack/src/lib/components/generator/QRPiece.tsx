@@ -1,4 +1,4 @@
-import { Circle, Rect } from 'react-native-svg';
+import { Circle, Rect, Path } from 'react-native-svg';
 import { PieceOptions } from '../../types/generator';
 
 type QRPieceProps = {
@@ -39,8 +39,55 @@ export const QRPiece = ({
   const posX = x * cellSize + centerOffset;
   const posY = y * cellSize + centerOffset;
 
+  // Rain Effect
+  const rainBarWidth = adjustedSize * 0.6;
+  const rainBarHeight = adjustedSize * 1.4;
+  const rainBarX = posX + (adjustedSize - rainBarWidth) / 2;
+  const rainBarY = posY + (cellSize - rainBarHeight) / 2;
+
+  // Heart Shape
+  const heartPath = `
+      M ${posX + adjustedSize / 2} ${posY + adjustedSize}
+      C ${posX + adjustedSize / 2} ${
+    posY + adjustedSize * 0.5
+  } ${posX} ${posY} ${posX} ${posY + adjustedSize * 0.5}
+      C ${posX} ${posY - adjustedSize * 0.2} ${posX + adjustedSize / 2} ${
+    posY - adjustedSize * 0.2
+  } ${posX + adjustedSize / 2} ${posY + adjustedSize * 0.3}
+      C ${posX + adjustedSize / 2} ${posY - adjustedSize * 0.2} ${
+    posX + adjustedSize
+  } ${posY - adjustedSize * 0.2} ${posX + adjustedSize} ${
+    posY + adjustedSize * 0.5
+  }
+      C ${posX + adjustedSize} ${posY} ${posX + adjustedSize / 2} ${
+    posY + adjustedSize * 0.5
+  } ${posX + adjustedSize / 2} ${posY + adjustedSize}
+      Z`
+    .trim()
+    .replace(/\s+/g, ' ');
+
   switch (shape) {
-    case 'circle':
+    case 'triangle':
+      return (
+        <Path
+          key={keyPrefix}
+          d={`M ${posX + adjustedSize / 2} ${posY}
+             L ${posX + adjustedSize} ${posY + adjustedSize}
+             L ${posX} ${posY + adjustedSize} Z`}
+          fill={pieceColor}
+          opacity={opacity}
+        />
+      );
+    case 'heart':
+      return (
+        <Path
+          key={keyPrefix}
+          d={heartPath}
+          fill={pieceColor}
+          opacity={opacity}
+        />
+      );
+    case 'dot':
       return (
         <Circle
           key={keyPrefix}
@@ -61,6 +108,20 @@ export const QRPiece = ({
           height={adjustedSize}
           rx={borderRadius}
           ry={borderRadius}
+          fill={pieceColor}
+          opacity={opacity}
+        />
+      );
+    case 'rain':
+      return (
+        <Rect
+          key={keyPrefix}
+          x={rainBarX}
+          y={rainBarY}
+          width={rainBarWidth}
+          height={rainBarHeight}
+          rx={rainBarWidth / 2}
+          ry={rainBarWidth / 2}
           fill={pieceColor}
           opacity={opacity}
         />

@@ -12,7 +12,7 @@ type EyeCornerRadius = {
 type EyeLayerRadius = number | EyeCornerRadius;
 
 type EyeOptions = {
-  shape?: 'square' | 'circle' | 'dot';
+  shape?: 'square' | 'circle' | 'dot' | 'triangle' | 'heart';
   color?: string;
   innerColor?: string;
   backgroundColor?: string;
@@ -23,7 +23,7 @@ type EyeOptions = {
 };
 
 type PieceOptions = {
-  shape?: 'square' | 'circle' | 'rounded';
+  shape?: 'square' | 'dot' | 'rounded' | 'heart' | 'triangle' | 'rain';
   color?: string;
   size?: number; // Size multiplier relative to cell size (1 = full size)
   opacity?: number;
@@ -132,6 +132,18 @@ type QREyeProps = {
   asMask?: boolean;
 };
 
+type DotShapeProps = {
+  keyPrefix: string;
+  x: number;
+  y: number;
+  cellSize: number;
+  innerEyeColor: string;
+  dotSizeRatio: number;
+  eyeBg: string;
+  eyeColor: string;
+  asMask: boolean;
+};
+
 export type {
   EyeCornerRadius,
   EyeLayerRadius,
@@ -149,4 +161,5 @@ export type {
   QRCodeVersion,
   QRImageProps,
   QRCodeErrorCorrectionLevel,
+  DotShapeProps,
 };
