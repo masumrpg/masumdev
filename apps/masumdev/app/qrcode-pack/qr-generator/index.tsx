@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { QRCodeGenerator } from '@masumdev/rn-qrcode-pack';
+import { QRCodeGenerator, QRCodeVariant } from '@masumdev/rn-qrcode-pack';
 import React from 'react';
 import QRTitle from '../../../components/QRTitle';
 // import * as FileSystem from 'expo-file-system';
@@ -414,6 +414,41 @@ const QRCodeGeneratorScreen = () => {
             }}
             imageClip={{
               href: require('../../../assets/tiktok.png'),
+            }}
+          />
+        </View>
+
+        {/* Variant */}
+        <View>
+          <QRTitle title="Variant Qr Code" />
+          <QRCodeVariant
+            variant="IMAGE_BACKGROUND"
+            value="Variant Qr Code"
+            size={qrSize}
+            includeBackground
+            piece={{
+              shape: 'dot',
+              color: 'yellow',
+            }}
+            eye={{
+              bottomLeft: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'yellow',
+              },
+              topLeft: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'yellow',
+              },
+              topRight: {
+                shape: 'circle',
+                color: 'green',
+                innerColor: 'yellow',
+              },
+            }}
+            imageClip={{
+              href: require('../../../assets/logo.png'),
             }}
           />
         </View>

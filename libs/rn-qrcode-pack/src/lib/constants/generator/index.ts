@@ -52,7 +52,7 @@ export const QR_CODE_CONFIGS = {
     value: 'With Logo Qr Code',
     size: 250,
     logo: {
-      source: require('../../../assets/logo.png'),
+      source: require('../../assets/logo.png'),
       size: 50,
       backgroundColor: 'white',
       padding: 5,
@@ -136,7 +136,7 @@ export const QR_CODE_CONFIGS = {
     includeBackground: true,
     version: 3,
     logo: {
-      source: require('../../../assets/logo.png'),
+      source: require('../../assets/logo.png'),
       size: 0.25,
       backgroundColor: 'white',
       padding: 7,
@@ -312,7 +312,7 @@ export const QR_CODE_CONFIGS = {
       shape: 'dot',
     },
     imageClip: {
-      href: require('../../../assets/tiktok.png'),
+      href: require('../../assets/tiktok.png'),
     },
   },
 };

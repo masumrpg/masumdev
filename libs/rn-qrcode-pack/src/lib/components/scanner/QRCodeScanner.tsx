@@ -172,7 +172,7 @@ import {
 import Svg, { Defs, Mask, Path, Rect } from 'react-native-svg';
 import { CameraScreenPermission } from './CameraScreenPermission';
 import { QRCodeScannerProps } from '../../types/scanner/qrCodeType';
-import { getThemeColors } from '../../constants/scanner/qrCodeConstants';
+import { getThemeColors } from '../../constants/scanner';
 
 // Modify the component to use the nested props structure
 const QRCodeScanner = ({
