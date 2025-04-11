@@ -1,6 +1,10 @@
 # MasumDev React Native Libraries
 
-A monorepo containing high-quality React Native libraries and components, built with modern development practices and tools.
+A monorepo containing versatile and high-quality React Native libraries and components, designed with modern development practices and tools. These libraries offer seamless integration and performance benefits, making them ideal for mobile applications.
+
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
+
+Support the ongoing development and maintenance of these libraries. Your sponsorship helps us introduce new features and improvements, ensuring the libraries remain cutting-edge and reliable.
 
 ## 📦 Libraries
 
