@@ -2,7 +2,7 @@ import {
   OnSuccessfulScanProps,
   QRCodeScanner,
   QRCodeValidator,
-} from '@masumdev/rn-qrcode-pack';
+} from '@masumdev/rn-qrcode-scanner';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 

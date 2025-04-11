@@ -1,6 +1,6 @@
 import { G, Rect, Image } from 'react-native-svg';
 import { Image as RNImage } from 'react-native'; // Import Image resolver
-import { LogoOptions } from '../../types/generator';
+import { LogoOptions } from '../types';
 
 type QRLogoProps = {
   logo: LogoOptions;

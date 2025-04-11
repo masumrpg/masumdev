@@ -9,7 +9,7 @@ import {
   Mask,
   G,
 } from 'react-native-svg';
-import { GradientDirection, QRGradientProps } from '../../types/generator';
+import { GradientDirection, QRGradientProps } from '../types';
 
 const getLinearCoords = (
   direction: GradientDirection | undefined,

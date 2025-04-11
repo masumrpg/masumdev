@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { QRCode } from '@masumdev/rn-qrcode-pack';
+import { QRCode } from '@masumdev/rn-qrcode';
 import React from 'react';
 import QRTitle from '../../../components/QRTitle';
 // import * as FileSystem from 'expo-file-system';

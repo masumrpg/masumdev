@@ -1,7 +1,7 @@
 import React from 'react';
 import { QRCodeGenerator } from './QRCodeGenerator';
-import type { QRCodeGeneratorProps, QRCodeProps } from '../../types/generator';
-import { QR_CODE_CONFIGS } from '../../constants/generator';
+import type { QRCodeGeneratorProps, QRCodeProps } from '../types';
+import { QR_CODE_CONFIGS } from '../constants';
 import type { Svg } from 'react-native-svg';
 
 const QRCode = React.forwardRef<Svg, QRCodeProps>(

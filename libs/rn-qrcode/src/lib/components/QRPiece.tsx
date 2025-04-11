@@ -1,5 +1,5 @@
 import { Circle, Rect, Path } from 'react-native-svg';
-import { PieceOptions } from '../../types/generator';
+import { PieceOptions } from '../types';
 
 type QRPieceProps = {
   x: number;

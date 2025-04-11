@@ -1,7 +1,7 @@
 import { QRCodeErrorCorrectionLevel } from 'qrcode';
 import React from 'react';
 import { ImageProps } from 'react-native-svg';
-import { QR_CODE_CONFIGS } from '../../constants/generator';
+import { QR_CODE_CONFIGS } from '../constants';
 
 type EyeCornerRadius = {
   tl?: number;

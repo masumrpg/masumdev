@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import QRCode, { QRCodeErrorCorrectionLevel } from 'qrcode';
-import { LogoOptions } from '../../types/generator';
+import { LogoOptions } from '../types';
 
 type Props = {
   value: string;

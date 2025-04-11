@@ -1,4 +1,4 @@
-import { EyeCornerRadius, EyeLayerRadius } from '../../types/generator';
+import { EyeCornerRadius, EyeLayerRadius } from '../types';
 
 const normalizeRadius = (r: EyeLayerRadius = 0): EyeCornerRadius => {
   if (r === null || r === undefined) {

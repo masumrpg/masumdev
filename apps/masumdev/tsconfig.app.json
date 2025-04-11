@@ -43,7 +43,10 @@
       "path": "../../libs/rn-scroll-to-hide/tsconfig.lib.json"
     },
     {
-      "path": "../../libs/rn-qrcode-pack/tsconfig.lib.json"
+      "path": "../../libs/rn-qrcode/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/rn-qrcode-scanner/tsconfig.lib.json"
     }
   ]
 }

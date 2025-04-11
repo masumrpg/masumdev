@@ -1,7 +1,7 @@
 import React from 'react';
 import { Svg, Rect } from 'react-native-svg';
-import { QRCodeGeneratorProps } from '../../types/generator';
-import { useGenerateQrCode } from '../../hooks/generator';
+import { QRCodeGeneratorProps } from '../types';
+import { useGenerateQrCode } from '../hooks';
 import { QRLogo } from './QRLogo';
 import { QREye } from './QREye';
 import { QRPiece } from './QRPiece';

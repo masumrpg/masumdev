@@ -1,1 +1,1 @@
-export * from './lib/rn-qrcode';
+export * from './lib';

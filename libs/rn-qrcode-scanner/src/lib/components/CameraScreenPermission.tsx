@@ -7,7 +7,7 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { CameraScreenPermissionProps } from '../../types/scanner/cameraScreenPermission';
+import { CameraScreenPermissionProps } from '../types';
 
 /**
  * CameraScreenPermission is a component that displays a camera permission request screen

@@ -4,8 +4,8 @@ import {
   EyeSize,
   QREyeProps,
   SquareRadius,
-} from '../../types/generator';
-import { normalizeRadius, roundedRectPath } from '../../utils/generator';
+} from '../types';
+import { normalizeRadius, roundedRectPath } from '../utils';
 
 export const QREye = ({
   x,
