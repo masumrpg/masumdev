@@ -84,6 +84,8 @@
     "libs/rn-toast",
     "libs/rn-scroll-to-hide",
     "libs/rn-bottom-sheet",
-    "libs/rn-qrcode-pack"
+    "libs/rn-qrcode-pack",
+    "libs/rn-qrcode",
+    "libs/rn-qrcode-scanner"
   ]
 }
