@@ -3,11 +3,22 @@ sidebar_position: 1
 ---
 
 # Demo
-Demo of the Scroll-to-Hide component on Android and iOS devices.
+Demo of the React Native QRCode Pack @masumdev/rn-qrcode and @masumdev/rn-qrcode-scanner component on Android and iOS devices.
+
+### QRCode `@masumdev/rn-qrcode`
 
 <div style={{ display: 'flex', gap: '8px' }}>
-  <img src="https://img.shields.io/npm/v/@masumdev%2Frn-scroll-to-hide" alt="npm version" />
-  <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-scroll-to-hide" alt="npm downloads" />
+  <img src="https://img.shields.io/npm/v/@masumdev%2Frn-qrcode" alt="npm version" />
+  <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-qrcode" alt="npm downloads" />
+  <img src="https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg" alt="platforms" />
+  <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
+  <img src="https://img.shields.io/badge/New-2025-brightgreen" alt="New Feature" />
+</div>
+
+### QRCode Scanner `@masumdev/rn-qrcode-scanner`
+<div style={{ display: 'flex', gap: '8px' }}>
+  <img src="https://img.shields.io/npm/v/@masumdev%2Frn-qrcode-scanner" alt="npm version" />
+  <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-qrcode-scanner" alt="npm downloads" />
   <img src="https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg" alt="platforms" />
   <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
   <img src="https://img.shields.io/badge/New-2025-brightgreen" alt="New Feature" />
@@ -15,11 +26,21 @@ Demo of the Scroll-to-Hide component on Android and iOS devices.
 
 ## Table of Contents
 - [Overview](#overview)
+  - [QRCode Overview](#qrcode-overview)
+  - [QRCode Overview](#qrcode-overview)
 - [Features](#features)
+  - [QRCode Generator Features](#qrcode-generator-features)
+  - [QRCode Scanner Features](#qrcode-scanner-features)
 - [Key Interactions Demonstrated](#key-interactions-demonstrated)
-- [Try It Yourself](#try-it-yourself)
+  - [QR Code Generation](#qr-code-generation)
+  - [Scanner Interactions](#scanner-interactions)
+  - [Customization Features](#customization-features)
+- [Video Tutorial](#video-tutorial)
+  - [QRCode & QRCode Scanner](#qrcode--qrcode-scanner)
 
 ## Overview
+
+### QRCode Overview
 
 Experience our Scroll-to-Hide component in action across both Android and iOS platforms. The demonstrations below showcase the smooth animations, gesture-based interactions, and responsive behavior of the component.
 
@@ -34,71 +55,107 @@ Experience our Scroll-to-Hide component in action across both Android and iOS pl
   </div>
 </div>
 
+### QRCode Scanner Overview
+
+Experience our Scroll-to-Hide component in action across both Android and iOS platforms. The demonstrations below showcase the smooth animations, gesture-based interactions, and responsive behavior of the component.
+
+<div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
+  <div>
+    <h3>Android Demo</h3>
+    ![Android Demo](../../../../libs/rn-scroll-to-hide/android.gif)
+  </div>
+  <div>
+    <h3>iOS Demo</h3>
+    ![iOS Demo](../../../../libs/rn-scroll-to-hide/iphone.gif)
+  </div>
+</div>
+
+
 ## Features
 
-- 🎨 Smooth scroll-based visibility transitions
-- 📱 iOS and Android native feel
-- 💫 Performant animations using react-native-reanimated
-- 🔄 Configurable scroll threshold
-- ⚡️ Optimized performance with gesture handling
-- 🎯 Support for any scrollable content
-- 🛡️ Safe area support
+### QRCode Features
 
-:::tip Performance Optimization
-For optimal performance, consider these best practices:
-- Use FlatList or ScrollView with proper configuration
-- Implement proper scroll event throttling
-- Optimize rendered content for smooth scrolling
-- Avoid unnecessary re-renders during scroll
-:::
+- 🎨 Rich QR Code styling with fully customizable:
+  - Colors and gradients
+  - Patterns and shapes
+  - Corner styles and dot designs
+  - Background effects
+- 🖼️ Custom logo placement with adjustable size and position
+- 🌈 Beautiful preset templates and themes
+- 🔍 Comprehensive format support for:
+  - URLs and deep links
+  - Contact information (vCard, meCard)
+  - Calendar events
+  - Wi-Fi configurations
+  - And more!
+- 🎯 Adjustable error correction levels (L, M, Q, H)
+- 📦 Seamless integration with React Native projects
+- 💫 Cross-platform compatibility (iOS & Android)
+- ⚡ High-performance QR code generation
+- 🎭 Multiple design variants and styles
 
-:::danger Common Pitfalls
-Be cautious of these common issues:
-- Improper scroll event handling
-- Conflicting gesture handlers
-- Incorrect scroll threshold values
-- Missing cleanup on component unmount
-:::
+### QRCode Scanner Features
+
+- 📱 Advanced QR Code scanning with camera support
+- 🔍 Multiple format support (URL, text, contact info, etc.)
+- 💫 Real-time scanning with high performance
+- 🎯 Customizable scanning area and frame
+- 🛡️ Built-in camera permission handling
+- 📳 Haptic feedback on successful scans
+- 🎨 Customizable UI elements (corners, overlay, controls)
+- 🔦 Torch/flashlight control support
+- ⏱️ Cooldown timer between scans
+- ✅ Custom validation support
+- 🌓 Theme support (light/dark mode)
+- ⚡ Optimized for both iOS and Android
 
 ## Key Interactions Demonstrated
 
-### Scroll Behaviors
-- Smooth hide on scroll down
-- Reveal on scroll up
-- Configurable threshold triggers
-- Gesture-responsive animations
+### QR Code Generation
+- Dynamic QR code creation with real-time updates
+- Customizable styling and appearance
+- Logo integration with automatic positioning
+- Multiple format encoding support
+- Error correction level handling
 
-### Animation Features
-- Smooth translate animations
-- Configurable timing functions
-- Native driver support
-- Optimized performance
+### Scanner Interactions
+- Real-time camera feed processing
+- Multi-format QR code detection
+- Haptic feedback on successful scans
+- Torch/flashlight control
+- Permission handling flow
 
-### Customization Options
-- Adjustable scroll sensitivity
-- Custom animation timing
-- Flexible component styling
-- Dynamic behavior control
+### Customization Features
+- Rich styling options for QR codes
+- Gradient and pattern customization
+- Scanner UI theming support
+- Frame and overlay customization
+- Responsive layout adaptation
 
 :::tip Implementation Best Practices
-To provide the best user experience:
-- Set appropriate scroll thresholds
-- Implement smooth animation curves
-- Handle orientation changes properly
-- Consider edge cases in scroll behavior
+To achieve optimal performance:
+- Choose appropriate error correction levels
+- Optimize logo size and placement
+- Handle camera permissions properly
+- Implement proper error handling
+- Consider scan area optimization
 :::
 
 :::danger Performance Considerations
 Watch out for these issues:
-- Heavy components affecting scroll performance
-- Memory leaks from scroll listeners
-- Unoptimized scroll event handling
-- Improper cleanup of animation worklets
+- Large logos affecting QR code readability
+- Excessive styling affecting scan performance
+- Improper camera resource management
+- Memory leaks from unmanaged listeners
+- Heavy UI animations during scanning
 :::
 
 ## Try It Yourself
-To get started with this component in your own project, check out our [installation guide](/docs/rn-scroll-to-hide/installation) and [basic usage examples](/docs/rn-scroll-to-hide/basic-usage).
+To get started with this component in your own project, check out our [installation guide](/docs/rn-qrcode-pack/installation) and [basic usage examples](/docs/rn-qrcode-pack/basic-usage).
 
+## Video Tutorial
+
+### QRCode & QRCode Scanner
 :::tip Video Tutorial
 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
   <a href="/docs/rn-scroll-to-hide/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
