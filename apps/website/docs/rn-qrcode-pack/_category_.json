@@ -1,0 +1,8 @@
+{
+  "label": "🔲 QR Code Pack",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "⚡ Powerful QR code solution for React Native! 🎨 Generate beautiful QR codes with rich styling options and scan them effortlessly. Features gradient colors, custom patterns, logo placement, and comprehensive format support. Perfect for both generating and scanning QR codes in your React Native apps! 💪 @masumdev/rn-qrcode & @masumdev/rn-qrcode-scanner"
+  }
+}

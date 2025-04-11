@@ -38,7 +38,7 @@ frontend:
   permalink: /frontend
   description: Frontend development techniques and tools
 
-reactnative:
+react-native:
   label: React Native
   permalink: /react-native
   description: Mobile app development with React Native framework

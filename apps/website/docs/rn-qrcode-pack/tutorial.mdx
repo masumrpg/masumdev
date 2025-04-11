@@ -1,0 +1,222 @@
+---
+sidebar_position: 5
+---
+
+# Tutorial
+
+🚀 Step-by-Step Guide to implementing scroll-based hide/show animations in React Native using rn-scroll-to-hide.
+
+## Table of Contents
+- [Video Tutorial](#video-tutorial)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Basic Implementation](#basic-implementation)
+- [Advanced Usage](#advanced-usage)
+  - [Multiple Components](#multiple-components)
+  - [Programmatic Control](#programmatic-control)
+
+## Video Tutorial
+Watch our detailed video guide for a hands-on implementation walkthrough:
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/udjs1sdXJTU" frameborder="0" allowfullscreen></iframe>
+
+## Features
+
+- 🚀 Lightweight and performant
+- 🎨 Customizable animations
+- 🔄 Built with React Native Reanimated
+- 📱 Works on iOS and Android
+- 📚 TypeScript support
+- 🎯 Support for both top and bottom components
+- 🔍 Smart bounce detection
+
+## Prerequisites
+Before you begin, make sure you have:
+- React Native project set up
+- Basic understanding of React Native and TypeScript
+
+## Installation
+
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native project. Using incompatible versions may cause unexpected behavior or crashes:
+
+```json
+{
+  "react": "^18.3.1",
+  "react-native": "^0.76.7",
+  "react-native-reanimated": "^3.16.7"
+}
+```
+:::
+
+1. Install the package using your preferred package manager:
+```bash
+npm install @masumdev/rn-scroll-to-hide
+# or
+yarn add @masumdev/rn-scroll-to-hide
+# or
+bun add @masumdev/rn-scroll-to-hide
+# or
+pnpm add @masumdev/rn-scroll-to-hide
+```
+
+2. Follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+
+## Basic Implementation
+
+:::tip Component Height
+Make sure to provide the correct component height to the hook. This is crucial for proper animations.
+:::
+
+1. First, import the necessary components:
+
+```tsx
+import React from 'react';
+import { View, ScrollView } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+```
+
+2. Set up your component with the hook:
+
+```tsx
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View
+        style={[
+          styles.header,
+          header.animatedStyle
+        ]}
+      >
+        <Text>Header</Text>
+      </Animated.View>
+
+      <ScrollView
+        onScroll={header.onScroll}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+    </View>
+  );
+}
+```
+
+## Advanced Usage
+
+### Multiple Components
+
+:::tip Scroll Event Handling
+When using multiple components, make sure to properly handle the scroll events.
+:::
+
+```tsx
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  const tabbar = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.DOWN
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View style={[styles.header, header.animatedStyle]}>
+        <Text>Header</Text>
+      </Animated.View>
+
+      <ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: header.scrollY } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+
+      <Animated.View style={[styles.tabbar, tabbar.animatedStyle]}>
+        <Text>Tabbar</Text>
+      </Animated.View>
+    </View>
+  );
+}
+```
+
+### Programmatic Control
+
+:::tip Manual Control
+You can manually control the visibility of components using the provided methods.
+:::
+
+```tsx
+export default function App() {
+  const header = useHideOnScroll({
+    height: 60,
+    hideDirection: HideDirection.UP
+  });
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Animated.View style={[styles.header, header.animatedStyle]}>
+        <Text>Header</Text>
+        <Button
+          title="Toggle Header"
+          onPress={() => header.toggle()}
+        />
+      </Animated.View>
+
+      <ScrollView
+        onScroll={header.onScroll}
+        scrollEventThrottle={16}
+      >
+        {/* Your content */}
+      </ScrollView>
+    </View>
+  );
+}
+```
+
+### Custom Styling
+
+:::tip Style Integration
+The `animatedStyle` property can be combined with your custom styles.
+:::
+
+```tsx
+const styles = StyleSheet.create({
+  header: {
+    height: 60,
+    backgroundColor: '#fff',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabbar: {
+    height: 60,
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+});
+```
