@@ -1,6 +1,7 @@
 import { QRCodeErrorCorrectionLevel } from 'qrcode';
 import React from 'react';
 import { ImageProps } from 'react-native-svg';
+import { QR_CODE_CONFIGS } from '../../constants/generator';
 
 type EyeCornerRadius = {
   tl?: number;
@@ -197,6 +198,10 @@ type DotShapeProps = {
   asMask: boolean;
 };
 
+type QRCodeProps = Partial<QRCodeGeneratorProps> & {
+  variant?: keyof typeof QR_CODE_CONFIGS;
+};
+
 export type {
   EyeCornerRadius,
   EyeLayerRadius,
@@ -221,4 +226,5 @@ export type {
   SquareRadius,
   OtherShapeEyeOptions,
   BaseEyeOptions,
+  QRCodeProps,
 };

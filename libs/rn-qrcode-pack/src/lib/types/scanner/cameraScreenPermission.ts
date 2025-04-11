@@ -13,6 +13,8 @@ export interface CameraScreenPermissionProps {
   title?: string;
   /** Subtitle/description text explaining the permission request */
   subtitle?: string;
+  /** Background color. Defaults to '#fff' */
+  backgroundColor?: string;
   /** Text for the allow permission button. Defaults to 'ALLOW' */
   allowButtonText?: string;
   /** Text for the decline permission button. Defaults to 'NOT NOW' */

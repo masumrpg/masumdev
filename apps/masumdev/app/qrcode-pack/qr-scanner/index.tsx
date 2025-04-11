@@ -1,9 +1,13 @@
-import { OnSuccessfulScanProps, QRCodeScanner, QRCodeValidator } from '@masumdev/rn-qrcode-pack';
+import {
+  OnSuccessfulScanProps,
+  QRCodeScanner,
+  QRCodeValidator,
+} from '@masumdev/rn-qrcode-pack';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native';
 
 const QRCodeScannerScreen = () => {
-  const [scannedMember, setScannedMember] = useState<string|null>(null);
+  const [scannedMember, setScannedMember] = useState<string | null>(null);
 
   const handleSuccessfulScan = (data: OnSuccessfulScanProps) => {
     if (data.code) {
@@ -12,7 +16,7 @@ const QRCodeScannerScreen = () => {
     console.log(data);
   };
 
-  const validateQRCode: QRCodeValidator = (code) => {
+  const validateQRCode: QRCodeValidator = (code: string) => {
     // Example: Only accept URLs starting with https://
     // if (code.startsWith('https://')) {
     //   return { valid: true, code };

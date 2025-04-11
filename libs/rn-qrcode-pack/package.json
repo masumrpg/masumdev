@@ -1,6 +1,10 @@
 {
   "name": "@masumdev/rn-qrcode-pack",
   "version": "1.0.0",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/masumrpg"
+  },
   "homepage": "https://docs.masum.cloud/docs/category/-qrcode-pack",
   "scripts": {
     "build": "bob build"
@@ -41,7 +45,7 @@
     "scroll",
     "scroll-to-hide",
     "hide",
-    "androdid",
+    "android",
     "ios",
     "react",
     "qrcode",
@@ -74,7 +78,9 @@
   "peerDependencies": {
     "react": ">=18.3.1",
     "react-native": ">=0.76.9",
-    "react-native-svg": ">=15.8.0",
+    "react-native-svg": ">=15.8.0"
+  },
+  "optionalDependencies": {
     "expo": ">=50.0.0",
     "expo-camera": ">=14.0.0",
     "expo-haptics": ">=12.8.0",
@@ -86,7 +92,7 @@
       "optional": false
     },
     "expo": {
-      "optional": false
+      "optional": true
     }
   }
 }

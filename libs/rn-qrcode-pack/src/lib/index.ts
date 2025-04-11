@@ -1,6 +1,5 @@
 // Generator QR Code
-export { QRCodeGenerator } from './components/generator/QRCodeGenerator';
-export { QRCodeVariant } from './components/generator/QRCodeVariant';
+export { QRCode } from './components/generator/QRCode';
 export type * from './types/generator';
 export * from './constants/generator';
 

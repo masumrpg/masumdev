@@ -22,6 +22,7 @@ const CameraScreenPermission = ({
   subtitle = 'Please allow the app to access your camera if you want to proceed with scanning the ticket.',
   allowButtonText = 'ALLOW',
   declineButtonText = 'NOT NOW',
+  backgroundColor = '#FFF',
   iconColor = '#000',
   dotColor1 = '#FB923C',
   dotColor2 = '#FDBA74',
@@ -43,7 +44,7 @@ const CameraScreenPermission = ({
       <View
         style={[
           styles.container,
-          { backgroundColor: isDark ? '#000' : '#FFF' },
+          { backgroundColor: isDark ? '#000' : backgroundColor },
         ]}
       >
         {/* Decorative elements */}

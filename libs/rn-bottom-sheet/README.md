@@ -2,6 +2,10 @@
 
 A highly customizable and gesture-responsive bottom sheet component for React Native applications.
 
+
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
+
+
 <div style="display: flex; gap: 8px;">
   <img src="https://img.shields.io/npm/v/@masumdev%2Frn-bottom-sheet" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-bottom-sheet" alt="npm downloads" />

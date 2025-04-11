@@ -2,6 +2,8 @@
 
 A lightweight and performant React Native hook for creating hide/show animations on scroll. Perfect for headers, footers, or any component that should hide based on scroll direction. Built with smooth animations and optimized performance.
 
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
+
 <div style="display: flex; gap: 8px;">
   <img src="https://img.shields.io/npm/v/@masumdev%2Frn-scroll-to-hide" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-scroll-to-hide" alt="npm downloads" />

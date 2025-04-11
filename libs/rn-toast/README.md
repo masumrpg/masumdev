@@ -2,6 +2,8 @@
 
 A simple toast for React Native, inspired by Samsung notifications. This library provides a lightweight toast component with smooth animations and anti-spam protection, ensuring a seamless user experience.
 
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
+
 <div style="display: flex; gap: 8px;">
   <img src="https://img.shields.io/npm/v/@masumdev%2Frn-toast" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-toast" alt="npm downloads" />

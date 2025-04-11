@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { QRCodeGenerator, QRCodeVariant } from '@masumdev/rn-qrcode-pack';
+import { QRCode } from '@masumdev/rn-qrcode-pack';
 import React from 'react';
 import QRTitle from '../../../components/QRTitle';
 // import * as FileSystem from 'expo-file-system';
@@ -57,17 +57,13 @@ const QRCodeGeneratorScreen = () => {
         {/* Basic */}
         <View>
           <QRTitle title="Basic Qr Code" />
-          <QRCodeGenerator
-            value="Basic Qr Code"
-            size={qrSize}
-            includeBackground
-          />
+          <QRCode value="Basic Qr Code" size={qrSize} includeBackground />
         </View>
 
         {/* Triangle */}
         <View>
           <QRTitle title="Triangle Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Triangle Qr Code"
             piece={{
               shape: 'triangle',
@@ -86,7 +82,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Heart */}
         <View>
           <QRTitle title="Heart Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Heart Qr Code"
             size={qrSize}
             color="pink"
@@ -106,7 +102,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Dot */}
         <View>
           <QRTitle title="Dot Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Heart Qr Code"
             size={qrSize}
             color="#483D8B"
@@ -127,7 +123,7 @@ const QRCodeGeneratorScreen = () => {
         <View>
           <QRTitle title="With Logo Qr Code" />
 
-          <QRCodeGenerator
+          <QRCode
             ref={ref}
             value="With Logo Qr Code"
             size={qrSize}
@@ -166,7 +162,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Rain Effect */}
         <View>
           <QRTitle title="Rain Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Rain Qr Code"
             size={qrSize}
             color="#2074a7"
@@ -220,7 +216,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Linear Gradient */}
         <View>
           <QRTitle title="Linear Gradient Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Linear Gradient Qr Code"
             size={qrSize}
             includeBackground
@@ -335,7 +331,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Radial Gradient */}
         <View>
           <QRTitle title="Radial Gradient Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Radial Gradient Qr Code"
             size={qrSize}
             includeBackground
@@ -391,7 +387,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Image Background */}
         <View>
           <QRTitle title="Image Background Qr Code" />
-          <QRCodeGenerator
+          <QRCode
             value="Image Background Qr Code"
             size={qrSize}
             includeBackground
@@ -421,7 +417,7 @@ const QRCodeGeneratorScreen = () => {
         {/* Variant */}
         <View>
           <QRTitle title="Variant Qr Code" />
-          <QRCodeVariant
+          <QRCode
             variant="IMAGE_BACKGROUND"
             value="Variant Qr Code"
             size={qrSize}

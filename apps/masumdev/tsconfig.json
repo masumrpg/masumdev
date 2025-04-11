@@ -4,7 +4,16 @@
   "include": [],
   "references": [
     {
-      "path": "../../libs/*"
+      "path": "../../libs/rn-bottom-sheet/tsconfig.json"
+    },
+    {
+      "path": "../../libs/rn-qrcode-pack/tsconfig.json"
+    },
+    {
+      "path": "../../libs/rn-scroll-to-hide/tsconfig.json"
+    },
+    {
+      "path": "../../libs/rn-toast/tsconfig.json"
     },
     {
       "path": "./tsconfig.app.json"
