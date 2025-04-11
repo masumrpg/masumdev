@@ -45,6 +45,27 @@ Make sure you have these peer dependencies installed in your React Native projec
 }
 ```
 
+Add in `app.json`
+```json
+{
+  // existing confoguration
+  {
+  "plugins": [
+    "expo-router",
+    [
+      "expo-camera",
+      {
+        "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+        "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+        "recordAudioAndroid": true
+      }
+    ]
+  ]
+}
+
+}
+```
+
 ### Installing peer dependencies
 ```bash
 npm install react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons

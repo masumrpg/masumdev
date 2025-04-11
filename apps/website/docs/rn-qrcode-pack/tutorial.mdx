@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Tutorial
 
-🚀 Step-by-Step Guide to implementing scroll-based hide/show animations in React Native using rn-scroll-to-hide.
+🚀 Step-by-Step Guide to implementing QR Code generation and scanning in React Native using @masumdev/rn-qrcode and @masumdev/rn-qrcode-scanner packages.
 
 ## Table of Contents
 - [Video Tutorial](#video-tutorial)
@@ -12,9 +12,11 @@ sidebar_position: 5
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Basic Implementation](#basic-implementation)
+  - [QR Code Generator](#qr-code-generator)
+  - [QR Code Scanner](#qr-code-scanner)
 - [Advanced Usage](#advanced-usage)
-  - [Multiple Components](#multiple-components)
-  - [Programmatic Control](#programmatic-control)
+  - [Custom Styling](#custom-styling)
+  - [Validation](#validation)
 
 ## Video Tutorial
 Watch our detailed video guide for a hands-on implementation walkthrough:
@@ -23,200 +25,144 @@ Watch our detailed video guide for a hands-on implementation walkthrough:
 
 ## Features
 
-- 🚀 Lightweight and performant
-- 🎨 Customizable animations
-- 🔄 Built with React Native Reanimated
-- 📱 Works on iOS and Android
-- 📚 TypeScript support
-- 🎯 Support for both top and bottom components
-- 🔍 Smart bounce detection
+### QR Code Generator (@masumdev/rn-qrcode)
+- 🎨 Rich QR Code styling with customizable colors and patterns
+- 🖼️ Custom logo placement support
+- 🌈 Beautiful preset templates and themes
+- 🔍 Comprehensive format support
+- 🎯 Adjustable error correction levels
+- 📦 Seamless React Native integration
+
+### QR Code Scanner (@masumdev/rn-qrcode-scanner)
+- 📱 Advanced camera-based QR scanning
+- 🔍 Multiple format support
+- 💫 Real-time scanning
+- 🎯 Customizable scanning area
+- 🔦 Torch/flashlight control
+- 🌓 Theme support (light/dark)
 
 ## Prerequisites
 Before you begin, make sure you have:
 - React Native project set up
-- Basic understanding of React Native and TypeScript
+- Basic understanding of React Native
+- Camera permissions configured (for scanner)
 
 ## Installation
 
-:::danger Peer Dependencies
-Make sure you have these peer dependencies installed in your React Native project. Using incompatible versions may cause unexpected behavior or crashes:
-
-```json
-{
-  "react": "^18.3.1",
-  "react-native": "^0.76.7",
-  "react-native-reanimated": "^3.16.7"
-}
-```
-:::
-
-1. Install the package using your preferred package manager:
-```bash
-npm install @masumdev/rn-scroll-to-hide
-# or
-yarn add @masumdev/rn-scroll-to-hide
-# or
-bun add @masumdev/rn-scroll-to-hide
-# or
-pnpm add @masumdev/rn-scroll-to-hide
-```
-
-2. Follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+Follow our [detailed installation guide](/docs/rn-qrcode-pack/installation) to set up both packages.
 
 ## Basic Implementation
 
-:::tip Component Height
-Make sure to provide the correct component height to the hook. This is crucial for proper animations.
-:::
-
-1. First, import the necessary components:
+### QR Code Generator
 
 ```tsx
-import React from 'react';
-import { View, ScrollView } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+import { QRCode } from '@masumdev/rn-qrcode';
+
+const GeneratorComponent = () => {
+  return (
+    <QRCode
+      value="https://example.com"
+      size={200}
+      variant="BASIC"
+      backgroundColor="white"
+    />
+  );
+};
 ```
 
-2. Set up your component with the hook:
+### QR Code Scanner
 
 ```tsx
-export default function App() {
-  const header = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.UP
-  });
+import { QRCodeScanner } from '@masumdev/rn-qrcode-scanner';
+
+const ScannerComponent = () => {
+  const handleScan = (data) => {
+    console.log('Scanned:', data.code);
+  };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Animated.View
-        style={[
-          styles.header,
-          header.animatedStyle
-        ]}
-      >
-        <Text>Header</Text>
-      </Animated.View>
-
-      <ScrollView
-        onScroll={header.onScroll}
-        scrollEventThrottle={16}
-      >
-        {/* Your content */}
-      </ScrollView>
-    </View>
+    <QRCodeScanner
+      core={{
+        onSuccessfulScan: handleScan
+      }}
+      uiControls={{
+        showControls: true,
+        showTorchButton: true
+      }}
+    />
   );
-}
+};
 ```
 
 ## Advanced Usage
 
-### Multiple Components
-
-:::tip Scroll Event Handling
-When using multiple components, make sure to properly handle the scroll events.
-:::
-
-```tsx
-export default function App() {
-  const header = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.UP
-  });
-
-  const tabbar = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.DOWN
-  });
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Animated.View style={[styles.header, header.animatedStyle]}>
-        <Text>Header</Text>
-      </Animated.View>
-
-      <ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: header.scrollY } } }],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-      >
-        {/* Your content */}
-      </ScrollView>
-
-      <Animated.View style={[styles.tabbar, tabbar.animatedStyle]}>
-        <Text>Tabbar</Text>
-      </Animated.View>
-    </View>
-  );
-}
-```
-
-### Programmatic Control
-
-:::tip Manual Control
-You can manually control the visibility of components using the provided methods.
-:::
-
-```tsx
-export default function App() {
-  const header = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.UP
-  });
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Animated.View style={[styles.header, header.animatedStyle]}>
-        <Text>Header</Text>
-        <Button
-          title="Toggle Header"
-          onPress={() => header.toggle()}
-        />
-      </Animated.View>
-
-      <ScrollView
-        onScroll={header.onScroll}
-        scrollEventThrottle={16}
-      >
-        {/* Your content */}
-      </ScrollView>
-    </View>
-  );
-}
-```
-
 ### Custom Styling
 
-:::tip Style Integration
-The `animatedStyle` property can be combined with your custom styles.
-:::
+Customize QR code appearance:
 
 ```tsx
-const styles = StyleSheet.create({
-  header: {
-    height: 60,
-    backgroundColor: '#fff',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabbar: {
-    height: 60,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-});
+<QRCode
+  value="https://example.com"
+  size={250}
+  variant="LINEAR_GRADIENT"
+  gradient={{
+    type: 'linear',
+    colors: ['#FF0080', '#7928CA'],
+    rotation: 45
+  }}
+  eye={{
+    topLeft: { shape: 'circle', color: '#FF0080' },
+    topRight: { shape: 'circle', color: '#7928CA' },
+    bottomLeft: { shape: 'circle', color: '#FF0080' }
+  }}
+/>
 ```
+
+### Validation
+
+Implement custom validation for scanned codes:
+
+```tsx
+const validateQRCode = (code) => {
+  if (!code) {
+    return {
+      valid: false,
+      message: 'Empty QR code detected'
+    };
+  }
+
+  if (code.startsWith('https://')) {
+    return {
+      valid: true,
+      code,
+      message: 'Valid URL detected'
+    };
+  }
+
+  return {
+    valid: false,
+    message: 'Invalid QR code format'
+  };
+};
+
+<QRCodeScanner
+  core={{
+    onSuccessfulScan: handleScan,
+    validate: validateQRCode
+  }}
+/>
+```
+
+For more advanced features and customization options, check our [Advanced Usage Guide](/docs/rn-qrcode-pack/advanced-usage).
+
+:::tip Video Tutorial
+<div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
+  <a href="/docs/rn-qrcode-pack/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+    <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
+      <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
+      <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>
+      <p style={{ margin: '10px 0 0', color: 'rgb(51, 54, 51)' }}>Follow our step-by-step guide to implement QR code generation and scanning in your React Native application</p>
+    </div>
+  </a>
+</div>
+:::

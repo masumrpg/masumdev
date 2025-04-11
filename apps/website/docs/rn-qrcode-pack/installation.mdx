@@ -4,23 +4,52 @@ sidebar_position: 2
 
 # Installation
 
-## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Expo Setup](#expo-setup)
-  - [Managed Workflow](#managed-workflow)
-- [Installing Library](#installing-library)
-- [Troubleshooting](#troubleshooting)
+:::info Installation Guide
+This document will guide you through the installation process of QR Code packages for React Native. There are two separate packages available:
+- **@masumdev/rn-qrcode**: For generating QR Codes
+- **@masumdev/rn-qrcode-scanner**: For scanning QR Codes
+:::
 
-## Prerequisites
+## Table of Contents
+- [QRCode Prerequisites `@masumdev/rn-qrcode`](#qrcode-prerequisites-rn-qrcode)
+  - [Prerequisites](#prerequisites)
+  - [Installing prerequisites package](#installing-prerequisites-package)
+- [Installing QRCode `@masumdev/rn-qrcode`](#installing-qrcode-rn-qrcode)
+  - [Troubleshooting](#troubleshooting)
+- [QRCode Prerequisites `@masumdev/rn-qrcode-scanner`](#qrcode-prerequisites-rn-qrcode-scanner)
+  - [Prerequisites](#prerequisites-1)
+  - [Installing prerequisites package](#installing-prerequisites-package-1)
+- [Installing QRCode Scanner `@masumdev/rn-qrcode-scanner`](#installing-qrcode-scanner-rn-qrcode-scanner)
+  - [Expo Setup](#expo-setup)
+  - [Managed Workflow](#managed-workflow)
+  - [Troubleshooting](#troubleshooting-1)
+
+
+## QRCode Prerequisites `@masumdev/rn-qrcode`
+
+### Prerequisites
 
 :::danger Peer Dependencies
-Make sure you have these peer dependencies installed in your React Native or Expo project. Using incompatible versions may cause unexpected behavior or crashes:
+Make sure you have installed all peer dependencies in your React Native or Expo project. Using incompatible versions may cause issues or crashes:
+
+:::caution Compatibility
+This package has been tested and works well with:
+- React Native ≥ 0.76.9
+- Expo SDK ≥ 50.0.0
+:::
+
+:::info System Requirements
+- Node.js ≥ 18.0.0
+- npm ≥ 9.0.0 or yarn ≥ 1.22.0
+:::
+
+Berikut adalah daftar peer dependencies yang diperlukan:
 
 ```json
 {
-  "react": "^18.3.1",
-  "react-native": "^0.76.9",
-  "react-native-reanimated": "^3.16.1"
+  "react": ">=18.3.1",
+  "react-native": ">=0.76.9",
+  "react-native-svg": ">=15.8.0"
 }
 ```
 
@@ -30,23 +59,118 @@ Make sure you have these peer dependencies installed in your React Native or Exp
 Use the following command to install the required peer dependency:
 - Using npm
 ```bash
-npm install react-native-reanimated
+npm install react react-native react-native-svg
 ```
 - Using yarn
 ```bash
-yarn add react-native-reanimated
+yarn add react react-native react-native-svg
 ```
 - Using bun
 ```bash
-bun add react-native-reanimated
+bun add react react-native react-native-svg
 ```
 - Using pnpm
 ```bash
-pnpm add react-native-reanimated
+pnpm add react react-native react-native-svg
 ```
 :::
 
-## Expo Setup
+## Installing QRCode `@masumdev/rn-qrcode`
+:::tip Library Installation
+Install the `@masumdev/rn-qrcode` package using your preferred package manager.
+:::
+#### Using npm
+```bash
+npm install @masumdev/rn-qrcode
+```
+#### Using yarn
+```bash
+yarn add @masumdev/rn-qrcode
+```
+#### Using bun
+```bash
+bun add @masumdev/rn-qrcode
+```
+#### Using pnpm
+```bash
+pnpm add @masumdev/rn-qrcode
+```
+
+### Troubleshooting
+:::danger Common Issues
+- **Installation Issues**:
+  - Make sure all peer dependencies are installed with compatible versions
+  - If using Expo, use `expo install` for better compatibility
+  - Clear npm cache with `npm cache clean --force`
+
+- **Build Issues**:
+  - Rebuild application after package installation
+  - Check babel.config.js configuration
+  - Clear Metro bundler cache: `npm start -c` or `yarn start --reset-cache`
+
+- **QRCode Plugin Not Found Error**:
+  - Check babel.config.js configuration
+  - Ensure react-native-svg is properly installed
+  - Try uninstalling and reinstalling the package
+
+- **Camera Issues (Scanner)**:
+  - Check camera permissions in app settings
+  - Ensure expo-camera is properly installed
+  - For iOS, check Info.plist for camera permissions
+  - For Android, check AndroidManifest.xml
+:::
+
+:::tip Additional Help
+If you're still experiencing issues:
+1. Check [GitHub Issues](https://github.com/masumdev/rn-qrcode/issues)
+2. Join our [Discord Community](https://discord.gg/masumdev)
+3. Create a new issue with detailed information about your problem
+:::
+
+## QRCode Prerequisites `@masumdev/rn-qrcode-scanner`
+
+### Prerequisites
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native or Expo project. Using incompatible versions may cause unexpected behavior or crashes:
+```json
+{
+  "react": ">=18.3.1",
+  "react-native": ">=0.76.9",
+  "react-native-svg": ">=15.8.0",
+  "expo": ">=50.0.0",
+  "expo-camera": ">=14.0.0",
+  "expo-haptics": ">=12.8.0",
+  "expo-router": ">=3.4.0",
+  "@expo/vector-icons": ">=14.0.0"
+}
+```
+### Installing prerequisites package
+:::tip Recommended Installation
+Use the following command to install the required peer dependency:
+- Using npm
+```bash
+npm install react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+```
+- Using yarn
+```bash
+yarn add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+```
+- Using bun
+```bash
+bun add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+```
+- Using pnpm
+```bash
+pnpm add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+```
+:::
+
+## Installing QRCode Scanner `@masumdev/rn-qrcode-scanner`
+:::tip Library Installation
+Install the `@masumdev/rn-qrcode-scanner` package using your preferred package manager.
+:::
+
+### Expo Setup
 
 :::tip Expo Installation
 If you're using Expo, we recommend using `expo install` instead of `npm install` to ensure compatibility with your Expo SDK version.
@@ -54,62 +178,48 @@ If you're using Expo, we recommend using `expo install` instead of `npm install`
 
 ### Managed Workflow
 
-1. Install the required dependencies:
+Add in `app.json`
+```json
+{
+  // existing confoguration
+  {
+  "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ]
+  }
+}
+```
 
+### Using npm
 ```bash
-npx expo install react-native-reanimated
+npm install @masumdev/rn-qrcode-scanner
 ```
-
-2. Update your `babel.config.js`:
-
-```js
-module.exports = function (api) {
-  api.cache(true);
-  return {
-    presets: ['babel-preset-expo'],
-    plugins: ['react-native-reanimated/plugin'],
-  };
-};
-```
-
-## Installing Library
-
-:::tip Library Installation
-Install the `@masumdev/rn-scroll-to-hide` package using your preferred package manager.
-:::
-
-#### Using npm
-
+### Using yarn
 ```bash
-npm install @masumdev/rn-scroll-to-hide
+yarn add @masumdev/rn-qrcode-scanner
 ```
-
-#### Using yarn
-
+### Using bun
 ```bash
-yarn add @masumdev/rn-scroll-to-hide
+bun add @masumdev/rn-qrcode-scanner
 ```
-
-#### Using bun
-
+### Using pnpm
 ```bash
-bun add @masumdev/rn-scroll-to-hide
+pnpm add @masumdev/rn-qrcode-scanner
 ```
-
-#### Using pnpm
-
-```bash
-pnpm add @masumdev/rn-scroll-to-hide
-```
-
-## Troubleshooting
-
+### Troubleshooting
 :::danger Common Issues
-- For Reanimated issues, ensure you've rebuilt the app after installing the package
+- For QRCode Scanner issues, ensure you've rebuilt the app after installing the package
 - Make sure all peer dependencies versions match the requirements
-- If you encounter "Reanimated plugin not found" error, verify your babel.config.js is properly configured
+- If you encounter "QRCode Scanner plugin not found" error, verify your babel.config.js is properly configured
 - Metro bundler cache issues can be resolved by clearing the cache: `npm start -c`
-- If animations are not working, check that Reanimated is properly configured in your babel.config.js
 :::
 
 :::tip Video Tutorial

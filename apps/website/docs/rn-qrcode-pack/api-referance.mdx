@@ -5,62 +5,120 @@ sidebar_position: 6
 # API Reference
 
 ## Table of Contents
-- [useHideOnScroll Hook](#usehideonscroll-hook)
-  - [Configuration Options](#configuration-options)
-  - [Return Value](#return-value)
-- [ScrollDirection Enum](#scrolldirection-enum)
-- [HideDirection Enum](#hidedirection-enum)
+- [QRCode Component](#qrcode-component)
+  - [Core Properties](#core-properties)
+  - [Style Properties](#style-properties)
+  - [Advanced Properties](#advanced-properties)
+- [QRCodeScanner Component](#qrcode-scanner-component)
+  - [Core Props](#core-props)
+  - [Scanning Props](#scanning-props)
+  - [UI Controls Props](#ui-controls-props)
+  - [Appearance Props](#appearance-props)
+  - [Callbacks Props](#callbacks-props)
+  - [Haptics Props](#haptics-props)
+  - [Navigation Props](#navigation-props)
+  - [Custom Components Props](#custom-components-props)
 
-## useHideOnScroll Hook
+## QRCode Component
 
-:::tip Hook Configuration
-The `useHideOnScroll` hook provides a simple interface for creating scroll-based hide/show animations. It returns an object containing animation styles and control methods.
+:::tip Component Configuration
+The `QRCode` component provides a highly customizable interface for generating QR codes with various styles and configurations.
 :::
 
-### Configuration Options
+### Core Properties
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| height | number | - | Required. Height of the component to animate |
-| duration | number | 300 | Animation duration in milliseconds |
-| threshold | number | 10 | Minimum scroll distance to trigger hide/show |
-| scrollDirection | ScrollDirection | DOWN | Whether to hide when scrolling down |
-| hideDirection | HideDirection | HideDirection.DOWN | Direction to hide the component |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| value | string | - | Required. The content to be encoded in the QR code |
+| variant | QRCodeVariant | 'BASIC' | Design variant of the QR code |
+| size | number | 256 | Size of the QR code in pixels |
+| version | QRCodeVersion | - | QR code version (1-40) |
+| errorCorrectionLevel | 'L' \| 'M' \| 'Q' \| 'H' | 'M' | Error correction capability |
 
-### Return Value
+### Style Properties
 
-The hook returns an object with the following properties:
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| color | string | '#000' | Main color of QR code elements |
+| backgroundColor | string | 'transparent' | Background color |
+| includeBackground | boolean | false | Add background wrapper |
+| gradient | QRCodeGradientConfig | - | Gradient configuration |
 
-| Property | Type | Description |
-|----------|------|-------------|
-| animatedStyle | object | Animated style object to be applied to your component |
-| scrollY | Animated.Value | The scroll position value |
-| isVisible | boolean | Current visibility state of the component |
-| show | () => void | Method to show the component |
-| hide | () => void | Method to hide the component |
-| toggle | () => void | Method to toggle component visibility |
-| onScroll | (event: NativeSyntheticEvent&lt;NativeScrollEvent&gt;) => void | Scroll event handler |
+### Advanced Properties
 
-## ScrollDirection Enum
-:::tip Direction Configuration
-Use the ScrollDirection enum to specify which direction your component should hide in.
-:::
-```tsx
-enum ScrollDirection {
-  UP = 'UP',
-  DOWN = 'DOWN'
-}
-```
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| logo | LogoOptions | - | Logo configuration |
+| piece | PieceOptions | - | Individual QR piece styling |
+| eye | EyeOptions | - | Corner eye pattern styling |
+| maxVersion | QRCodeVersion | - | Maximum QR code version |
 
-## HideDirection Enum
+## QRCodeScanner Component
 
-:::tip Direction Configuration
-Use the HideDirection enum to specify which direction your component should hide in.
+:::tip Scanner Configuration
+The `QRCodeScanner` component offers a feature-rich interface for QR code scanning with customizable UI and behavior.
 :::
 
-```tsx
-enum HideDirection {
-  UP = 'UP',
-  DOWN = 'DOWN'
-}
-```
+### Core Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| onSuccessfulScan | (state: OnSuccessfulScanProps) => void | Yes | Scan success callback |
+| validate | QRCodeValidator | No | Custom validation function |
+
+### Scanning Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| cooldownDuration | number | 2000 | Time between scans (ms) |
+| scanningArea | ScanningAreaProps | - | Target area configuration |
+
+### UI Controls Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| showControls | boolean | true | Show/hide control buttons |
+| showStatus | boolean | true | Show/hide status info |
+| showTorchButton | boolean | true | Show/hide torch control |
+
+### Appearance Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| theme | 'light' \| 'dark' | 'light' | UI theme selection |
+| overlayStyle | OverlayStyle | - | Scanner overlay styling |
+| frameStyle | FrameStyle | - | Scanner frame styling |
+| cornerStyle | CornerStyle | - | Corner markers styling |
+| statusStyle | StatusStyle | - | Status display styling |
+
+### Callbacks Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| onTorchChange | (isOn: boolean) => void | Torch state change handler |
+| onScanStart | () => void | Scan start handler |
+| onScanEnd | () => void | Scan end handler |
+| onCooldownStart | (duration: number) => void | Cooldown start handler |
+| onCooldownEnd | () => void | Cooldown end handler |
+
+### Haptics Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| enableHapticFeedback | boolean | true | Enable/disable haptics |
+| customHapticFeedback | HapticFeedbackConfig | - | Custom haptics settings |
+
+### Navigation Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| onBackPress | () => void | Back button handler |
+| showBackButton | boolean | Show/hide back button |
+| backButtonIcon | string | Back button icon name |
+
+### Custom Components Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| renderCustomStatus | (statusInfo: StatusInfo) => React.ReactNode | Custom status renderer |
+| renderCustomControls | (controls: ControlsInfo) => React.ReactNode | Custom controls renderer |

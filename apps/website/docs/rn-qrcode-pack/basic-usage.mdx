@@ -5,120 +5,96 @@ sidebar_position: 3
 # Basic Usage
 
 :::tip
-The `useHideOnScroll` hook provides a simple way to create hide/show animations for components based on scroll direction. This is perfect for headers, footers, or any component that should respond to scroll behavior.
+The `@masumdev/rn-qrcode` and `@masumdev/rn-qrcode-scanner` packages provide simple ways to implement QR code generation and scanning functionality in your Expo React Native applications. These packages are perfect for applications that need to handle QR codes efficiently.
+
+These packages are designed with performance and ease of use in mind, offering:
+- Simple integration with Expo and React Native projects
+- Customizable QR code generation with various styles
+- Fast and accurate QR code scanning
+- Built-in error handling and validation
 :::
+
+:::info Key Features
+- **QR Code Generator**: Create customizable QR codes with various styles and error correction levels
+- **QR Code Scanner**: High-performance scanner with real-time detection and customizable UI
+- **Type Safety**: Full TypeScript support for better development experience
+- **Expo Compatible**: Seamlessly works with Expo managed and bare workflow
+:::
+
+
 
 ## Table of Contents
 - [Basic Usage](#basic-usage)
+  - [QRCode `@masumdev/rn-qrcode` Basic Usage](#qrcode-rn-qrcode-basic-usage)
+  - [QRCodeScanner `@masumdev/rn-qrcode-scanner` Basic Usage](#qrcodescanner-rn-qrcode-scanner-basic-usage)
 
 ## Basic Usage:
-The `useHideOnScroll` hook provides a powerful and flexible way to create smooth hide/show animations for components based on scroll direction. This is particularly useful for implementing dynamic headers, footers, or any UI element that should respond to user scrolling behavior.
 
-Here's a basic example demonstrating how to use the hook to create a header that hides when scrolling up and shows when scrolling down: down:
+### QRCode `@masumdev/rn-qrcode` Basic Usage
 
-:::tip
-The `scrollEventThrottle={16}` prop ensures smooth 60fps animations by updating the scroll position every 16ms.
+:::info Props Description
+- `variant`: Visual style of the QR code ("BASIC", "DOTS", etc.)
+- `value`: The data to encode in the QR code (text, URL, etc.)
+- `size`: Size of the QR code in pixels
+- `backgroundColor`: Background color of the QR code
+- `errorCorrectionLevel`: Error correction capability (L: 7%, M: 15%, Q: 25%, H: 30%)
+- `includeBackground`: Whether to include a background layer
 :::
 
 ```tsx
-import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
+import { QRCode } from '@masumdev/rn-qrcode';
 
-export default function App() {
-  const header = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.UP
-  });
+const GeneratorComponent = () => {
+  return <QRCode variant="BASIC" value="https://github.com/masumrpg" size={300} backgroundColor="white" errorCorrectionLevel="H" includeBackground />;
+};
+```
+
+### QRCodeScanner `@masumdev/rn-qrcode-scanner` Basic Usage
+
+:::info Scanner Props
+- `core.onSuccessfulScan`: Callback function when a QR code is successfully scanned
+- `core.scanInterval`: Time between scans in milliseconds (default: 2000)
+- `core.enableVibration`: Toggle vibration feedback (default: true)
+- `core.cameraProps`: Additional camera configuration options
+:::
+
+:::tip Pro Tip
+Make sure to test your QR code scanner in different lighting conditions to ensure optimal performance. The scanner works best with good lighting and a steady hand!
+
+For best results:
+- Hold the device steady
+- Ensure good lighting conditions
+- Keep the QR code within the scanning area
+- Maintain an appropriate distance (15-30cm)
+:::
+```tsx
+import { QRCodeScanner } from '@masumdev/rn-qrcode-scanner';
+
+const ScannerComponent = () => {
+  const handleScan = (data: string) => {
+    console.log('Scanned QR Code:', data);
+  };
 
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.header,
-          header.animatedStyle
-        ]}
-      >
-        <Text style={styles.headerText}>Header</Text>
-      </Animated.View>
-
-      <ScrollView
-        onScroll={header.onScroll}
-        scrollEventThrottle={16}
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {/* Your content */}
-        <Text style={styles.content}>Your content here</Text>
-        <Text style={styles.content}>Scroll up to hide the header</Text>
-        {Array(20).fill(0).map((_, index) => (
-          <View key={index} style={styles.item}>
-            <Text>Item {index + 1}</Text>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+    <QRCodeScanner
+        core={{
+          onSuccessfulScan: handleSuccessfulScan,
+        }}
+    />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    height: 60,
-    backgroundColor: '#3498db',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1000,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
-  headerText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  scrollView: {
-    flex: 1,
-    marginTop: 60, // Same as header height
-  },
-  contentContainer: {
-    paddingHorizontal: 15,
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  content: {
-    fontSize: 16,
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  item: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 1,
-  },
-});
+export default ScannerComponent;
 ```
+
+:::caution Security Best Practice
+When implementing QR code scanning in your application, it's recommended to validate and sanitize the scanned data before processing it to ensure safe and secure data handling.
+:::
+
 
 :::tip Video Tutorial
 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
-  <a href="/docs/rn-scroll-to-hide/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+  <a href="/docs/rn-qrcode-pack/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
     <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
       <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
       <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>

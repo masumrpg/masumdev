@@ -4,279 +4,584 @@ sidebar_position: 4
 
 # Advanced Usage
 
+Welcome to the advanced usage guide for @masumdev/rn-qrcode and @masumdev/rn-qrcode-scanner packages. In this section, we'll explore more sophisticated implementations and features of both packages.
+
 ## Table of Contents
-- [Custom Configuration](#custom-configuration)
-- [Programmatic Control](#programmatic-control)
-- [Multiple Components](#multiple-components)
+- [QRCode Generator](#qrcode-masumdevrn-qrcode-advanced-usage)
+  - [Performance Optimization](#performance-optimization-tips)
+  - [Best Practices](#best-practices)
+  - [Styling & Customization](#styling)
+    - [Design Principles](#design-principles)
+    - [Built-in Variants](#variant-qrcode-builtin)
+    - [Custom QR Code](#custom-qrcode)
+  - [Advanced Features](#advanced-customization)
+    - [Gradient Effects](#gradient-configuration)
+    - [Eye Patterns](#advanced-eye-patterns)
+    - [Error Handling](#error-handling-and-validation)
+- [QRCode Scanner](#qrcodescanner-masumdevrn-qrcode-scanner-advanced-usage)
+  - [Scanner Configuration](#scanner-configuration-best-practices)
+  - [Advanced Features](#advanced-scanning-features)
+  - [Implementation Examples](#advanced-scanner-implementation)
+    - [Batch Scanning](#batch-scanning-with-validation)
+    - [Custom UI](#customize-the-scanner-screen)
 
-## Custom Configuration
+## QRCode `@masumdev/rn-qrcode` Advanced Usage
 
-:::tip
-The `useHideOnScroll` hook accepts various configuration options to customize the animation behavior and sensitivity.
-:::
+### Performance Optimization Tips
+
+- **Size Optimization**: Choose appropriate QR code size based on scanning distance and device capabilities
+- **Error Correction**: Use lower error correction levels (L or M) for simple data to improve generation speed
+- **Caching**: Implement caching mechanisms for frequently used QR codes
+- **Lazy Loading**: Consider lazy loading for QR codes not immediately visible
+
+### Best Practices
+
+- **Content Length**: Keep QR code content concise to maintain readability
+- **Testing**: Always test QR codes across different devices and lighting conditions
+- **Contrast**: Maintain high contrast between QR code and background colors
+- **Error Handling**: Implement proper error handling for invalid inputs
+
+### Styling
+
+#### Design Principles
+- **Clarity**: Ensure QR code elements are clearly defined
+- **Contrast Ratio**: Maintain minimum 3:1 contrast ratio
+- **Size Balance**: Balance between aesthetics and scannability
+
+#### Variant qrcode builtin
 
 ```tsx
-const header = useHideOnScroll({
-  // Required: Component height
-  height: 60,
+import { QRCode } from '@masumdev/rn-qrcode';
+import { View } from 'react-native';
 
-  // Optional: Animation duration in milliseconds
-  duration: 300,
-
-  // Optional: Minimum scroll distance to trigger hide/show
-  threshold: 10,
-
-  // Optional: Whether to hide when scrolling (UP or DOWN)
-  scrollDirection: ScrollDirection.DOWN,
-
-  // Optional: Direction to hide (UP or DOWN)
-  hideDirection: HideDirection.UP
-});
-```
-
-## Programmatic Control
-
-:::tip
-You can programmatically control the visibility of your component using the methods provided by the hook.
-:::
-
-```tsx
-import React from 'react';
-import { View, ScrollView, Button } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
-
-export default function App() {
-  const header = useHideOnScroll({
-    height: 60,
-    hideDirection: HideDirection.UP
-  });
-
+const CustomQRCode = () => {
+  const qrValue = 'URL_ADDRESS.example.com';
   return (
-    <View style={{ flex: 1 }}>
-      <Animated.View style={[styles.header, header.animatedStyle]}>
-        <Text>Header</Text>
-        <Button
-          title="Toggle Header"
-          onPress={() => header.toggle()}
+    <View>
+      <QRCode
+        value={qrValue}
+        size={200}
+        color="black"
+        backgroundColor="white"
+        variant="WITH_LOGO" // default is BASIC
         />
-        <Button
-          title="Show Header"
-          onPress={() => header.show()}
-        />
-        <Button
-          title="Hide Header"
-          onPress={() => header.hide()}
-        />
-      </Animated.View>
-
-      <ScrollView
-        onScroll={header.onScroll}
-        scrollEventThrottle={16}
-      >
-        {/* Your content */}
-      </ScrollView>
     </View>
-  );
+  )
+}
+export default CustomQRCode;
+```
+:::info
+Choose from a range of predefined templates to quickly style your QR code.
+| Value | Description | Visual Effect |
+|-------|-------------|---------------|
+| 'BASIC' | Simple, basic QR code | Minimalistic, clean |
+| 'TRIANGLE' | Triangle-shaped QR code | Triangular, elegant |
+| 'HEART' | Heart-shaped QR code | Hearty, romantic |
+| 'DOT' | Dotted QR code pattern | Modern, minimalist |
+| 'WITH_LOGO' | QR code with centered logo | Professional, branded |
+| 'RAIN' | Rainy QR code with falling pieces | Rainy, atmospheric |
+| 'LINEAR_GRADIENT' | Linear gradient colored QR code | Smooth, colorful |
+| 'RADIAL_GRADIENT' | Radial gradient colored QR code | Dynamic, radiant |
+| 'IMAGE_BACKGROUND' | QR code with image background | Creative, unique |
+:::
+
+#### Custom qrcode
+```tsx
+import { QRCode } from '@masumdev/rn-qrcode';
+import { View } from'react-native';
+const CustomQRCode = () => {
+  const qrValue = 'URL_ADDRESS.example.com';
+  return (
+    <View>
+      {/* Rain Effect */}
+        <View>
+          <QRTitle title="Rain Qr Code" />
+          <QRCode
+            value="Rain Qr Code"
+            size={qrSize}
+            color="#2074a7"
+            version={2}
+            eye={{
+              topLeft: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              topRight: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+              bottomLeft: {
+                shape: 'square',
+                size: {
+                  center: 1.2,
+                  inner: 1.3,
+                },
+                radius: {
+                  radiusOuter: 20,
+                  radiusInner: 13,
+                  radiusCenter: 10,
+                },
+              },
+            }}
+            piece={{
+              shape: 'rain',
+              size: 1,
+            }}
+            includeBackground
+          />
+        </View>
+    </View>
+  )
 }
 ```
-
-## Multiple Components
-
 :::tip
-You can use multiple instances of `useHideOnScroll` to control different components independently.
+Customize the appearance of your QR code by choosing from a range of predefined templates or creating your own custom styles.
 :::
 
+#### Custom qrcode builtin with variant
 ```tsx
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-  Platform,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from 'react-native';
-import Animated from 'react-native-reanimated';
-import {
-  useHideOnScroll,
-  HideDirection,
-  ScrollDirection,
-} from '@masumdev/rn-scroll-to-hide';
-import { Ionicons } from '@expo/vector-icons'; // Pastikan Anda memiliki @expo/vector-icons
-
-const TABBAR_HEIGHT = 70;
-const HEADER_HEIGHT = 60;
-const STATUSBAR_HEIGHT =
-  Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 0;
-
-export default function ScrollToHideScreen() {
-  const tabbar = useHideOnScroll({
-    height: TABBAR_HEIGHT,
-    duration: 300,
-    threshold: 5,
-    scrollDirection: ScrollDirection.DOWN,
-    hideDirection: HideDirection.DOWN,
-  });
-
-  const header = useHideOnScroll({
-    height: HEADER_HEIGHT,
-    duration: 300,
-    threshold: 5,
-    scrollDirection: ScrollDirection.DOWN,
-    hideDirection: HideDirection.UP,
-  });
-
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    tabbar.onScroll(event);
-    header.onScroll(event);
-  };
-
-  const renderDummyContent = () => {
-    const items = [];
-    for (let i = 1; i <= 50; i++) {
-      items.push(
-        <View key={i} style={styles.item}>
-          <Text style={styles.itemText}>Item {i}</Text>
+import { QRCode } from '@masumdev/rn-qrcode';
+import { View } from'react-native';
+const CustomQRCode = () => {
+  return (
+    <View>
+          <QRTitle title="Triangle Qr Code" />
+          <QRCode
+            value="Triangle Qr Code"
+            variant="WITH_LOGO" // if add this variant, then you can add logo
+            logo={{
+              source: require('./assets/logo.png'), // Replace with your logo image, overrden by variant
+            }}
+            piece={{
+              shape: 'triangle',
+            }}
+            color="#DAA520"
+            eye={{
+              topLeft: { shape: 'triangle' },
+              topRight: { shape: 'triangle' },
+              bottomLeft: { shape: 'triangle' },
+            }}
+            size={qrSize}
+            includeBackground
+          />
         </View>
-      );
+  )
+}
+export default CustomQRCode;
+```
+:::tip
+Customize the appearance of your QR code by choosing from a range of predefined templates or creating your own custom styles.
+:::
+
+### Advanced Customization
+
+#### Gradient Configuration
+```tsx
+import { QRCode } from '@masumdev/rn-qrcode';
+import { View } from 'react-native';
+
+const GradientQRCode = () => {
+  return (
+    <View>
+      <QRCode
+        value="https://example.com"
+        size={200}
+        variant="LINEAR_GRADIENT"
+        gradient={{
+          type: 'linear',
+          colors: ['#FF0080', '#7928CA'],
+          rotation: 45,
+        }}
+        eye={{
+          topLeft: { shape: 'circle', color: '#FF0080' },
+          topRight: { shape: 'circle', color: '#7928CA' },
+          bottomLeft: { shape: 'circle', color: '#FF0080' },
+        }}
+      />
+    </View>
+  );
+};
+```
+
+#### Advanced Eye Patterns
+```tsx
+const CustomEyeQRCode = () => {
+  return (
+    <QRCode
+      value="https://example.com"
+      size={250}
+      eye={{
+        topLeft: {
+          shape: 'rounded',
+          size: { inner: 1.5, outer: 1.2 },
+          color: '#2074a7',
+        },
+        topRight: {
+          shape: 'diamond',
+          size: { inner: 1.5, outer: 1.2 },
+          color: '#2074a7',
+        },
+        bottomLeft: {
+          shape: 'leaf',
+          size: { inner: 1.5, outer: 1.2 },
+          color: '#2074a7',
+        },
+      }}
+    />
+  );
+};
+```
+
+### Error Handling and Validation
+```tsx
+const QRCodeWithErrorHandling = () => {
+  const [error, setError] = useState<string | null>(null);
+  const [value, setValue] = useState('');
+
+  const validateQRContent = (content: string) => {
+    if (!content) {
+      setError('QR content cannot be empty');
+      return false;
     }
-    return items;
+    if (content.length > 2048) {
+      setError('QR content exceeds maximum length');
+      return false;
+    }
+    setError(null);
+    return true;
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.header, header.animatedStyle]}>
-        <View style={styles.statusBar} />
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>App Title</Text>
-        </View>
-      </Animated.View>
-
-      <ScrollView
-        style={styles.content}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {renderDummyContent()}
-      </ScrollView>
-
-      <Animated.View style={[styles.tabbar, tabbar.animatedStyle]}>
-        <View style={styles.tab}>
-          <Ionicons name="home-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Home</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="search-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Search</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="person-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Profile</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="settings-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Settings</Text>
-        </View>
-      </Animated.View>
+    <View>
+      <TextInput
+        value={value}
+        onChangeText={setValue}
+        placeholder="Enter QR content"
+      />
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
+      {!error && value && (
+        <QRCode
+          value={value}
+          size={200}
+          errorCorrectionLevel="H"
+        />
+      )}
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-  },
-  header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'white',
-    zIndex: 1000,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  statusBar: {
-    height: STATUSBAR_HEIGHT,
-    backgroundColor: '#5e72e4',
-  },
-  headerContent: {
-    height: HEADER_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#5e72e4',
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  content: {
-    flex: 1,
-    paddingTop: HEADER_HEIGHT + STATUSBAR_HEIGHT,
-  },
-  scrollContent: {
-    paddingBottom: TABBAR_HEIGHT + 20,
-  },
-  item: {
-    backgroundColor: 'white',
-    marginHorizontal: 16,
-    marginVertical: 8,
-    padding: 20,
-    borderRadius: 8,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-  },
-  itemText: {
-    fontSize: 16,
-  },
-  tabbar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: TABBAR_HEIGHT,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-  },
-  tab: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabText: {
-    fontSize: 12,
-    color: '#5e72e4',
-    marginTop: 4,
-  },
-});
+};
 ```
+
+### Performance Optimization
+- Use appropriate error correction levels based on your use case
+- Implement caching for frequently used QR codes
+- Consider lazy loading for multiple QR codes
+- Optimize image assets used in logos or backgrounds
+
+### Accessibility Considerations
+- Maintain sufficient contrast ratios (minimum 4.5:1)
+- Provide alternative text for QR codes
+- Ensure adequate touch target size for interactive elements
+- Support screen reader compatibility
 
 :::tip
 When using multiple components, make sure to properly handle the scroll events for each component.
 :::
 
+
+## QRCodeScanner `@masumdev/rn-qrcode-scanner` Advanced Usage
+
+### Scanner Configuration Best Practices
+- **Camera Resolution**: Choose appropriate resolution based on device capabilities
+- **Frame Rate**: Balance between performance and scanning accuracy
+- **Scanning Area**: Define optimal scanning area for better user experience
+- **Error Handling**: Implement robust error handling for various scenarios
+
+### Advanced Scanning Features
+- **Multi-Format Support**: Handle different QR code formats
+- **Batch Scanning**: Process multiple QR codes in sequence
+- **Custom Validation**: Implement complex validation rules
+- **Performance Optimization**: Optimize scanning for different conditions
+
+### Advanced Scanner Implementation
+
+#### Batch Scanning with Validation
+```tsx
+import {
+  OnSuccessfulScanProps,
+  QRCodeScanner,
+  QRCodeValidator,
+} from '@masumdev/rn-qrcode-scanner';
+import { useState, useCallback } from 'react';
+import { StyleSheet, Text, View, Alert } from 'react-native';
+
+const BatchScannerScreen = () => {
+  const [scannedCodes, setScannedCodes] = useState<string[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleSuccessfulScan = useCallback((data: OnSuccessfulScanProps) => {
+    if (data.code && !isProcessing) {
+      setIsProcessing(true);
+
+      // Process the scanned code
+      if (!scannedCodes.includes(data.code)) {
+        setScannedCodes(prev => [...prev, data.code]);
+        Alert.alert('Success', `Added code: ${data.code}`);
+      } else {
+        Alert.alert('Duplicate', 'This code has already been scanned');
+      }
+
+      // Reset processing state after delay
+      setTimeout(() => setIsProcessing(false), 1500);
+    }
+  }, [scannedCodes, isProcessing]);
+
+  const validateQRCode: QRCodeValidator = useCallback((code: string) => {
+    // Complex validation logic
+    if (!code) {
+      return {
+        valid: false,
+        message: 'Empty QR code detected',
+      };
+    }
+
+    // Check for specific format
+    if (!/^[A-Z]{2}-\d{6}$/.test(code)) {
+      return {
+        valid: false,
+        message: 'Invalid code format. Expected: XX-123456',
+      };
+    }
+
+    return {
+      valid: true,
+      code,
+      message: 'Valid code format',
+    };
+  }, []);
+
+  return (
+    <View style={StyleSheet.absoluteFill}>
+      <QRCodeScanner
+        core={{
+          onSuccessfulScan: handleSuccessfulScan,
+          validate: validateQRCode,
+        }}
+        scanning={{
+          cooldownDuration: 1500,
+          scanningArea: {
+            tolerance: 60,
+          },
+        }}
+        uiControls={{
+          showControls: true,
+          showStatus: true,
+          showTorchButton: true,
+        }}
+        appearance={{
+          theme: 'dark',
+          overlayStyle: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          },
+          frameStyle: {
+            width: 280,
+            height: 280,
+            borderRadius: 20,
+          },
+          cornerStyle: {
+            color: '#00FF00',
+            width: 4,
+            length: 30,
+          },
+          statusStyle: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            textColor: '#FFFFFF',
+            borderRadius: 12,
+            padding: 10,
+          },
+        }}
+      />
+
+      <View style={styles.scannedCodesContainer}>
+        <Text style={styles.headerText}>Scanned Codes ({scannedCodes.length})</Text>
+        {scannedCodes.map((code, index) => (
+          <Text key={index} style={styles.codeText}>{code}</Text>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  scannedCodesContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 16,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: '40%',
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#000',
+  },
+  codeText: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 4,
+  },
+});
+
+export default BatchScannerScreen;
+```
+
+### Customize the Scanner Screen
+```tsx
+import {
+  OnSuccessfulScanProps,
+  QRCodeScanner,
+  QRCodeValidator,
+} from '@masumdev/rn-qrcode-scanner';
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+const QRCodeScannerScreen = () => {
+  const [scannedMember, setScannedMember] = useState<string | null>(null);
+
+  const handleSuccessfulScan = (data: OnSuccessfulScanProps) => {
+    if (data.code) {
+      setScannedMember(data.code);
+    }
+    console.log(data);
+  };
+
+  const validateQRCode: QRCodeValidator = (code: string) => {
+    // Example: Only accept URLs starting with https://
+    // if (code.startsWith('https://')) {
+    //   return { valid: true, code };
+    // }
+
+    // // Example: Accept product codes with specific format
+    // if (/^PROD-\d{6}$/.test(code)) {
+    //   return { valid: true, code };
+    // }
+
+    if (code) {
+      return { valid: true, code, message: 'Success' };
+    }
+
+    return {
+      valid: false,
+      message:
+        'Invalid QR code format. Expected HTTPS URL or product code (PROD-XXXXXX).',
+    };
+  };
+
+  return (
+    <View style={StyleSheet.absoluteFill}>
+      <QRCodeScanner
+        // Core functionality
+        core={{
+          onSuccessfulScan: handleSuccessfulScan,
+          validate: validateQRCode,
+        }}
+        // Scanning behavior
+        scanning={{
+          cooldownDuration: 3000,
+          scanningArea: {
+            // tolerance: 80,∂
+          },
+        }}
+        // UI Controls
+        uiControls={{
+          showControls: true,
+          showStatus: true,
+          showTorchButton: false, // We're using custom controls
+        }}
+        // Appearance
+        appearance={{
+          theme: 'light',
+          overlayStyle: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            opacity: 0.9,
+          },
+          frameStyle: {
+            width: 280,
+            height: 280,
+            borderRadius: 20,
+          },
+          cornerStyle: {
+            color: '#00AAFF',
+            width: 4,
+            length: 30,
+          },
+          statusStyle: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            textColor: '#FFFFFF',
+            borderRadius: 12,
+            padding: 10,
+            fontWeight: '600',
+          },
+        }}
+      />
+
+      {scannedMember && (
+        <View style={styles.bottomContainer}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.memberText}>{scannedMember}</Text>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  bottomContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  infoContainer: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+  },
+  memberText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+});
+
+export default QRCodeScannerScreen;
+```
+
 :::tip Video Tutorial
 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
-  <a href="/docs/rn-scroll-to-hide/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+  <a href="/docs/rn-qrcode-pack/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
     <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
       <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
       <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>

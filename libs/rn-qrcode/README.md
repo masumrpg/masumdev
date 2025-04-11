@@ -179,6 +179,7 @@ Core properties for customizing the QR code appearance and behavior.
 | Prop                 | Type                     | Default | Description                  |
 | -------------------- | ------------------------ | ------- | ---------------------------- |
 | value                | string                                 | -       | The content to be encoded in the QR code. Can be any text, URL, or data string. |
+| variant              | QRCodeVariant              | 'BASIC' | The design variant of the QR code. Choose from predefined templates. |
 | size                 | number                                 | 256     | The size of the QR code in pixels. Determines both width and height. |
 | color                | string                                 | '#000'  | The main color of the QR code elements. Accepts any valid CSS color value. |
 | backgroundColor      | string                                 | 'transparent' | The background color behind the QR code. Set to 'transparent' for no background. |
@@ -190,6 +191,20 @@ Core properties for customizing the QR code appearance and behavior.
 | version              | QRCodeVersion                         | -       | Set a specific QR code version (1-40). Higher versions can store more data. |
 | maxVersion           | QRCodeVersion                         | -       | The maximum allowed QR code version. Useful for limiting complexity. |
 | errorCorrectionLevel | QRCodeErrorCorrectionLevel            | 'M'     | Error correction capability: L (7%), M (15%), Q (25%), or H (30%). |
+
+#### QRCodeVariant
+Choose from a range of predefined templates to quickly style your QR code.
+| Value | Description | Visual Effect |
+|-------|-------------|---------------|
+| 'BASIC' | Simple, basic QR code | Minimalistic, clean |
+| 'TRIANGLE' | Triangle-shaped QR code | Triangular, elegant |
+| 'HEART' | Heart-shaped QR code | Hearty, romantic |
+| 'DOT' | Dotted QR code pattern | Modern, minimalist |
+| 'WITH_LOGO' | QR code with centered logo | Professional, branded |
+| 'RAIN' | Rainy QR code with falling pieces | Rainy, atmospheric |
+| 'LINEAR_GRADIENT' | Linear gradient colored QR code | Smooth, colorful |
+| 'RADIAL_GRADIENT' | Radial gradient colored QR code | Dynamic, radiant |
+| 'IMAGE_BACKGROUND' | QR code with image background | Creative, unique |
 
 #### QRCodeGradientConfig
 Create beautiful gradient effects for your QR code with these advanced configuration options.
