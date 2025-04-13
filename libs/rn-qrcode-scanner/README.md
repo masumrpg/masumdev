@@ -2,14 +2,35 @@
 
 A powerful and easy-to-use QR code scanning and generation library for React Native applications.
 
+> **Note:** Currently, this library only supports Android platform. iOS support is under development and will be available in future releases.
+
 [![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
 
 <div style="display: flex; gap: 8px;">
   <img src="https://img.shields.io/npm/v/@masumdev%2Frn-qrcode-scanner" alt="npm version" />
   <img src="https://img.shields.io/npm/dt/@masumdev%2Frn-qrcode-scanner" alt="npm downloads" />
-  <img src="https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg" alt="platforms" />
+  <img src="https://img.shields.io/badge/platform-android-lightgrey.svg" alt="platform" />
   <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
 </div>
+
+
+## Demo
+
+<p align="center">
+  <img src="./android.gif" alt="QR Scanner Android" width="45%" height="auto" style="vertical-align: top;" />
+</p>
+
+## Youtube Tutorial
+Soon
+<!-- <p align="center">
+  <a href="https://www.youtube.com/watch?v=oBM0lh7tcyY" target="_blank">
+    <img src="https://img.youtube.com/vi/oBM0lh7tcyY/maxresdefault.jpg"
+      alt="React Native Toast Demo"
+      width="600"
+      style="border-radius: 10px"
+    />
+  </a>
+</p> -->
 
 ## Features
 
@@ -24,7 +45,7 @@ A powerful and easy-to-use QR code scanning and generation library for React Nat
 - ⏱️ Cooldown timer between scans
 - ✅ Custom validation support
 - 🌓 Theme support (light/dark mode)
-- ⚡ Optimized for both iOS and Android
+- ⚡ Optimized for Android platform
 
 ## Installation
 
