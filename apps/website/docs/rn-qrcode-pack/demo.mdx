@@ -5,9 +5,6 @@ sidebar_position: 1
 # Demo
 Demo of the React Native QRCode Pack @masumdev/rn-qrcode and @masumdev/rn-qrcode-scanner component on Android and iOS devices.
 
-:::danger iOS Support
-Please note that the QR Code Scanner (@masumdev/rn-qrcode-scanner) is currently only supported on Android devices. iOS support is under development and will be available in future releases.
-:::
 
 [![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-lightgrey?logo=github)](https://github.com/sponsors/masumrpg)
 
@@ -29,6 +26,12 @@ Please note that the QR Code Scanner (@masumdev/rn-qrcode-scanner) is currently 
   <img src="https://img.shields.io/badge/Expo-compatible-9cf.svg" alt="expo compatible" />
   <img src="https://img.shields.io/badge/New-2025-brightgreen" alt="New Feature" />
 </div>
+
+<br/>
+
+:::danger iOS & Expo Compatibility
+Please note that the QR Code Scanner (@masumdev/rn-qrcode-scanner) is currently only supported on Android devices due to compatibility issues with Expo's camera implementation on iOS. We are actively working on a solution and iOS support will be available in future releases.
+:::
 
 ## Table of Contents
 - [Overview](#overview)
@@ -107,10 +110,11 @@ function ScannerExample() {
 <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
   <div>
     <h3>Android Demo</h3>
-    {/* ![Android Demo](../../../../libs/rn-qrcode-scanner/android.gif) */}
+    ![Android Demo](../../../../libs/rn-qrcode-scanner/android.gif)
   </div>
   <div>
     <h3>iOS Demo</h3>
+    Unsupported on iOS at the moment
     {/* ![iOS Demo](../../../../libs/rn-qrcode-scanner/ios.gif) */}
   </div>
 </div>
