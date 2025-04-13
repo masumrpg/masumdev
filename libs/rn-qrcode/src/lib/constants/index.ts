@@ -53,10 +53,8 @@ export const QR_CODE_CONFIGS = {
     size: 250,
     logo: {
       source: require('../assets/logo.png'),
-      size: 50,
-      backgroundColor: 'white',
-      padding: 5,
-      borderRadius: 99,
+      size: 0.25,
+      backgroundColor: 'transparent',
     },
     version: 3,
     piece: {
@@ -64,18 +62,33 @@ export const QR_CODE_CONFIGS = {
     },
     eye: {
       topRight: {
-        shape: 'circle',
-        color: 'green',
+        shape: 'square',
+        radius: {
+          radiusOuter: 9,
+          radiusInner: 5,
+          radiusCenter: 3,
+        },
+        color: '#3178c6',
         innerColor: 'black',
       },
       bottomLeft: {
-        shape: 'circle',
-        color: 'green',
+        shape: 'square',
+        radius: {
+          radiusOuter: 9,
+          radiusInner: 5,
+          radiusCenter: 3,
+        },
+        color: '#3178c6',
         innerColor: 'black',
       },
       topLeft: {
-        shape: 'circle',
-        color: 'green',
+        shape: 'square',
+        radius: {
+          radiusOuter: 9,
+          radiusInner: 5,
+          radiusCenter: 3,
+        },
+        color: '#3178c6',
         innerColor: 'black',
       },
     },
@@ -312,7 +325,7 @@ export const QR_CODE_CONFIGS = {
       shape: 'dot',
     },
     imageClip: {
-      href: require('../assets/tiktok.png'),
+      href: require('../assets/logo.png'),
     },
   },
 };
