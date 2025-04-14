@@ -68,25 +68,25 @@ Make sure you have these peer dependencies installed in your React Native projec
 ### Installing peer dependencies
 
 ```bash
-npm install react react-native react-native-svg
+npm install react-native-svg
 ```
 
 or
 
 ```bash
-yarn add react react-native react-native-svg
+yarn add react-native-svg
 ```
 
 or
 
 ```bash
-bun add react react-native react-native-svg
+bun add react-native-svg
 ```
 
 or
 
 ```bash
-pnpm add react react-native react-native-svg
+pnpm add react-native-svg
 ```
 
 ### Installing @masumdev/rn-qrcode

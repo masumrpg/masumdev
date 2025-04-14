@@ -89,19 +89,19 @@ Add in `app.json`
 
 ### Installing peer dependencies
 ```bash
-npm install react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+npm install expo-camera expo-haptics expo-router @expo/vector-icons
 ```
 or
 ```bash
-yarn add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+yarn add expo-camera expo-haptics expo-router @expo/vector-icons
 ```
 or
 ```bash
-bun add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+bun add expo-camera expo-haptics expo-router @expo/vector-icons
 ```
 or
 ```bash
-pnpm add react react-native react-native-svg expo expo-camera expo-haptics expo-router @expo/vector-icons
+pnpm add expo-camera expo-haptics expo-router @expo/vector-icons
 ```
 
 ### Installing @masumdev/rn-qrcode-scanner
