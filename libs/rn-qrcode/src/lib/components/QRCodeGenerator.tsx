@@ -57,12 +57,23 @@ const QRCodeGeneratorSVG = (
         height={size}
         style={{ backgroundColor: 'transparent' }}
       >
-        <Rect width={size} height={size} fill={backgroundColor} />
+        <Rect width={size} height={size} fill={'transparent'} />
         {children}
       </Svg>
     );
 
-    return includeBackground ? <QRBgStyle width={size}>{svg}</QRBgStyle> : svg;
+    return includeBackground ? (
+      <QRBgStyle
+        width={size}
+        backgroundColor={
+          backgroundColor === 'transparent' ? 'white' : backgroundColor
+        }
+      >
+        {svg}
+      </QRBgStyle>
+    ) : (
+      svg
+    );
   };
 
   const renderEyes = (

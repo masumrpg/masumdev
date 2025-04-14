@@ -229,45 +229,6 @@ const CustomEyeQRCode = () => {
 };
 ```
 
-### Error Handling and Validation
-```tsx
-const QRCodeWithErrorHandling = () => {
-  const [error, setError] = useState<string | null>(null);
-  const [value, setValue] = useState('');
-
-  const validateQRContent = (content: string) => {
-    if (!content) {
-      setError('QR content cannot be empty');
-      return false;
-    }
-    if (content.length > 2048) {
-      setError('QR content exceeds maximum length');
-      return false;
-    }
-    setError(null);
-    return true;
-  };
-
-  return (
-    <View>
-      <TextInput
-        value={value}
-        onChangeText={setValue}
-        placeholder="Enter QR content"
-      />
-      {error && <Text style={{ color: 'red' }}>{error}</Text>}
-      {!error && value && (
-        <QRCode
-          value={value}
-          size={200}
-          errorCorrectionLevel="H"
-        />
-      )}
-    </View>
-  );
-};
-```
-
 ### Performance Optimization
 - Use appropriate error correction levels based on your use case
 - Implement caching for frequently used QR codes
@@ -308,141 +269,6 @@ import {
   QRCodeScanner,
   QRCodeValidator,
 } from '@masumdev/rn-qrcode-scanner';
-import { useState, useCallback } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
-
-const BatchScannerScreen = () => {
-  const [scannedCodes, setScannedCodes] = useState<string[]>([]);
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handleSuccessfulScan = useCallback((data: OnSuccessfulScanProps) => {
-    if (data.code && !isProcessing) {
-      setIsProcessing(true);
-
-      // Process the scanned code
-      if (!scannedCodes.includes(data.code)) {
-        setScannedCodes(prev => [...prev, data.code]);
-        Alert.alert('Success', `Added code: ${data.code}`);
-      } else {
-        Alert.alert('Duplicate', 'This code has already been scanned');
-      }
-
-      // Reset processing state after delay
-      setTimeout(() => setIsProcessing(false), 1500);
-    }
-  }, [scannedCodes, isProcessing]);
-
-  const validateQRCode: QRCodeValidator = useCallback((code: string) => {
-    // Complex validation logic
-    if (!code) {
-      return {
-        valid: false,
-        message: 'Empty QR code detected',
-      };
-    }
-
-    // Check for specific format
-    if (!/^[A-Z]{2}-\d{6}$/.test(code)) {
-      return {
-        valid: false,
-        message: 'Invalid code format. Expected: XX-123456',
-      };
-    }
-
-    return {
-      valid: true,
-      code,
-      message: 'Valid code format',
-    };
-  }, []);
-
-  return (
-    <View style={StyleSheet.absoluteFill}>
-      <QRCodeScanner
-        core={{
-          onSuccessfulScan: handleSuccessfulScan,
-          validate: validateQRCode,
-        }}
-        scanning={{
-          cooldownDuration: 1500,
-          scanningArea: {
-            tolerance: 60,
-          },
-        }}
-        uiControls={{
-          showControls: true,
-          showStatus: true,
-          showTorchButton: true,
-        }}
-        appearance={{
-          theme: 'dark',
-          overlayStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          },
-          frameStyle: {
-            width: 280,
-            height: 280,
-            borderRadius: 20,
-          },
-          cornerStyle: {
-            color: '#00FF00',
-            width: 4,
-            length: 30,
-          },
-          statusStyle: {
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            textColor: '#FFFFFF',
-            borderRadius: 12,
-            padding: 10,
-          },
-        }}
-      />
-
-      <View style={styles.scannedCodesContainer}>
-        <Text style={styles.headerText}>Scanned Codes ({scannedCodes.length})</Text>
-        {scannedCodes.map((code, index) => (
-          <Text key={index} style={styles.codeText}>{code}</Text>
-        ))}
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  scannedCodesContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    padding: 16,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '40%',
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#000',
-  },
-  codeText: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 4,
-  },
-});
-
-export default BatchScannerScreen;
-```
-
-### Customize the Scanner Screen
-```tsx
-import {
-  OnSuccessfulScanProps,
-  QRCodeScanner,
-  QRCodeValidator,
-} from '@masumdev/rn-qrcode-scanner';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -457,15 +283,15 @@ const QRCodeScannerScreen = () => {
   };
 
   const validateQRCode: QRCodeValidator = (code: string) => {
-    // Example: Only accept URLs starting with https://
-    // if (code.startsWith('https://')) {
-    //   return { valid: true, code };
-    // }
+    Example: Only accept URLs starting with https://
+    if (code.startsWith('https://')) {
+      return { valid: true, code };
+    }
 
-    // // Example: Accept product codes with specific format
-    // if (/^PROD-\d{6}$/.test(code)) {
-    //   return { valid: true, code };
-    // }
+    // Example: Accept product codes with specific format
+    if (/^PROD-\d{6}$/.test(code)) {
+      return { valid: true, code };
+    }
 
     if (code) {
       return { valid: true, code, message: 'Success' };

@@ -10,33 +10,173 @@ sidebar_position: 6
 The `QRCode` component provides a highly customizable interface for generating QR codes with various styles and configurations.
 :::
 
-### Core Properties
+### QRCodeProps
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| value | string | - | Required. The content to be encoded in the QR code |
-| variant | QRCodeVariant | 'BASIC' | Design variant of the QR code |
-| size | number | 256 | Size of the QR code in pixels |
-| version | QRCodeVersion | - | QR code version (1-40) |
-| errorCorrectionLevel | 'L' \| 'M' \| 'Q' \| 'H' | 'M' | Error correction capability |
+Core properties for customizing the QR code appearance and behavior.
 
-### Style Properties
+| Prop                 | Type                     | Default | Description                  |
+| -------------------- | ------------------------ | ------- | ---------------------------- |
+| value                | string                                 | -       | The content to be encoded in the QR code. Can be any text, URL, or data string. |
+| variant              | QRCodeVariant              | 'BASIC' | The design variant of the QR code. Choose from predefined templates. |
+| size                 | number                                 | 256     | The size of the QR code in pixels. Determines both width and height. |
+| color                | string                                 | '#000'  | The main color of the QR code elements. Accepts any valid CSS color value. |
+| backgroundColor      | string                                 | 'transparent' | The background color behind the QR code. Set to 'transparent' for no background. |
+| gradient             | QRCodeGradientConfig                  | -       | Advanced gradient configuration for creating beautiful color transitions. |
+| logo                 | LogoOptions                            | -       | Options for adding a centered logo image with customizable size and styling. |
+| piece                | PieceOptions                           | -       | Customize the shape and style of individual QR code elements. |
+| eye                  | EyeOptions                              | -       | Style the three corner finder patterns (eyes) of the QR code. |
+| includeBackground    | boolean                                | false   | When true, adds a wrapper background element behind the QR code. |
+| version              | QRCodeVersion                         | -       | Set a specific QR code version (1-40). Higher versions can store more data. |
+| maxVersion           | QRCodeVersion                         | -       | The maximum allowed QR code version. Useful for limiting complexity. |
+| imageClip            | ImageProps                            | -       | Props for adding an image as a clip mask to the QR code pattern, SVG Props |
+| errorCorrectionLevel | QRCodeErrorCorrectionLevel            | 'M'     | Error correction capability: L (7%), M (15%), Q (25%), or H (30%). |
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| color | string | '#000' | Main color of QR code elements |
-| backgroundColor | string | 'transparent' | Background color |
-| includeBackground | boolean | false | Add background wrapper |
-| gradient | QRCodeGradientConfig | - | Gradient configuration |
+#### QRCodeVariant
+Choose from a range of predefined templates to quickly style your QR code.
+| Value | Description | Visual Effect |
+|-------|-------------|---------------|
+| 'BASIC' | Simple, basic QR code | Minimalistic, clean |
+| 'TRIANGLE' | Triangle-shaped QR code | Triangular, elegant |
+| 'HEART' | Heart-shaped QR code | Hearty, romantic |
+| 'DOT' | Dotted QR code pattern | Modern, minimalist |
+| 'WITH_LOGO' | QR code with centered logo | Professional, branded |
+| 'RAIN' | Rainy QR code with falling pieces | Rainy, atmospheric |
+| 'LINEAR_GRADIENT' | Linear gradient colored QR code | Smooth, colorful |
+| 'RADIAL_GRADIENT' | Radial gradient colored QR code | Dynamic, radiant |
+| 'IMAGE_BACKGROUND' | QR code with image background | Creative, unique |
 
-### Advanced Properties
+#### QRCodeGradientConfig
+Create beautiful gradient effects for your QR code with these advanced configuration options.
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| logo | LogoOptions | - | Logo configuration |
-| piece | PieceOptions | - | Individual QR piece styling |
-| eye | EyeOptions | - | Corner eye pattern styling |
-| maxVersion | QRCodeVersion | - | Maximum QR code version |
+| Prop                 | Type                                     | Default    | Description                                                                 |
+| -------------------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------------- |
+| type                 | 'linear' \| 'radial'                    | 'linear'   | Choose between linear (straight line) or radial (circular) gradient patterns |
+| maskLogo             | boolean                                  | false      | When true, prevents the gradient from overlaying the logo area              |
+| direction            | GradientDirection                        | 'to-right' | Sets the flow direction for linear gradients (see GradientDirection below)   |
+| colors               | GradientColor[]                          | -          | Define multiple color stops with position and opacity for smooth transitions |
+| cx                   | string                                   | '50%'      | Center X position of radial gradient (e.g. '50%' for middle)               |
+| cy                   | string                                   | '50%'      | Center Y position of radial gradient (e.g. '50%' for middle)               |
+| r                    | string                                   | '50%'      | Radius of the radial gradient (e.g. '50%' for half of QR code size)        |
+| fx                   | string                                   | -          | Focal point X position for radial gradient (creates elliptical effects)    |
+| fy                   | string                                   | -          | Focal point Y position for radial gradient (creates elliptical effects)    |
+| x1                   | string                                   | '0%'       | Starting X position for linear gradient (e.g. '0%' for left edge)          |
+| y1                   | string                                   | '0%'       | Starting Y position for linear gradient (e.g. '0%' for top edge)           |
+| x2                   | string                                   | '100%'     | Ending X position for linear gradient (e.g. '100%' for right edge)         |
+| y2                   | string                                   | '0%'       | Ending Y position for linear gradient (e.g. '0%' for top edge)             |
+
+#### GradientDirection
+Specify the flow direction of linear gradients. This setting creates dynamic and visually appealing QR codes.
+
+| Value | Description | Visual Effect |
+|-------|-------------|---------------|
+| 'to-right' | Gradient flows from left to right | Horizontal transition →|
+| 'to-left' | Gradient flows from right to left | Horizontal transition ←|
+| 'to-bottom' | Gradient flows from top to bottom | Vertical transition ↓|
+| 'to-top' | Gradient flows from bottom to top | Vertical transition ↑|
+| 'to-bottom-right' | Gradient flows diagonally from top-left to bottom-right | Diagonal transition ↘|
+| 'to-bottom-left' | Gradient flows diagonally from top-right to bottom-left | Diagonal transition ↙|
+| 'to-top-right' | Gradient flows diagonally from bottom-left to top-right | Diagonal transition ↗|
+| 'to-top-left' | Gradient flows diagonally from bottom-right to top-left | Diagonal transition ↖|
+
+#### GradientColor
+Define smooth color transitions by specifying multiple color stops in your gradient. Each stop controls position, color, and transparency.
+
+| Prop | Type | Description | Example |
+|------|------|-------------|----------|
+| offset | string | Position of the color stop along the gradient (0-100%) | '0%' for start, '50%' for middle, '100%' for end |
+| color | string | Any valid color value (hex, rgb, named colors) | '#FF5733', 'rgb(255,87,51)', 'coral' |
+| opacity | number | Transparency level between 0 (invisible) and 1 (solid) | 0.8 for 80% opacity |
+
+#### LogoOptions
+Customize the appearance of a centered logo within your QR code. The logo can be an image from your local assets or a remote URL.
+
+| Prop              | Type      | Default | Description                                      | Notes |
+|--------------------|-----------|---------|--------------------------------------------------|--------|
+| source            | ImageSource | -       | Logo image source (local asset/URL)             | See ImageSource below for format details |
+| size              | number    | 20%     | Logo size as percentage of QR code width        | Keep between 10-30% for best scanning |
+| backgroundColor   | string    | 'white' | Background color behind the logo               | Use light colors for better contrast |
+| padding           | number    | 2       | Space around logo in pixels                    | Helps logo stand out from QR pattern |
+| borderRadius      | number    | 0       | Rounded corners for logo background            | Higher values create circular shapes |
+
+#### ImageSource
+Specify the source of your logo image. The component supports both local project assets and remote image URLs.
+
+| Type | Description | Example | Best Practices |
+|------|-------------|----------|----------------|
+| number | Local image from project assets | require('./assets/logo.png') | Use for bundled images |
+| string | Remote image from URL | 'https://example.com/logo.png' | Ensure reliable hosting |
+
+Important Guidelines:
+- Local assets: Use require() for images in your project directory
+- Remote URLs: Provide complete HTTPS URLs for security
+- Supported formats: PNG (recommended), JPG, JPEG
+- Optimal size: 50-100 pixels for best balance of clarity and scanning
+- File size: Keep under 50KB to maintain performance
+
+#### PieceOptions
+Customize the appearance of individual QR code elements (the small squares that make up the pattern).
+
+| Prop    | Type               | Default | Description                                      | Visual Impact |
+|---------|--------------------|---------|--------------------------------------------------|---------------|
+| shape   | 'square'\|'dot'\|'triangle'\|'heart'\|'rain' | 'square' | Shape of each QR code element | Changes overall pattern style |
+| size    | number             | 1       | Scale factor for element size (0.5-2.0)         | Affects density and readability |
+| spacing | number             | 0       | Gap between elements in pixels                   | Creates breathing room in pattern |
+
+#### EyeOptions
+Style the three finder patterns (eyes) in the corners of the QR code. These are crucial for scanner orientation.
+
+| Prop        | Type                              | Default | Description                                      | Impact |
+|-------------|-----------------------------------|---------|--------------------------------------------------|--------|
+| topLeft    | EyeShapeConfig                    | {}      | Style for top-left corner pattern                | Affects scanning reliability |
+| topRight   | EyeShapeConfig                    | {}      | Style for top-right corner pattern               | Must remain distinct |
+| bottomLeft | EyeShapeConfig                    | {}      | Style for bottom-left corner pattern             | Helps orientation |
+
+##### EyeShapeConfig
+Detailed configuration for each QR code eye (finder pattern).
+
+| Prop      | Type                             | Default | Description                                      | Best Practice |
+|-----------|----------------------------------|---------|--------------------------------------------------|---------------|
+| shape     | 'square'\|'circle'\|'rounded'    | 'square' | Overall shape of the eye pattern                | Keep distinctive |
+| size      | `{ center: number, inner: number }`| -       | Size multiplier for center and inner components  | Maintain proportions |
+| radius    | `{ radiusOuter: number, radiusInner: number, radiusCenter: number }` | - | Corner rounding for each part | Balance style with function |
+| color     | string                           | -       | Main color of the eye pattern                    | Use high contrast |
+| innerColor| string                           | -       | Color of the inner eye component                 | Complement main color |
+
+#### QRCodeVersion
+Control the size and data capacity of your QR code.
+
+| Type       | Description                              | Use Case |
+|------------|------------------------------------------|----------|
+| number (1-40) | QR code version number                    | Higher versions = more data, larger size |
+
+Version Guide:
+- 1-10: Best for short URLs and text (up to 174 characters)
+- 11-20: Medium content (up to 1,663 characters)
+- 21-40: Large content like vCards or detailed data
+
+#### ImageProps
+Advanced SVG image properties for creating custom QR code patterns.
+| Prop              | Type      | Default | Description                                      | Notes |
+|--------------------|-----------|---------|--------------------------------------------------|--------|
+| x                 | number    | -       | Horizontal position of the image                | Position from left |
+| y                 | number    | -       | Vertical position of the image                  | Position from top |
+| width             | number    | -       | Width of the image                             | In pixels or percentage |
+| height            | number    | -       | Height of the image                            | In pixels or percentage |
+| xlinkHref         | ImageSource \| string | - | Source of the image (legacy attribute)      | Use href instead |
+| href              | ImageSource \| string | - | Source of the image                         | Preferred over xlinkHref |
+| preserveAspectRatio | string  | -       | How image should scale (e.g., 'xMidYMid meet') | Controls image fitting |
+| opacity           | number    | 1       | Transparency of the image (0-1)                | 0 = transparent, 1 = solid |
+| onLoad            | function  | -       | Callback when image loads                      | Handles load completion |
+
+#### QRCodeErrorCorrectionLevel
+Balance between data redundancy and error correction capability.
+
+| Level | Error Correction Capacity | Best Used For |
+|-------|----------------------------|---------------|
+| L     | ~7% damage recovery        | Clean environments, maximum data capacity |
+| M     | ~15% damage recovery       | Standard use, good balance |
+| Q     | ~25% damage recovery       | Public display, some wear expected |
+| H     | ~30% damage recovery       | Outdoor use, high reliability needed |
 
 ## QRCodeScanner Component
 
@@ -44,66 +184,120 @@ The `QRCode` component provides a highly customizable interface for generating Q
 The `QRCodeScanner` component offers a feature-rich interface for QR code scanning with customizable UI and behavior.
 :::
 
-### Core Props
+### QRCodeScanner Props
+
+QRCodeScanner component accepts several prop groups that control different aspects of its functionality:
+
+#### Core Props
 
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
-| onSuccessfulScan | (state: OnSuccessfulScanProps) => void | Yes | Scan success callback |
-| validate | QRCodeValidator | No | Custom validation function |
+| onSuccessfulScan | (state: OnSuccessfulScanProps) => void | Yes | Callback function called when QR code is successfully scanned |
+| validate | QRCodeValidator | No | Custom validation function for scanned QR codes |
 
-### Scanning Props
+#### Scanning Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| cooldownDuration | number | 2000 | Time between scans (ms) |
-| scanningArea | ScanningAreaProps | - | Target area configuration |
+| cooldownDuration | number | 2000 | Time in milliseconds between scans |
+| scanningArea | ScanningAreaProps | - | Configure the scanning target area |
 
-### UI Controls Props
+##### ScanningAreaProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| targetX | number | - | X coordinate of scanning target |
+| targetY | number | - | Y coordinate of scanning target |
+| tolerance | number | - | Tolerance area around target coordinates |
+
+#### UI Controls Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | showControls | boolean | true | Show/hide control buttons |
-| showStatus | boolean | true | Show/hide status info |
-| showTorchButton | boolean | true | Show/hide torch control |
+| showStatus | boolean | true | Show/hide status information |
+| showTorchButton | boolean | true | Show/hide torch control button |
 
-### Appearance Props
+#### Appearance Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | theme | 'light' \| 'dark' | 'light' | UI theme selection |
-| overlayStyle | OverlayStyle | - | Scanner overlay styling |
-| frameStyle | FrameStyle | - | Scanner frame styling |
-| cornerStyle | CornerStyle | - | Corner markers styling |
-| statusStyle | StatusStyle | - | Status display styling |
+| overlayStyle | OverlayStyle | - | Customize scanner overlay |
+| frameStyle | FrameStyle | - | Customize scanner frame |
+| cornerStyle | CornerStyle | - | Customize corner markers |
+| controlButtonStyle | ControlButtonStyle | - | Customize control buttons |
+| statusStyle | StatusStyle | - | Customize status display |
 
-### Callbacks Props
+##### OverlayStyle
 
 | Prop | Type | Description |
 |------|------|-------------|
-| onTorchChange | (isOn: boolean) => void | Torch state change handler |
-| onScanStart | () => void | Scan start handler |
-| onScanEnd | () => void | Scan end handler |
-| onCooldownStart | (duration: number) => void | Cooldown start handler |
-| onCooldownEnd | () => void | Cooldown end handler |
+| backgroundColor | string | Background color of overlay |
+| opacity | number | Opacity level of overlay |
 
-### Haptics Props
+##### FrameStyle
+
+| Prop | Type | Description |
+|------|------|-------------|
+| width | number | Width of scanning frame |
+| height | number | Height of scanning frame |
+| borderRadius | number | Border radius of frame corners |
+
+##### CornerStyle
+
+| Prop | Type | Description |
+|------|------|-------------|
+| color | string | Color of corner markers |
+| width | number | Width of corner lines |
+| length | number | Length of corner lines |
+
+##### StatusStyle
+
+| Prop | Type | Description |
+|------|------|-------------|
+| backgroundColor | string | Background color of status box |
+| textColor | string | Color of status text |
+| borderRadius | number | Border radius of status box |
+| padding | number | Padding inside status box |
+| fontWeight | string | Font weight of status text |
+
+#### Callbacks Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| onTorchChange | (isOn: boolean) => void | Called when torch state changes |
+| onScanStart | () => void | Called when scanning starts |
+| onScanEnd | () => void | Called when scanning ends |
+| onCooldownStart | (duration: number) => void | Called when cooldown period starts |
+| onCooldownEnd | () => void | Called when cooldown period ends |
+
+#### Haptics Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| enableHapticFeedback | boolean | true | Enable/disable haptics |
-| customHapticFeedback | HapticFeedbackConfig | - | Custom haptics settings |
+| enableHapticFeedback | boolean | true | Enable/disable haptic feedback |
+| customHapticFeedback | `{ success?: NotificationFeedbackType; error?: NotificationFeedbackType }` | - | Custom haptic feedback settings |
 
-### Navigation Props
+#### Navigation Props
 
 | Prop | Type | Description |
 |------|------|-------------|
-| onBackPress | () => void | Back button handler |
+| onBackPress | () => void | Custom back button handler |
 | showBackButton | boolean | Show/hide back button |
-| backButtonIcon | string | Back button icon name |
+| backButtonIcon | string | Icon name for back button |
 
-### Custom Components Props
+#### Custom Components Props
 
 | Prop | Type | Description |
 |------|------|-------------|
-| renderCustomStatus | (statusInfo: StatusInfo) => React.ReactNode | Custom status renderer |
-| renderCustomControls | (controls: ControlsInfo) => React.ReactNode | Custom controls renderer |
+| renderCustomStatus | (statusInfo: StatusInfo) => React.ReactNode | Custom status component renderer |
+| renderCustomControls | (controls: ControlsInfo) => React.ReactNode | Custom controls component renderer |
+
+#### Custom Styles Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| containerStyle | ViewStyle | Custom styles for container |
+| statusBoxStyle | ViewStyle | Custom styles for status box |
+| statusTextStyle | TextStyle | Custom styles for status text |

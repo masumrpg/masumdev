@@ -3,11 +3,17 @@ import { StyleSheet, View } from 'react-native';
 type Props = {
   children: React.ReactNode;
   width: number;
+  backgroundColor: string;
 };
 
-const QRBgStyle = ({ children, width }: Props) => {
+const QRBgStyle = ({ children, width, backgroundColor }: Props) => {
   return (
-    <View style={[styles.card, { width: width + 50, height: width + 50 }]}>
+    <View
+      style={[
+        styles.card,
+        { width: width + 50, height: width + 50, backgroundColor },
+      ]}
+    >
       {children}
     </View>
   );
@@ -19,7 +25,6 @@ const styles = StyleSheet.create({
   card: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {

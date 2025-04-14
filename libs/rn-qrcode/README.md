@@ -209,6 +209,7 @@ Core properties for customizing the QR code appearance and behavior.
 | includeBackground    | boolean                                | false   | When true, adds a wrapper background element behind the QR code. |
 | version              | QRCodeVersion                         | -       | Set a specific QR code version (1-40). Higher versions can store more data. |
 | maxVersion           | QRCodeVersion                         | -       | The maximum allowed QR code version. Useful for limiting complexity. |
+| imageClip            | ImageProps                            | -       | Props for adding an image as a clip mask to the QR code pattern, SVG Props |
 | errorCorrectionLevel | QRCodeErrorCorrectionLevel            | 'M'     | Error correction capability: L (7%), M (15%), Q (25%), or H (30%). |
 
 #### QRCodeVariant
@@ -333,6 +334,20 @@ Version Guide:
 - 1-10: Best for short URLs and text (up to 174 characters)
 - 11-20: Medium content (up to 1,663 characters)
 - 21-40: Large content like vCards or detailed data
+
+#### ImageProps
+Advanced SVG image properties for creating custom QR code patterns.
+| Prop              | Type      | Default | Description                                      | Notes |
+|--------------------|-----------|---------|--------------------------------------------------|--------|
+| x                 | number    | -       | Horizontal position of the image                | Position from left |
+| y                 | number    | -       | Vertical position of the image                  | Position from top |
+| width             | number    | -       | Width of the image                             | In pixels or percentage |
+| height            | number    | -       | Height of the image                            | In pixels or percentage |
+| xlinkHref         | ImageSource \| string | - | Source of the image (legacy attribute)      | Use href instead |
+| href              | ImageSource \| string | - | Source of the image                         | Preferred over xlinkHref |
+| preserveAspectRatio | string  | -       | How image should scale (e.g., 'xMidYMid meet') | Controls image fitting |
+| opacity           | number    | 1       | Transparency of the image (0-1)                | 0 = transparent, 1 = solid |
+| onLoad            | function  | -       | Callback when image loads                      | Handles load completion |
 
 #### QRCodeErrorCorrectionLevel
 Balance between data redundancy and error correction capability.
