@@ -62,7 +62,7 @@ const QRCodeGeneratorSVG = (
       </Svg>
     );
 
-    return includeBackground ? <QRBgStyle>{svg}</QRBgStyle> : svg;
+    return includeBackground ? <QRBgStyle width={size}>{svg}</QRBgStyle> : svg;
   };
 
   const renderEyes = (

@@ -2,7 +2,6 @@ export const QR_CODE_CONFIGS = {
   BASIC: {
     value: 'Basic Qr Code',
     size: 250,
-    includeBackground: true,
   },
   TRIANGLE: {
     value: 'Triangle Qr Code',
@@ -16,7 +15,6 @@ export const QR_CODE_CONFIGS = {
       bottomLeft: { shape: 'triangle' },
     },
     size: 250,
-    includeBackground: true,
   },
   HEART: {
     value: 'Heart Qr Code',
@@ -31,7 +29,6 @@ export const QR_CODE_CONFIGS = {
       shape: 'heart',
       size: 1,
     },
-    includeBackground: true,
   },
   DOT: {
     value: 'Heart Qr Code',
@@ -46,7 +43,6 @@ export const QR_CODE_CONFIGS = {
       shape: 'dot',
       size: 1,
     },
-    includeBackground: true,
   },
   WITH_LOGO: {
     value: 'With Logo Qr Code',
