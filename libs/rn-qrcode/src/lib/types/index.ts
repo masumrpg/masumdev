@@ -198,7 +198,7 @@ type DotShapeProps = {
   asMask: boolean;
 };
 
-type QRCodeProps = Partial<QRCodeGeneratorProps> & {
+type QRCodeProps = QRCodeGeneratorProps & {
   variant?: keyof typeof QR_CODE_CONFIGS;
 };
 
