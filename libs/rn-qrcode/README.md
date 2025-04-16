@@ -19,16 +19,15 @@ A powerful and easy-to-use QR code scanning and generation library for React Nat
 </p>
 
 ## Youtube Tutorial
-Soon
-<!-- <p align="center">
-  <a href="https://www.youtube.com/watch?v=oBM0lh7tcyY" target="_blank">
-    <img src="https://img.youtube.com/vi/oBM0lh7tcyY/maxresdefault.jpg"
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=7tjg2kDvLdk" target="_blank">
+    <img src="https://img.youtube.com/vi/7tjg2kDvLdk/maxresdefault.jpg"
       alt="React Native Toast Demo"
       width="600"
       style="border-radius: 10px"
     />
   </a>
-</p> -->
+</p>
 
 ## Features
 
