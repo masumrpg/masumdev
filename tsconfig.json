@@ -20,6 +20,9 @@
     },
     {
       "path": "./libs/rn-qrcode-scanner"
+    },
+    {
+      "path": "./libs/rn-fab"
     }
   ]
 }

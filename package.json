@@ -85,6 +85,7 @@
     "libs/rn-scroll-to-hide",
     "libs/rn-bottom-sheet",
     "libs/rn-qrcode",
-    "libs/rn-qrcode-scanner"
+    "libs/rn-qrcode-scanner",
+    "libs/rn-fab"
   ]
 }

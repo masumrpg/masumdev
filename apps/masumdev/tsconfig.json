@@ -19,6 +19,9 @@
       "path": "../../libs/rn-qrcode-scanner/tsconfig.json"
     },
     {
+      "path": "../../libs/rn-fab/tsconfig.json"
+    },
+    {
       "path": "./tsconfig.app.json"
     }
   ]

@@ -9,6 +9,7 @@ import { Link } from 'expo-router';
 import {
   AlignVerticalJustifyEnd,
   Bell,
+  CirclePlus,
   GalleryHorizontal,
   QrCode,
 } from 'lucide-react-native';
@@ -38,6 +39,12 @@ export default function HomeScreen() {
       title: 'Rn Qr Code Pack',
       path: '/qrcode-pack',
       icon: <QrCode size={30} color={'black'} />,
+    },
+    {
+      id: 5,
+      title: 'Rn Fab',
+      path: '/fab',
+      icon: <CirclePlus size={30} color={'black'} />,
     },
   ];
 
