@@ -1,11 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   Easing,
   Extrapolation,
@@ -22,6 +16,7 @@ import { FabStackedProps } from '../types';
 const FabStacked = ({
   items,
   style,
+  containerStyle,
   theme = 'light',
   isOpen: setIsOpen,
   plusIcon,
@@ -108,7 +103,12 @@ const FabStacked = ({
       third: thirdAnimatedStyle,
       plus: plusAnimatedStyle,
     }),
-    [firstAnimatedStyle, secondAnimatedStyle, thirdAnimatedStyle, plusAnimatedStyle]
+    [
+      firstAnimatedStyle,
+      secondAnimatedStyle,
+      thirdAnimatedStyle,
+      plusAnimatedStyle,
+    ]
   );
 
   const sampleItems = useMemo(
@@ -123,7 +123,7 @@ const FabStacked = ({
   const backgroundStyle = theme === 'light' ? styles.lightBg : styles.darkBg;
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, containerStyle]}>
       {items.map((item, index) => (
         <Animated.View
           key={index}
@@ -149,7 +149,9 @@ const FabStacked = ({
         style={[styles.contentContainer, backgroundStyle]}
         onPress={handlePress}
       >
-        <Animated.View style={[styles.iconContainer, animatedStyles.plus, style]}>
+        <Animated.View
+          style={[styles.iconContainer, animatedStyles.plus, style]}
+        >
           {plusIcon || (
             <Image
               source={require('../assets/PlusIcon.png')}
@@ -161,7 +163,7 @@ const FabStacked = ({
           )}
         </Animated.View>
       </Pressable>
-    </View>
+    </Animated.View>
   );
 };
 

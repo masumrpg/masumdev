@@ -1,11 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   Easing,
   Extrapolation,
@@ -22,6 +16,7 @@ import { FabClusteredProps } from '../types';
 const FabClustered = ({
   items,
   style,
+  containerStyle,
   theme = 'light',
   isOpen: setIsOpen,
   plusIcon,
@@ -180,7 +175,7 @@ const FabClustered = ({
   const backgroundStyle = theme === 'light' ? styles.lightBg : styles.darkBg;
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, containerStyle]}>
       {items.map((item, index) => (
         <Animated.View
           key={index}
@@ -222,7 +217,7 @@ const FabClustered = ({
           )}
         </Animated.View>
       </Pressable>
-    </View>
+    </Animated.View>
   );
 };
 

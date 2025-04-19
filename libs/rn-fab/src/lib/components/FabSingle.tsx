@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import Animated from 'react-native-reanimated';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { FabSingleProps } from '../types';
 
 const FabSingle = ({
@@ -16,7 +12,7 @@ const FabSingle = ({
   const backgroundStyle = theme === 'light' ? styles.lightBg : styles.darkBg;
 
   return (
-    <View style={[styles.container, backgroundStyle, style]}>
+    <Animated.View style={[styles.container, backgroundStyle, style]}>
       <TouchableOpacity style={styles.touchable} onPress={onPress}>
         {component || (
           <Image
@@ -28,7 +24,7 @@ const FabSingle = ({
           />
         )}
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

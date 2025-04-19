@@ -20,6 +20,7 @@ import { FabExtendedProps } from '../types';
 const FabExtended = ({
   items,
   style,
+  containerStyle,
   theme = 'light',
   isOpen: setIsOpen,
   plusIcon,
@@ -73,7 +74,7 @@ const FabExtended = ({
   const backgroundStyle = theme === 'light' ? styles.lightBg : styles.darkBg;
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, containerStyle]}>
       <Animated.View
         style={[styles.fabContainer, animatedStyles.container, backgroundStyle]}
       >
@@ -114,7 +115,7 @@ const FabExtended = ({
           </TouchableOpacity>
         ))}
       </Animated.View>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -22,6 +22,8 @@ export type FabClusteredProps = {
   isOpen?: (prev: boolean) => void;
   /** Optional custom plus icon component */
   plusIcon?: React.ReactNode;
+  /** Custom styles for the FAB container */
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 /** Item type for Doted FAB variant */
@@ -44,6 +46,8 @@ export type FabDotedProps = {
   isOpen?: (prev: boolean) => void;
   /** Optional custom plus icon component */
   plusIcon?: React.ReactNode;
+  /** Custom styles for the FAB container */
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 /** Item type for Extended FAB variant with label */
@@ -68,6 +72,8 @@ export type FabExtendedProps = {
   isOpen?: (prev: boolean) => void;
   /** Optional custom plus icon component */
   plusIcon?: React.ReactNode;
+  /** Custom styles for the FAB container */
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 /** Props for Single FAB component */
@@ -102,6 +108,8 @@ export type FabStackedProps = {
   isOpen?: (prev: boolean) => void;
   /** Optional custom plus icon component */
   plusIcon?: React.ReactNode;
+  /** Custom styles for the FAB container */
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 /** Available FAB variants */

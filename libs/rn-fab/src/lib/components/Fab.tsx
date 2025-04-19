@@ -9,6 +9,103 @@ import FabExtended from './FabExtended';
 import FabSingle from './FabSingle';
 import FabStacked from './FabStacked';
 
+/**
+ * Floating Action Button (FAB) component for React Native
+ *
+ * @component
+ * @example
+ * // Single FAB
+ * <Fab
+ *   variant="single"
+ *   component={<YourIconComponent />} // Custom component for the icon
+ *   onPress={() => console.log('FAB pressed')}
+ *   theme="light" // or "dark"
+ *   style={{ // Optional custom styles
+ *     backgroundColor: '#007AFF'
+ *   }}
+ * />
+ *
+ * @example
+ * // Extended FAB with label
+ * <Fab
+ *   variant="extended"
+ *   items={[
+ *     {
+ *       component: <YourIconComponent />,
+ *       label: "Edit",
+ *       onPress: () => console.log('Edit pressed')
+ *     }
+ *   ]}
+ *   theme="light"
+ * />
+ *
+ * @example
+ * // Stacked FAB with multiple actions
+ * <Fab
+ *   variant="stacked"
+ *   items={[
+ *     {
+ *       component: <EditIcon />,
+ *       onPress: () => console.log('Edit')
+ *     },
+ *     {
+ *       component: <DeleteIcon />,
+ *       onPress: () => console.log('Delete')
+ *     }
+ *   ]}
+ *   theme="light"
+ *   style={{ backgroundColor: '#007AFF' }}
+ * />
+ *
+ * @example
+ * // Clustered FAB
+ * <Fab
+ *   variant="clustered"
+ *   items={[
+ *     {
+ *       component: <CameraIcon />,
+ *       label: "Camera",
+ *       onPress: () => console.log('Camera')
+ *     },
+ *     {
+ *       component: <GalleryIcon />,
+ *       label: "Gallery",
+ *       onPress: () => console.log('Gallery')
+ *     }
+ *   ]}
+ *   theme="light"
+ * />
+ *
+ * @example
+ * // Doted FAB with indicators
+ * <Fab
+ *   variant="doted"
+ *   items={[
+ *     {
+ *       component: <HomeIcon />,
+ *       onPress: () => console.log('Home')
+ *     },
+ *     {
+ *       component: <SettingsIcon />,
+ *       onPress: () => console.log('Settings')
+ *     }
+ *   ]}
+ *   theme="light"
+ *   isOpen={isOpen}
+ *   plusIcon={<CustomPlusIcon />} // Optional custom plus icon
+ * />
+ *
+ * @param {FabProps} props - The props for the FAB component
+ * @param {('single'|'extended'|'stacked'|'clustered'|'doted')} [props.variant='single'] - The variant of the FAB
+ * @param {ReactNode} [props.component] - Custom component for single variant
+ * @param {ReactNode} [props.plusIcon] - Custom plus icon for doted variant
+ * @param {Array<{ component: ReactNode, label?: string, onPress: () => void }>} [props.items] - Items for extended, stacked, clustered, and doted variants
+ * @param {() => void} [props.onPress] - Callback function for single variant
+ * @param {'light'|'dark'} [props.theme='light'] - Theme of the FAB
+ * @param {ViewStyle} [props.style] - Custom styles for the FAB
+ * @param {boolean} [props.isOpen] - Control open state for doted variant
+ * @returns {JSX.Element} Rendered FAB component
+ */
 const Fab = (props: FabProps) => {
   return (
     <View style={{ position: 'absolute', bottom: 0, right: 0, left: 0 }}>
