@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
-import Animated, {
+import {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   interpolate,
   Extrapolation,
+  SharedValue,
 } from 'react-native-reanimated';
 
 // Enum for component hide direction
@@ -80,7 +81,7 @@ interface UseHideOnScrollResult {
    * Shared value that can be used for additional logic
    * Contains the current Y scroll position
    */
-  scrollY: Animated.SharedValue<number>;
+  scrollY: SharedValue<number>;
 
   /**
    * Function to force show the component
