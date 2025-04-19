@@ -17,7 +17,7 @@ import FabStacked from './FabStacked';
  * // Single FAB
  * <Fab
  *   variant="single"
- *   component={<YourIconComponent />} // Custom component for the icon
+ *   icon={<YourIconComponent />} // Custom component for the icon
  *   onPress={() => console.log('FAB pressed')}
  *   theme="light" // or "dark"
  *   style={{ // Optional custom styles
@@ -31,7 +31,7 @@ import FabStacked from './FabStacked';
  *   variant="extended"
  *   items={[
  *     {
- *       component: <YourIconComponent />,
+ *       icon: <YourIconComponent />,
  *       label: "Edit",
  *       onPress: () => console.log('Edit pressed')
  *     }
@@ -45,11 +45,11 @@ import FabStacked from './FabStacked';
  *   variant="stacked"
  *   items={[
  *     {
- *       component: <EditIcon />,
+ *       icon: <EditIcon />,
  *       onPress: () => console.log('Edit')
  *     },
  *     {
- *       component: <DeleteIcon />,
+ *       icon: <DeleteIcon />,
  *       onPress: () => console.log('Delete')
  *     }
  *   ]}
@@ -63,12 +63,12 @@ import FabStacked from './FabStacked';
  *   variant="clustered"
  *   items={[
  *     {
- *       component: <CameraIcon />,
+ *       icon: <CameraIcon />,
  *       label: "Camera",
  *       onPress: () => console.log('Camera')
  *     },
  *     {
- *       component: <GalleryIcon />,
+ *       icon: <GalleryIcon />,
  *       label: "Gallery",
  *       onPress: () => console.log('Gallery')
  *     }
@@ -82,11 +82,11 @@ import FabStacked from './FabStacked';
  *   variant="doted"
  *   items={[
  *     {
- *       component: <HomeIcon />,
+ *       icon: <HomeIcon />,
  *       onPress: () => console.log('Home')
  *     },
  *     {
- *       component: <SettingsIcon />,
+ *       icon: <SettingsIcon />,
  *       onPress: () => console.log('Settings')
  *     }
  *   ]}
@@ -97,9 +97,9 @@ import FabStacked from './FabStacked';
  *
  * @param {FabProps} props - The props for the FAB component
  * @param {('single'|'extended'|'stacked'|'clustered'|'doted')} [props.variant='single'] - The variant of the FAB
- * @param {ReactNode} [props.component] - Custom component for single variant
+ * @param {ReactNode} [props.icon] - Custom icon for single variant
  * @param {ReactNode} [props.plusIcon] - Custom plus icon for doted variant
- * @param {Array<{ component: ReactNode, label?: string, onPress: () => void }>} [props.items] - Items for extended, stacked, clustered, and doted variants
+ * @param {Array<{ icon: ReactNode, label?: string, onPress: () => void }>} [props.items] - Items for extended, stacked, clustered, and doted variants
  * @param {() => void} [props.onPress] - Callback function for single variant
  * @param {'light'|'dark'} [props.theme='light'] - Theme of the FAB
  * @param {ViewStyle} [props.style] - Custom styles for the FAB

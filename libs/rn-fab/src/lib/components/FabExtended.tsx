@@ -103,7 +103,7 @@ const FabExtended = ({
               handlePress();
             }}
           >
-            <View style={styles.iconContainer}>{item?.component}</View>
+            <View style={styles.iconContainer}>{item?.icon}</View>
             <Text
               style={[
                 styles.text,
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fabContainer: {
-    backgroundColor: '#0F56B3',
     position: 'absolute',
     bottom: 30,
     right: 30,

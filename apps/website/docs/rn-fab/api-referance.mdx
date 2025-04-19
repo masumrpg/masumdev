@@ -1,0 +1,112 @@
+---
+sidebar_position: 6
+---
+
+# API Reference
+
+## FAB Component Variants
+
+The FAB component comes in five different variants to suit various use cases:
+
+### Single FAB
+
+:::tip Basic Usage
+A simple floating action button with a single action.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| icon | React.ReactNode | - | Optional icon component |
+| onPress | () => void | - | Optional callback function when FAB is pressed |
+| theme | 'dark' \| 'light' | 'light' | Theme variant for the FAB |
+| style | ViewStyle | - | Custom styles for the FAB |
+
+### Clustered FAB
+
+:::tip Multiple Actions with Labels
+Displays multiple actions in a clustered layout with labels.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | [FabClusteredItem, FabClusteredItem?, FabClusteredItem?] | - | Array of 1-3 FAB items |
+| theme | 'dark' \| 'light' | 'light' | Theme variant for the FAB |
+| style | ViewStyle | - | Custom styles for the FAB |
+| isOpen | (prev: boolean) => void | - | Callback for FAB open/close state changes |
+| plusIcon | React.ReactNode | - | Optional custom plus icon component |
+| containerStyle | ViewStyle | - | Custom styles for the FAB container |
+
+#### FabClusteredItem
+
+| Property | Type | Description |
+|----------|------|-------------|
+| icon | React.ReactNode | Icon component |
+| onPress | () => void | Callback function when FAB is pressed |
+| label | string | Label text to display next to the FAB |
+
+### Doted FAB
+
+:::tip Minimalist Multiple Actions
+Displays multiple actions in a dot-style layout.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | [FabDotedItem, FabDotedItem?, FabDotedItem?] | - | Array of 1-3 FAB items |
+| theme | 'dark' \| 'light' | 'light' | Theme variant for the FAB |
+| style | ViewStyle | - | Custom styles for the FAB |
+| isOpen | (prev: boolean) => void | - | Callback for FAB open/close state changes |
+| plusIcon | React.ReactNode | - | Optional custom plus icon component |
+| containerStyle | ViewStyle | - | Custom styles for the FAB container |
+
+#### FabDotedItem
+
+| Property | Type | Description |
+|----------|------|-------------|
+| icon | React.ReactNode | Icon component |
+| onPress | () => void | Callback function when FAB is pressed |
+
+### Extended FAB
+
+:::tip Actions with Labels
+Displays multiple actions with labels in an extended layout.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | [FabExtendedItem, FabExtendedItem?, FabExtendedItem?] | - | Array of 1-3 FAB items |
+| theme | 'dark' \| 'light' | 'light' | Theme variant for the FAB |
+| style | ViewStyle | - | Custom styles for the FAB |
+| isOpen | (prev: boolean) => void | - | Callback for FAB open/close state changes |
+| plusIcon | React.ReactNode | - | Optional custom plus icon component |
+| containerStyle | ViewStyle | - | Custom styles for the FAB container |
+
+#### FabExtendedItem
+
+| Property | Type | Description |
+|----------|------|-------------|
+| icon | React.ReactNode | Icon component |
+| onPress | () => void | Callback function when FAB is pressed |
+| label | string | Label text to display next to the FAB |
+
+### Stacked FAB
+
+:::tip Vertical Layout
+Displays multiple actions in a vertical stacked layout.
+:::
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | [FabStackedItem, FabStackedItem?, FabStackedItem?] | - | Array of 1-3 FAB items |
+| theme | 'dark' \| 'light' | 'light' | Theme variant for the FAB |
+| style | ViewStyle | - | Custom styles for the FAB |
+| isOpen | (prev: boolean) => void | - | Callback for FAB open/close state changes |
+| plusIcon | React.ReactNode | - | Optional custom plus icon component |
+| containerStyle | ViewStyle | - | Custom styles for the FAB container |
+
+#### FabStackedItem
+
+| Property | Type | Description |
+|----------|------|-------------|
+| icon | React.ReactNode | Icon component |
+| onPress | () => void | Callback function when FAB is pressed |

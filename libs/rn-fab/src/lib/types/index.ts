@@ -3,7 +3,7 @@ import { StyleProp, ViewStyle } from "react-native";
 /** Item type for Clustered FAB variant with label */
 type FabClusteredItem = {
   /** Icon component from lucide-react-native, react-native-vector-icons, or React Native <Image/> component */
-  component: React.ReactNode;
+  icon: React.ReactNode;
   /** Callback function when FAB is pressed */
   onPress: () => void;
   /** Label text to display next to the FAB */
@@ -29,7 +29,7 @@ export type FabClusteredProps = {
 /** Item type for Doted FAB variant */
 type FabDotedItem = {
   /** Icon component from lucide-react-native, react-native-vector-icons, or React Native <Image/> component */
-  component: React.ReactNode;
+  icon: React.ReactNode;
   /** Callback function when FAB is pressed */
   onPress: () => void;
 };
@@ -53,7 +53,7 @@ export type FabDotedProps = {
 /** Item type for Extended FAB variant with label */
 type FabExtendedItem = {
   /** Icon component from lucide-react-native, react-native-vector-icons, or React Native <Image/> component */
-  component: React.ReactNode;
+  icon: React.ReactNode;
   /** Callback function when FAB is pressed */
   onPress: () => void;
   /** Label text to display next to the FAB */
@@ -79,7 +79,7 @@ export type FabExtendedProps = {
 /** Props for Single FAB component */
 export type FabSingleProps = {
   /** Optional icon component from lucide-react-native, react-native-vector-icons, or React Native <Image/> component */
-  component?: React.ReactNode;
+  icon?: React.ReactNode;
   /** Optional callback function when FAB is pressed */
   onPress?: () => void;
   /** Theme variant for the FAB */
@@ -91,7 +91,7 @@ export type FabSingleProps = {
 /** Item type for Stacked FAB variant */
 type FabStackedItem = {
   /** Icon component from lucide-react-native, react-native-vector-icons, or React Native <Image/> component */
-  component: React.ReactNode;
+  icon: React.ReactNode;
   /** Callback function when FAB is pressed */
   onPress: () => void;
 };

@@ -50,7 +50,7 @@ export default function FabScreen() {
       {fabVariant === 'single' && (
         <Fab
           variant="single"
-          component={<Plus size={30} color={'white'} />}
+          icon={<Plus size={30} color={'white'} />}
           onPress={() => console.log('Pressed')}
         />
       )}
@@ -60,17 +60,17 @@ export default function FabScreen() {
           variant="clustered"
           items={[
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
@@ -83,15 +83,15 @@ export default function FabScreen() {
           variant="doted"
           items={[
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
           ]}
@@ -103,17 +103,17 @@ export default function FabScreen() {
           variant="extended"
           items={[
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
               label: 'Action 1',
             },
@@ -126,15 +126,15 @@ export default function FabScreen() {
           variant="stacked"
           items={[
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
             {
-              component: <BicepsFlexed size={30} color={'white'} />,
+              icon: <BicepsFlexed size={30} color={'white'} />,
               onPress: () => console.log('Pressed'),
             },
           ]}

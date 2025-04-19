@@ -191,13 +191,20 @@ const FabClustered = ({
               item?.onPress?.();
               handlePress();
             }}
-            style={[styles.iconContainer, plusIconStyle, style]}
+            style={[styles.iconContainer, style]}
           >
-            {item?.component}
+            {item?.icon}
           </TouchableOpacity>
-          <Animated.Text style={[styles.text, opacityStyle]}>
-            {item?.label}
-          </Animated.Text>
+          <TouchableOpacity
+            onPress={() => {
+              item?.onPress?.();
+              handlePress();
+            }}
+          >
+            <Animated.Text style={[styles.text, opacityStyle]}>
+              {item?.label}
+            </Animated.Text>
+          </TouchableOpacity>
         </Animated.View>
       ))}
 
@@ -226,7 +233,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    backgroundColor: '#0F56B3',
     position: 'absolute',
     bottom: 30,
     right: 30,

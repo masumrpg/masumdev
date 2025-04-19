@@ -4,7 +4,7 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { FabSingleProps } from '../types';
 
 const FabSingle = ({
-  component,
+  icon: component,
   onPress,
   style,
   theme = 'light',

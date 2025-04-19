@@ -1,0 +1,189 @@
+---
+sidebar_position: 5
+---
+
+# Tutorial
+
+🚀 Step-by-Step Guide to implementing Floating Action Button (FAB) in React Native using @masumdev/rn-fab.
+
+## Video Tutorial
+Watch our detailed video guide for a hands-on implementation walkthrough:
+
+Soon
+{/* <iframe width="100%" height="500" src="https://www.youtube.com/embed/udjs1sdXJTU" frameborder="0" allowfullscreen></iframe> */}
+
+## Features
+
+- 🚀 Multiple FAB variants (Single, Extended, Stacked, Clustered, Doted)
+- 🎨 Customizable themes (Light/Dark)
+- 🔄 Smooth animations and transitions
+- 📱 Works on iOS and Android
+- 📚 TypeScript support
+- 🎯 Support for custom icons and components
+- 🔍 Flexible styling
+
+## Prerequisites
+Before you begin, make sure you have:
+- React Native project set up
+- Basic understanding of React Native and TypeScript
+
+## Installation
+
+:::danger Peer Dependencies
+Make sure you have these peer dependencies installed in your React Native project. Using incompatible versions may cause unexpected behavior or crashes:
+
+```json
+{
+  "react": "^18.2.0",
+  "react-native": "^0.76.9",
+  "react-native-reanimated": "^3.16.7"
+}
+```
+:::
+
+1. Install the package using your preferred package manager:
+```bash
+npm install @masumdev/rn-fab
+# or
+yarn add @masumdev/rn-fab
+# or
+bun add @masumdev/rn-fab
+# or
+pnpm add @masumdev/rn-fab
+```
+
+2. Follow the [react-native-reanimated installation instructions](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+
+## Basic Implementation
+
+### Single FAB
+
+```tsx
+import { Fab } from '@masumdev/rn-fab';
+import { PlusIcon } from 'lucide-react-native'; // or any icon library
+
+export const SingleFAB = () => (
+  <Fab
+    variant="single"
+    icon={<PlusIcon color="white" />}
+    onPress={() => console.log('FAB pressed')}
+    theme="light"
+    style={{ backgroundColor: '#007AFF' }}
+  />
+);
+```
+
+### Extended FAB
+
+```tsx
+import { Fab } from '@masumdev/rn-fab';
+import { EditIcon } from 'lucide-react-native';
+
+export const ExtendedFAB = () => (
+  <Fab
+    variant="extended"
+    items={[
+      {
+        icon: <EditIcon color="white" />,
+        label: "Edit",
+        onPress: () => console.log('Edit pressed')
+      }
+    ]}
+    theme="light"
+  />
+);
+```
+
+## Advanced Usage
+
+### Stacked FAB
+
+```tsx
+import { Fab } from '@masumdev/rn-fab';
+import { EditIcon, TrashIcon } from 'lucide-react-native';
+
+export const StackedFAB = () => (
+  <Fab
+    variant="stacked"
+    items={[
+      {
+        icon: <EditIcon color="white" />,
+        onPress: () => console.log('Edit')
+      },
+      {
+        icon: <TrashIcon color="white" />,
+        onPress: () => console.log('Delete')
+      }
+    ]}
+    theme="light"
+  />
+);
+```
+
+### Clustered FAB
+
+```tsx
+import { Fab } from '@masumdev/rn-fab';
+import { CameraIcon, GalleryIcon } from 'lucide-react-native';
+
+const ClusteredFAB = () => (
+  <Fab
+    variant="clustered"
+    items={[
+      {
+        icon: <CameraIcon color="white" />,
+        label: "Camera",
+        onPress: () => console.log('Camera')
+      },
+      {
+        icon: <GalleryIcon color="white" />,
+        label: "Gallery",
+        onPress: () => console.log('Gallery')
+      }
+    ]}
+    theme="light"
+    isOpen={(open) => console.log('FAB is open:', open)}
+  />
+);
+```
+
+### Custom Styling
+
+:::tip Style Integration
+You can customize the appearance of your FAB components using the style and containerStyle props.
+:::
+
+```tsx
+import { Fab } from '@masumdev/rn-fab';
+import { StyleSheet } from 'react-native';
+
+const CustomStyledFAB = () => (
+  <Fab
+    variant="single"
+    icon={<PlusIcon color="white" />}
+    onPress={() => console.log('FAB pressed')}
+    theme="dark"
+    style={styles.fab}
+    containerStyle={styles.container}
+  />
+);
+
+const styles = StyleSheet.create({
+  fab: {
+    backgroundColor: '#6200EE',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+  },
+  container: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+  },
+});
+```

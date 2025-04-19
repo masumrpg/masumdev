@@ -5,7 +5,7 @@
     "type": "github",
     "url": "https://github.com/sponsors/masumrpg"
   },
-  "homepage": "https://docs.masum.cloud/docs/category/-bottom-sheet",
+  "homepage": "https://docs.masum.cloud/docs/category/-fab",
   "scripts": {
     "build": "bob build"
   },
@@ -52,10 +52,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/masumrpg/masumdev.git",
-    "directory": "libs/rn-bottom-sheet"
+    "directory": "libs/rn-fab"
   },
   "peerDependencies": {
-    "react": "~18.3.1",
-    "react-native": "0.76.3"
+    "react": "^18.3.1",
+    "react-native": "^0.76.9",
+    "react-native-reanimated": "^3.16.1"
   }
 }

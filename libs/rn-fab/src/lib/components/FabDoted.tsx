@@ -142,7 +142,7 @@ const FabDoted = ({
             }}
             style={[styles.iconContainer, animatedStyles.plus, style]}
           >
-            {item?.component}
+            {item?.icon}
           </TouchableOpacity>
         </Animated.View>
       ))}
@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    backgroundColor: '#0F56B3',
     position: 'absolute',
     bottom: 30,
     right: 30,

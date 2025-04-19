@@ -1,0 +1,187 @@
+---
+sidebar_position: 4
+---
+
+# Advanced Usage
+
+## Custom Configuration
+
+:::tip
+The FAB component supports various configuration options to customize appearance and behavior according to needs.
+:::
+
+```tsx
+// Single FAB with basic configuration
+<Fab
+  variant="single"
+  theme="light"
+  style={{
+    backgroundColor: '#5e72e4',
+    borderRadius: 28
+  }}
+  onPress={() => console.log('FAB pressed')}
+/>
+```
+
+## Programmatic Control
+
+:::tip
+You can programmatically control the FAB state using the isOpen callback.
+:::
+
+```tsx
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Fab } from '@masumdev/rn-fab';
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <View style={styles.container}>
+      <Fab
+        variant="stacked"
+        theme="light"
+        items={[
+          {
+            icon: require('./assets/edit.png'),
+            onPress: () => console.log('Edit pressed')
+          },
+          {
+            icon: require('./assets/share.png'),
+            onPress: () => console.log('Share pressed')
+          },
+          {
+            icon: require('./assets/delete.png'),
+            onPress: () => console.log('Delete pressed')
+          }
+        ]}
+        isOpen={(open) => {
+          setIsOpen(open);
+          console.log('FAB is open:', open);
+        }}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+});
+```
+
+## Multiple FAB Variants
+
+:::tip
+You can use multiple FAB variants on one screen to provide a richer user experience.
+:::
+
+```tsx
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Fab } from '@masumdev/rn-fab';
+
+export default function MultipleFabScreen() {
+  return (
+    <View style={styles.container}>
+      {/* Extended FAB */}
+      <Fab
+        variant="extended"
+        theme="light"
+        items={[{
+          icon: require('./assets/add.png'),
+          label: 'Create New',
+          onPress: () => console.log('Create pressed')
+        }]}
+        style={styles.extendedFab}
+      />
+
+      {/* Clustered FAB */}
+      <Fab
+        variant="clustered"
+        theme="light"
+        items={[
+          {
+            icon: require('./assets/camera.png'),
+            label: 'Take Photo',
+            onPress: () => console.log('Camera pressed')
+          },
+          {
+            icon: require('./assets/gallery.png'),
+            label: 'Gallery',
+            onPress: () => console.log('Gallery pressed')
+          },
+          {
+            icon: require('./assets/video.png'),
+            label: 'Record Video',
+            onPress: () => console.log('Video pressed')
+          }
+        ]}
+        style={styles.clusteredFab}
+      />
+
+      {/* Doted FAB */}
+      <Fab
+        variant="doted"
+        theme="dark"
+        items={[
+          {
+            icon: require('./assets/location.png'),
+            onPress: () => console.log('Location pressed')
+          },
+          {
+            icon: require('./assets/bluetooth.png'),
+            onPress: () => console.log('Bluetooth pressed')
+          },
+          {
+            icon: require('./assets/wifi.png'),
+            onPress: () => console.log('WiFi pressed')
+          }
+        ]}
+        style={styles.dotedFab}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0'
+  },
+  extendedFab: {
+    position: 'absolute',
+    top: 16,
+    right: 16
+  },
+  clusteredFab: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16
+  },
+  dotedFab: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16
+  }
+});
+```
+
+:::tip
+Ensure to manage the position of each FAB well to avoid overlapping.
+:::
+
+:::tip Video Tutorial
+Coming soon
+{/* <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', marginBottom: '20px' }}>
+  <a href="/docs/rn-fab/tutorial#video-tutorial" style={{ textDecoration: 'none' }}>
+    <div style={{ textAlign: 'center', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', width: '100%', background: 'rgb(187, 196, 185)' }}>
+      <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg" alt="Tutorial Thumbnail" style={{ width: '100%', borderRadius: '4px', marginBottom: '15px' }} />
+      <h3 style={{ margin: '0', color: 'rgb(38, 121, 67)' }}>Watch Implementation Guide</h3>
+      <p style={{ margin: '10px 0 0', color: 'rgb(51, 54, 51)' }}>Follow our step-by-step guide to integrate and customize the FAB component in your React Native application</p>
+    </div>
+  </a>
+</div> */}
+:::

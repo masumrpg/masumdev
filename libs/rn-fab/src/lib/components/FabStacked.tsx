@@ -140,7 +140,7 @@ const FabStacked = ({
             }}
             style={[styles.iconContainer, animatedStyles.plus, style]}
           >
-            {item?.component}
+            {item?.icon}
           </TouchableOpacity>
         </Animated.View>
       ))}
