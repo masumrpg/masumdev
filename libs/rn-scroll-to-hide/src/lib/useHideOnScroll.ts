@@ -21,6 +21,10 @@ enum ScrollDirection {
   DOWN = 'down',
 }
 
+type HideDirectionType = HideDirection | 'up' | 'down';
+
+type ScrollDirectionType = ScrollDirection | 'up' | 'down';
+
 interface UseHideOnScrollOptions {
   /**
    * Height of the component to be hidden (in pixels)
@@ -48,7 +52,7 @@ interface UseHideOnScrollOptions {
    * 'UP' - hide component when scrolling up
    * @default ScrollDirection.DOWN
    */
-  scrollDirection?: ScrollDirection;
+  scrollDirection?: ScrollDirectionType;
 
   /**
    * Direction in which the component will be hidden
@@ -57,7 +61,7 @@ interface UseHideOnScrollOptions {
    * Choose based on component position in layout
    * @default 'down'
    */
-  hideDirection?: HideDirection;
+  hideDirection?: HideDirectionType;
 }
 
 interface UseHideOnScrollResult {
@@ -109,16 +113,28 @@ interface UseHideOnScrollResult {
  *
  * @example
  * ```tsx
- * // Basic usage for header (hidden upward)
+ * // Basic usage for header (hidden upward) using enum
  * const { animatedStyle, onScroll } = useHideOnScroll({
  *   height: 60,
  *   hideDirection: HideDirection.UP
  * });
  *
- * // For tabbar (hidden downward)
+ * // Basic usage for header using string literal
+ * const { animatedStyle, onScroll } = useHideOnScroll({
+ *   height: 60,
+ *   hideDirection: 'up'
+ * });
+ *
+ * // For tabbar (hidden downward) using enum
  * const { animatedStyle, onScroll } = useHideOnScroll({
  *   height: 60,
  *   hideDirection: HideDirection.DOWN
+ * });
+ *
+ * // For tabbar using string literal
+ * const { animatedStyle, onScroll } = useHideOnScroll({
+ *   height: 60,
+ *   hideDirection: 'down'
  * });
  *
  * // Advanced usage with custom threshold and duration
@@ -126,14 +142,15 @@ interface UseHideOnScrollResult {
  *   height: 80,
  *   threshold: 20,        // More scroll needed to trigger
  *   duration: 200,        // Faster animation
- *   scrollDirection: ScrollDirection.UP, // Hide when scrolling up instead
- *   hideDirection: HideDirection.UP
+ *   scrollDirection: 'up', // Hide when scrolling up
+ *   hideDirection: 'up'
  * });
  *
- * // Advanced usage with visibility control based on other conditions
+ * // Advanced usage with visibility control and enum values
  * const { animatedStyle, onScroll, forceShow } = useHideOnScroll({
  *   height: 60,
- *   hideDirection: HideDirection.UP
+ *   hideDirection: HideDirection.UP,
+ *   scrollDirection: ScrollDirection.DOWN
  * });
  *
  * // Force show header when a specific tab is selected
@@ -163,6 +180,8 @@ interface UseHideOnScrollResult {
  * - The hook handles bounce effects at the top/bottom of scroll containers
  * - For complex layouts, you may need to adjust the threshold parameter
  * - Works with both ScrollView and FlatList components
+ * - Supports both enum values (HideDirection.UP/DOWN, ScrollDirection.UP/DOWN)
+ *   and string literals ('up'/'down') for direction props
  */
 const useHideOnScroll = (
   options: UseHideOnScrollOptions
@@ -271,4 +290,9 @@ const useHideOnScroll = (
 };
 
 export { useHideOnScroll, HideDirection, ScrollDirection };
-export type { UseHideOnScrollOptions, UseHideOnScrollResult };
+export type {
+  UseHideOnScrollOptions,
+  UseHideOnScrollResult,
+  HideDirectionType,
+  ScrollDirectionType,
+};
