@@ -1,6 +1,6 @@
 {
   "name": "@masumdev/rn-fab",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/masumrpg"
@@ -42,10 +42,17 @@
   ],
   "keywords": [
     "react-native",
-    "bottom-sheet",
-    "sheet",
-    "alert",
-    "mobile"
+    "fab",
+    "floating-action-button",
+    "floating-action-buttons",
+    "react-native-fab",
+    "react-native-floating-action-buttons",
+    "react-native-floating-action-button",
+    "react-native-floating-action-buttons-component",
+    "react-native-floating-action-buttons-component-library",
+    "react-native-floating-action-buttons-library",
+    "react-native-floating-action-buttons-library-component",
+    "react-native-floating-action-buttons-library-component-library"
   ],
   "author": "Masum",
   "license": "MIT",
