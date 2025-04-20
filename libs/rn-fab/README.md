@@ -20,16 +20,15 @@ A highly customizable Floating Action Button (FAB) component for React Native. S
 </p>
 
 ## Youtube Tutorial
-Soon
-<!-- <p align="center">
-  <a href="https://www.youtube.com/watch?v=udjs1sdXJTU" target="_blank">
-    <img src="https://img.youtube.com/vi/udjs1sdXJTU/maxresdefault.jpg"
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=qb8irKz0J8k" target="_blank">
+    <img src="https://img.youtube.com/vi/qb8irKz0J8k/maxresdefault.jpg"
       alt="React Native Toast Demo"
       width="600"
       style="border-radius: 10px"
     />
   </a>
-</p> -->
+</p>
 
 ## Features
 

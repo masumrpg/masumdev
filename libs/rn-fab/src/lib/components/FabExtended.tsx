@@ -76,7 +76,7 @@ const FabExtended = ({
   return (
     <Animated.View style={[styles.container, containerStyle]}>
       <Animated.View
-        style={[styles.fabContainer, animatedStyles.container, backgroundStyle]}
+        style={[styles.fabContainer, animatedStyles.container, backgroundStyle, style]}
       >
         <Pressable style={styles.iconContainer} onPress={handlePress}>
           <Animated.View

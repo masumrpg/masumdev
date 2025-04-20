@@ -184,6 +184,7 @@ const FabClustered = ({
             sampleItems[index].animate,
             sampleItems[index].width,
             backgroundStyle,
+            style,
           ]}
         >
           <TouchableOpacity

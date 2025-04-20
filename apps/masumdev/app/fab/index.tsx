@@ -58,6 +58,9 @@ export default function FabScreen() {
       {fabVariant === 'clustered' && (
         <Fab
           variant="clustered"
+          style={{
+            backgroundColor: 'pink',
+          }}
           items={[
             {
               icon: <BicepsFlexed size={30} color={'white'} />,
@@ -101,6 +104,10 @@ export default function FabScreen() {
       {fabVariant === 'extended' && (
         <Fab
           variant="extended"
+          theme='dark'
+          style={{
+            backgroundColor: 'pink',
+          }}
           items={[
             {
               icon: <BicepsFlexed size={30} color={'white'} />,
