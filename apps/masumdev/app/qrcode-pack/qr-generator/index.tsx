@@ -125,7 +125,7 @@ const QRCodeGeneratorScreen = () => {
 
           <QRCode
             ref={ref}
-            value="With Logo Qr Code"
+            value="https://masum.cloud"
             size={qrSize}
             logo={{
               source: require('../../../assets/logo.png'),

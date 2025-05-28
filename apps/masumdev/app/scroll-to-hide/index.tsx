@@ -1,180 +1,149 @@
 import {
+  SafeAreaView,
+  StyleSheet,
   View,
   Text,
-  StyleSheet,
-  ScrollView,
   StatusBar,
   Platform,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import {
-  useHideOnScroll,
-  HideDirection,
-  ScrollDirection,
-} from '@masumdev/rn-scroll-to-hide';
-import { Ionicons } from '@expo/vector-icons'; // Pastikan Anda memiliki @expo/vector-icons
+// Pastikan path impor ini benar sesuai dengan struktur proyek Anda
+// Jika rn-scroll-to-hide adalah library lokal di dalam 'libs'
+// dan terekspos melalui package.json atau tsconfig paths,
+// impornya mungkin seperti ini atau '@your-workspace/rn-scroll-to-hide'
+import { useHideOnScroll, HideDirection } from '@masumdev/rn-scroll-to-hide';
 
-const TABBAR_HEIGHT = 70;
-const HEADER_HEIGHT = 60;
-const STATUSBAR_HEIGHT =
-  Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 0;
+const HEADER_HEIGHT =
+  Platform.OS === 'ios' ? 80 : 60 + (StatusBar.currentHeight || 0);
+const FOOTER_HEIGHT = 70;
 
-export default function ScrollToHideScreen() {
-  const tabbar = useHideOnScroll({
-    height: TABBAR_HEIGHT,
-    duration: 300,
-    threshold: 5,
-    scrollDirection: ScrollDirection.DOWN,
-    hideDirection: HideDirection.DOWN,
-  });
+const generateDummyData = (count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: `item-${i}`,
+    text: `Item ${i + 1}`,
+  }));
+};
 
-  const header = useHideOnScroll({
-    height: HEADER_HEIGHT,
-    duration: 300,
-    threshold: 5,
-    scrollDirection: ScrollDirection.DOWN,
-    hideDirection: HideDirection.UP,
-  });
+const ScrollToHideScreen = () => {
+  const { animatedStyle: headerAnimatedStyle, onScroll: onScrollHeader } =
+    useHideOnScroll({
+      height: HEADER_HEIGHT,
+      hideDirection: HideDirection.UP, // Sembunyikan header ke atas
+      // Opsi tambahan bisa ditambahkan di sini jika perlu
+      // duration: 250,
+      // threshold: 15,
+    });
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    tabbar.onScroll(event);
-    header.onScroll(event);
+  const { animatedStyle: footerAnimatedStyle, onScroll: onScrollFooter } =
+    useHideOnScroll({
+      height: FOOTER_HEIGHT,
+      hideDirection: HideDirection.DOWN, // Sembunyikan footer ke bawah
+      scrollDirection: 'down', // Sembunyikan footer hanya saat scroll ke bawah
+    });
+
+  // Menggabungkan event onScroll jika Anda memiliki satu ScrollView
+  // yang mengontrol kedua elemen (header dan footer)
+  const handleScroll = (event: any) => {
+    onScrollHeader(event); // Panggil handler untuk header
+    onScrollFooter(event); // Panggil handler untuk footer
   };
 
-  const renderDummyContent = () => {
-    const items = [];
-    for (let i = 1; i <= 50; i++) {
-      items.push(
-        <View key={i} style={styles.item}>
-          <Text style={styles.itemText}>Item {i}</Text>
-        </View>
-      );
-    }
-    return items;
-  };
+  const dummyData = generateDummyData(30);
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.header, header.animatedStyle]}>
-        <View style={styles.statusBar} />
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>App Title</Text>
-        </View>
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F3F4F6" />
+
+      {/* Header */}
+      <Animated.View style={[styles.header, headerAnimatedStyle]}>
+        <Text style={styles.headerText}>Scroll To Hide Header</Text>
       </Animated.View>
 
-      <ScrollView
-        style={styles.content}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {renderDummyContent()}
-      </ScrollView>
+      {/* Konten Scroll */}
+      <Animated.FlatList // Menggunakan Animated.FlatList untuk performa lebih baik dengan list besar
+        data={dummyData}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.listItem}>
+            <Text style={styles.listItemText}>{item.text}</Text>
+          </View>
+        )}
+        onScroll={handleScroll} // Gunakan handler gabungan
+        scrollEventThrottle={16} // Penting untuk animasi yang mulus
+        contentContainerStyle={styles.scrollContentContainer}
+        style={styles.scrollView}
+      />
 
-      <Animated.View style={[styles.tabbar, tabbar.animatedStyle]}>
-        <View style={styles.tab}>
-          <Ionicons name="home-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Home</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="search-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Search</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="person-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Profile</Text>
-        </View>
-        <View style={styles.tab}>
-          <Ionicons name="settings-outline" size={24} color="#5e72e4" />
-          <Text style={styles.tabText}>Settings</Text>
-        </View>
+      {/* Footer */}
+      <Animated.View style={[styles.footer, footerAnimatedStyle]}>
+        <Text style={styles.footerText}>Sticky Footer</Text>
       </Animated.View>
-    </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#FFFFFF',
   },
   header: {
+    height: HEADER_HEIGHT,
+    backgroundColor: '#60A5FA', // Tailwind blue-400
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'white',
-    zIndex: 1000,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    zIndex: 10,
+    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight, // Untuk notch/status bar
+    borderBottomWidth: 1,
+    borderBottomColor: '#3B82F6', // Tailwind blue-500
   },
-  statusBar: {
-    height: STATUSBAR_HEIGHT,
-    backgroundColor: '#5e72e4',
-  },
-  headerContent: {
-    height: HEADER_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#5e72e4',
-  },
-  headerTitle: {
+  headerText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#FFFFFF',
   },
-  content: {
+  scrollView: {
     flex: 1,
-    paddingTop: HEADER_HEIGHT + STATUSBAR_HEIGHT,
   },
-  scrollContent: {
-    paddingBottom: TABBAR_HEIGHT + 20,
+  scrollContentContainer: {
+    paddingTop: HEADER_HEIGHT, // Memberi ruang untuk header yang fixed/absolute
+    paddingBottom: FOOTER_HEIGHT, // Memberi ruang untuk footer
+    paddingHorizontal: 16,
   },
-  item: {
-    backgroundColor: 'white',
-    marginHorizontal: 16,
-    marginVertical: 8,
+  listItem: {
+    backgroundColor: '#F3F4F6', // Tailwind gray-100
     padding: 20,
+    marginVertical: 8,
     borderRadius: 8,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    borderWidth: 1,
+    borderColor: '#E5E7EB', // Tailwind gray-200
   },
-  itemText: {
+  listItemText: {
     fontSize: 16,
+    color: '#1F2937', // Tailwind gray-800
   },
-  tabbar: {
+  footer: {
+    height: FOOTER_HEIGHT,
+    backgroundColor: '#34D399', // Tailwind green-400
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: TABBAR_HEIGHT,
-    backgroundColor: 'white',
-    flexDirection: 'row',
+    zIndex: 10,
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    borderTopColor: '#10B981', // Tailwind green-500
   },
-  tab: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabText: {
-    fontSize: 12,
-    color: '#5e72e4',
-    marginTop: 4,
+  footerText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
   },
 });
+
+export default ScrollToHideScreen;

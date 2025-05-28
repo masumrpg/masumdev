@@ -73,6 +73,7 @@ interface UseHideOnScrollResult {
     transform: {
       translateY: number;
     }[];
+    opacity: number;
   };
 
   /**
@@ -275,8 +276,17 @@ const useHideOnScroll = (
       Extrapolation.CLAMP
     );
 
+    // Opacity interpolation
+    const opacity = interpolate(
+      isVisible.value,
+      [0, 1],
+      [0, 1],
+      Extrapolation.CLAMP
+    );
+
     return {
       transform: [{ translateY }],
+      opacity, // Opacity to the returned style
     };
   });
 
