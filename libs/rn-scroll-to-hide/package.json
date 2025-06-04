@@ -68,12 +68,12 @@
     "directory": "libs/rn-scroll-to-hide"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-native": "^0.76.9",
-    "react-native-reanimated": "^3.16.1"
+    "react": ">=18.3.1",
+    "react-native": ">=0.76.9",
+    "react-native-reanimated": ">=3.16.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "typescript": "^5.7.2"
+    "@types/react": ">=18.3.12",
+    "typescript": ">=5.7.2"
   }
 }

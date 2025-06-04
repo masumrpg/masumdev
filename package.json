@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "bunx nx start masumdev",
+    "start": "bunx nx start example",
     "start:clear": "bun run nx reset && bun start --clear",
     "build": "bunx nx run-many --target=build --all"
   },
@@ -21,7 +21,7 @@
     "@mdx-js/react": "^3.1.0",
     "@react-native/assets": "^1.0.0",
     "@react-native/normalize-color": "^2.1.0",
-    "@react-navigation/native": "^7.1.9",
+    "@react-navigation/native": "^7.1.6",
     "@types/qrcode": "^1.5.5",
     "clsx": "^2.1.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -57,7 +57,7 @@
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
-    "@eslint/js": "^9.27.0",
+    "@eslint/js": "^9.28.0",
     "@expo/cli": "~0.21.8",
     "@nx/eslint": "20.6.1",
     "@nx/eslint-plugin": "20.6.1",
@@ -70,9 +70,9 @@
     "@testing-library/jest-native": "~5.4.3",
     "@testing-library/react-native": "~12.9.0",
     "@types/react": "~19.0.14",
-    "@typescript-eslint/type-utils": "^8.33.0",
+    "@typescript-eslint/type-utils": "^8.33.1",
     "babel-preset-expo": "~13.0.0",
-    "eslint": "^9.27.0",
+    "eslint": "^9.28.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-react": "7.35.0",
@@ -82,7 +82,7 @@
     "react-test-renderer": "~18.3.1",
     "tslib": "^2.8.1",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.33.0"
+    "typescript-eslint": "^8.33.1"
   },
   "workspaces": [
     "apps/*",

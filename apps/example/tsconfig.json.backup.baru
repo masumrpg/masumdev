@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "files": [],
-  "include": [],
+  "include": [
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ],
   "references": [
     {
       "path": "../../libs/rn-bottom-sheet/tsconfig.json"

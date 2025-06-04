@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import { Link } from 'expo-router';
+import { Href, Link } from 'expo-router';
 import {
   AlignVerticalJustifyEnd,
   Bell,
@@ -13,9 +13,19 @@ import {
   GalleryHorizontal,
   QrCode,
 } from 'lucide-react-native';
+import { ReactElement } from 'react';
+
+
+type LibraryItem = {
+  id: number;
+  title: string;
+  path: Href;
+  icon: ReactElement;
+};
+
 
 export default function HomeScreen() {
-  const listLibrary = [
+  const listLibrary: LibraryItem[] = [
     {
       id: 1,
       title: 'Rn Toast',

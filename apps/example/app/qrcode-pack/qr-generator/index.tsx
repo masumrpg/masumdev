@@ -103,9 +103,9 @@ const QRCodeGeneratorScreen = () => {
         <View>
           <QRTitle title="Dot Qr Code" />
           <QRCode
-            value="Heart Qr Code"
+            value="https://masum.cloud"
             size={qrSize}
-            color="#483D8B"
+            color="#4193D0"
             eye={{
               topLeft: { shape: 'dot' },
               topRight: { shape: 'dot' },
@@ -128,7 +128,7 @@ const QRCodeGeneratorScreen = () => {
             value="https://masum.cloud"
             size={qrSize}
             logo={{
-              source: require('../../../assets/logo.png'),
+              source: require('../../../assets/images/logo.png'),
               size: 50,
               backgroundColor: 'white',
               padding: 5,
@@ -222,7 +222,7 @@ const QRCodeGeneratorScreen = () => {
             includeBackground
             version={3}
             logo={{
-              source: require('../../../assets/logo.png'),
+              source: require('../../../assets/images/logo.png'),
               size: 0.25,
               backgroundColor: 'white',
               padding: 7,
@@ -409,7 +409,7 @@ const QRCodeGeneratorScreen = () => {
               // size: 1.1,
             }}
             imageClip={{
-              href: require('../../../assets/tiktok.png'),
+              href: require('../../../assets/images/tiktok.png'),
             }}
           />
         </View>
@@ -444,7 +444,7 @@ const QRCodeGeneratorScreen = () => {
               },
             }}
             imageClip={{
-              href: require('../../../assets/logo.png'),
+              href: require('../../../assets/images/logo.png'),
             }}
           />
         </View>
