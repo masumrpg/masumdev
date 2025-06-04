@@ -50,8 +50,7 @@
     "react-native-svg": "15.11.2",
     "react-native-svg-transformer": "~1.5.1",
     "react-native-view-shot": "^4.0.3",
-    "react-native-web": "^0.20.0",
-    "use-latest-callback": "^0.2.3"
+    "react-native-web": "^0.20.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
