@@ -5,7 +5,8 @@
   "scripts": {
     "start": "bunx nx start example",
     "start:clear": "bun run nx reset && bun start --clear",
-    "build": "bunx nx run-many --target=build --all"
+    "build": "bunx nx run-many --target=build --all",
+    "generate:lib": "./tools/scripts/generate-lib.sh"
   },
   "private": true,
   "dependencies": {
