@@ -9,8 +9,10 @@ import { Href, Link } from 'expo-router';
 import {
   AlignVerticalJustifyEnd,
   Bell,
+  CardSim,
   CirclePlus,
   GalleryHorizontal,
+  LetterText,
   Palette,
   QrCode,
 } from 'lucide-react-native';
@@ -60,6 +62,18 @@ export default function HomeScreen() {
       title: 'Rn Theme',
       path: '/theme',
       icon: <Palette size={30} color={'black'} />,
+    },
+    {
+      id: 7,
+      title: 'Card',
+      path: '/card',
+      icon: <CardSim size={30} color={'black'} />,
+    },
+    {
+      id: 8,
+      title: 'Typography',
+      path: '/typography',
+      icon: <LetterText size={30} color={'black'} />,
     },
   ];
 

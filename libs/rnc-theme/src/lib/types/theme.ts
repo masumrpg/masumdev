@@ -1,3 +1,5 @@
+import { TextStyle } from "react-native";
+
 export interface ThemeColors {
   primary: string;
   secondary: string;
@@ -41,11 +43,11 @@ export interface Theme {
     xl: number;
   };
   typography: {
-    small: { fontSize: number; lineHeight: number };
-    body: { fontSize: number; lineHeight: number };
-    subtitle: { fontSize: number; lineHeight: number };
-    title: { fontSize: number; lineHeight: number };
-    heading: { fontSize: number; lineHeight: number };
+    small: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
+    body: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
+    subtitle: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
+    title: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
+    heading: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
   };
 }
 
