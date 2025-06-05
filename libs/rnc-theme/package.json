@@ -1,11 +1,11 @@
 {
-  "name": "{{PACKAGE_NAME}}",
+  "name": "rnc-theme",
   "version": "0.0.1",
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/masumrpg"
   },
-  "homepage": "https://docs.masum.cloud/docs/category/-{{PACKAGE_NAME}}",
+  "homepage": "https://docs.masum.cloud/docs/category/-rnc-theme",
   "scripts": {
     "build": "bob build"
   },
@@ -42,7 +42,7 @@
   ],
   "keywords": [
     "react-native",
-    "{{PACKAGE_NAME}}",
+    "rnc-theme",
     "mobile"
   ],
   "author": "Masum",
@@ -58,6 +58,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/masumrpg/masumdev.git",
-    "directory": "libs/{{PACKAGE_NAME}}"
+    "directory": "libs/rnc-theme"
   }
 }
