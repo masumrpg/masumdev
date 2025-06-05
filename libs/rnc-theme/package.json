@@ -48,11 +48,11 @@
   "author": "Masum",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=18",
-    "react-native": ">=0.76"
+    "react": ">=19",
+    "react-native": ">=0.79.3"
   },
   "devDependencies": {
-    "@types/react": ">=18",
+    "@types/react": ">=19",
     "typescript": ">=5"
   },
   "repository": {

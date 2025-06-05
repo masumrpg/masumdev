@@ -4,9 +4,6 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/masumdev"
-    },
-    {
       "path": "./libs/rn-toast"
     },
     {
