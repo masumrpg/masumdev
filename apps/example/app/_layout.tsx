@@ -63,39 +63,7 @@ function RootLayoutNav() {
           .join(' ');
 
   return (
-    <MyTheme
-      defaultTheme="system"
-      customLightTheme={{
-        colors: {
-          primary: '#007AFF',
-          secondary: '',
-          background: '',
-          surface: '',
-          text: '',
-          textSecondary: '',
-          border: '',
-          error: '',
-          warning: '',
-          success: '',
-          info: '',
-        },
-      }}
-      customDarkTheme={{
-        colors: {
-          primary: '#0A84FF',
-          secondary: '',
-          background: '',
-          surface: '',
-          text: '',
-          textSecondary: '',
-          border: '',
-          error: '',
-          warning: '',
-          success: '',
-          info: '',
-        },
-      }}
-    >
+    <MyTheme defaultTheme="system">
       <StatusBar style={pathName === '/scroll-to-hide' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
