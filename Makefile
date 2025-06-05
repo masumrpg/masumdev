@@ -6,6 +6,13 @@ expo-lib:
 		exit 1; \
 	fi
 	bunx nx g @nx/expo:lib libs/$(name) $(name) --importPath=$(name)
+	@echo "Applying package.json template..."
+	@if [ -f "tools/templates/package.json.template" ]; then \
+		sed 's/{{PACKAGE_NAME}}/$(name)/g' tools/templates/package.json.template > libs/$(name)/package.json; \
+		echo "✅ Applied package.json template for $(name)"; \
+	else \
+		echo "⚠️  Warning: tools/templates/package.json.template not found, using default"; \
+	fi
 
 # Build all libraries
 build-all:
@@ -22,7 +29,7 @@ start-clean:
 # Show help
 help:
 	@echo "Available commands:"
-	@echo "  make expo-lib name=<package-name>  - Generate new library"
+	@echo "  make expo-lib name=<package-name>  - Generate new library with template"
 	@echo "  make build-all                         - Build all libraries"
 	@echo "  make start                             - Start example app"
 	@echo "  make start-clean                       - Clean and start app"
