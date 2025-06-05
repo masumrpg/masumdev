@@ -3,7 +3,7 @@ import { useFonts } from 'expo-font';
 import { Stack, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { ThemeProvider } from 'rnc-theme';
+import { ThemeProvider as MyTheme } from 'rnc-theme';
 import 'react-native-reanimated';
 
 import { StatusBar } from 'expo-status-bar';
@@ -63,11 +63,11 @@ function RootLayoutNav() {
           .join(' ');
 
   return (
-    <ThemeProvider
+    <MyTheme
       defaultTheme="system"
       customLightTheme={{
         colors: {
-          primary: '#000000',
+          primary: '#007AFF',
           secondary: '',
           background: '',
           surface: '',
@@ -77,7 +77,7 @@ function RootLayoutNav() {
           error: '',
           warning: '',
           success: '',
-          info: ''
+          info: '',
         },
       }}
       customDarkTheme={{
@@ -92,7 +92,7 @@ function RootLayoutNav() {
           error: '',
           warning: '',
           success: '',
-          info: ''
+          info: '',
         },
       }}
     >
@@ -107,6 +107,6 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="index" />
       </Stack>
-    </ThemeProvider>
+    </MyTheme>
   );
 }
