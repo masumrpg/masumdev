@@ -164,6 +164,8 @@ const ThemeScreen: React.FC = () => {
     Alert.alert('Notifikasi', messages[type]);
   };
 
+  console.log(theme);
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar
