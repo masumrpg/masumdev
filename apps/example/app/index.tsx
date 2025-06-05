@@ -12,9 +12,11 @@ import {
   CardSim,
   CirclePlus,
   GalleryHorizontal,
+  LayoutDashboard,
   LetterText,
   Palette,
   QrCode,
+  TextCursorInput,
 } from 'lucide-react-native';
 import { ReactElement } from 'react';
 
@@ -74,6 +76,18 @@ export default function HomeScreen() {
       title: 'Typography',
       path: '/typography',
       icon: <LetterText size={30} color={'black'} />,
+    },
+    {
+      id: 9,
+      title: 'Input',
+      path: '/input',
+      icon: <TextCursorInput size={30} color={'black'} />,
+    },
+    {
+      id: 10,
+      title: 'Layout',
+      path: '/layout',
+      icon: <LayoutDashboard size={30} color={'black'} />,
     },
   ];
 
