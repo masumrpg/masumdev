@@ -1,16 +1,11 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { ThemeProvider } from 'rnc-theme';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
 
 const nonHeaderPatshs = ['/scroll-to-hide', '/qrcode-pack/qr-scanner'];
@@ -53,7 +48,6 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
   const pathName = usePathname();
 
   const isNonHeaderPath = nonHeaderPatshs.includes(pathName);
@@ -69,7 +63,39 @@ function RootLayoutNav() {
           .join(' ');
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider
+      defaultTheme="system"
+      customLightTheme={{
+        colors: {
+          primary: '#000000',
+          secondary: '',
+          background: '',
+          surface: '',
+          text: '',
+          textSecondary: '',
+          border: '',
+          error: '',
+          warning: '',
+          success: '',
+          info: ''
+        },
+      }}
+      customDarkTheme={{
+        colors: {
+          primary: '#0A84FF',
+          secondary: '',
+          background: '',
+          surface: '',
+          text: '',
+          textSecondary: '',
+          border: '',
+          error: '',
+          warning: '',
+          success: '',
+          info: ''
+        },
+      }}
+    >
       <StatusBar style={pathName === '/scroll-to-hide' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{

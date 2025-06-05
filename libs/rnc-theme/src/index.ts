@@ -1,1 +1,1 @@
-export * from './lib/rnc-theme';
+export * from './lib';

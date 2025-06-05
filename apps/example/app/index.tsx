@@ -11,10 +11,10 @@ import {
   Bell,
   CirclePlus,
   GalleryHorizontal,
+  Palette,
   QrCode,
 } from 'lucide-react-native';
 import { ReactElement } from 'react';
-
 
 type LibraryItem = {
   id: number;
@@ -22,7 +22,6 @@ type LibraryItem = {
   path: Href;
   icon: ReactElement;
 };
-
 
 export default function HomeScreen() {
   const listLibrary: LibraryItem[] = [
@@ -55,6 +54,12 @@ export default function HomeScreen() {
       title: 'Rn Fab',
       path: '/fab',
       icon: <CirclePlus size={30} color={'black'} />,
+    },
+    {
+      id: 6,
+      title: 'Rn Theme',
+      path: '/theme',
+      icon: <Palette size={30} color={'black'} />,
     },
   ];
 
