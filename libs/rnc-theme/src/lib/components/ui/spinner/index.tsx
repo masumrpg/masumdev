@@ -1,5 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Animated, ViewStyle } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ViewStyle } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  cancelAnimation,
+} from 'react-native-reanimated';
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
@@ -10,6 +17,8 @@ interface SpinnerProps {
   color?: string | keyof Theme['colors'];
   style?: ViewStyle;
   thickness?: number;
+  duration?: number;
+  animating?: boolean;
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
@@ -17,30 +26,49 @@ const Spinner: React.FC<SpinnerProps> = ({
   color,
   style,
   thickness = 2,
+  duration = 1000,
+  animating = true,
   ...props
 }) => {
   const { theme } = useTheme();
   const styles = useThemedStyles(createSpinnerStyles);
-  const spinValue = useRef(new Animated.Value(0)).current;
+  const rotation = useSharedValue(0);
 
   useEffect(() => {
-    const spin = () => {
-      spinValue.setValue(0);
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }).start(() => spin());
+    if (animating) {
+      // Reset rotation to 0 before starting animation
+      rotation.value = 0;
+
+      // Start infinite rotation animation
+      rotation.value = withRepeat(
+        withTiming(360, {
+          duration,
+        }),
+        -1, // infinite repeat
+        false // don't reverse
+      );
+    } else {
+      // Cancel animation when not animating
+      cancelAnimation(rotation);
+    }
+
+    // Cleanup function to cancel animation on unmount
+    return () => {
+      cancelAnimation(rotation);
     };
-    spin();
-  }, [spinValue]);
+  }, [animating, duration, rotation]);
 
-  const spinRotation = spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          rotate: `${rotation.value}deg`,
+        },
+      ],
+    };
+  }, []);
 
-  const getSize = () => {
+  const getSize = (): number => {
     if (typeof size === 'number') return size;
     switch (size) {
       case 'sm':
@@ -56,6 +84,19 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   const spinnerSize = getSize();
   const spinnerColor = resolveColor(theme, color, theme.colors.primary);
+  const borderRadius = spinnerSize / 2;
+
+  // Create gradient effect for better visual appeal
+  const gradientColors = {
+    transparent: `${spinnerColor}00`,
+    light: `${spinnerColor}40`,
+    medium: `${spinnerColor}80`,
+    full: spinnerColor,
+  };
+
+  if (!animating) {
+    return null;
+  }
 
   return (
     <View style={[styles.container, style]} {...props}>
@@ -65,12 +106,14 @@ const Spinner: React.FC<SpinnerProps> = ({
           {
             width: spinnerSize,
             height: spinnerSize,
+            borderRadius,
             borderWidth: thickness,
-            borderColor: `${spinnerColor}20`,
-            borderTopColor: spinnerColor,
-            borderRadius: spinnerSize / 2,
-            transform: [{ rotate: spinRotation }],
+            borderTopColor: gradientColors.full,
+            borderRightColor: gradientColors.medium,
+            borderBottomColor: gradientColors.light,
+            borderLeftColor: gradientColors.transparent,
           },
+          animatedStyle,
         ]}
       />
     </View>
@@ -87,7 +130,4 @@ const createSpinnerStyles = (_: Theme) => ({
   },
 });
 
-export {
-  Spinner,
-  type SpinnerProps,
-};
+export { Spinner, type SpinnerProps };

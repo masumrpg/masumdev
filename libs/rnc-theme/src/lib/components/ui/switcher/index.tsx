@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  ViewStyle,
-  Animated,
-  Easing,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { TouchableOpacity, ViewStyle } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  interpolate,
+  interpolateColor,
+  runOnJS,
+} from 'react-native-reanimated';
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
@@ -34,8 +36,11 @@ interface SwitcherLabelProps {
   style?: ViewStyle;
 }
 
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
+
 const Switcher: React.FC<SwitcherProps> = ({
-  value, // ✅ State sekarang wajib dari luar
+  value,
   onValueChange,
   size = 'md',
   variant = 'default',
@@ -44,86 +49,126 @@ const Switcher: React.FC<SwitcherProps> = ({
   trackColor,
   thumbColor,
   animated = true,
-  ...props
 }) => {
   const { theme } = useTheme();
   const styles = useThemedStyles(createSwitcherStyles);
-  const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
 
-  // ✅ Sync animatedValue dengan prop value dari luar
+  // Shared values for animations
+  const switchValue = useSharedValue(value ? 1 : 0);
+  const pressScale = useSharedValue(1);
+  const thumbScale = useSharedValue(1);
+
+  // Update animation when value prop changes
   useEffect(() => {
     if (animated) {
-      Animated.timing(animatedValue, {
-        toValue: value ? 1 : 0,
-        duration: 200,
-        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-        useNativeDriver: false,
-      }).start();
+      switchValue.value = withSpring(value ? 1 : 0, {
+        damping: 15,
+        stiffness: 150,
+        mass: 1,
+      });
     } else {
-      animatedValue.setValue(value ? 1 : 0);
+      switchValue.value = value ? 1 : 0;
     }
-  }, [value, animated, animatedValue]);
+  }, [value, animated, switchValue]);
 
-  const handlePress = () => {
-    if (disabled || !onValueChange) return;
-    onValueChange(!value); // ✅ Hanya trigger callback, state dikelola parent
-  };
+  // Get colors based on variant and state
+  const getTrackColors = () => {
+    const offColor = trackColor?.false || theme.colors.border;
+    let onColor = trackColor?.true;
 
-  // ✅ Fungsi warna yang selalu sinkron dengan prop value
-  const getTrackColor = () => {
-    if (disabled) return theme.colors.border;
-    if (value) {
-      if (trackColor?.true) return trackColor.true;
+    if (!onColor) {
       switch (variant) {
-        case 'primary': return theme.colors.primary;
-        case 'success': return theme.colors.success;
-        case 'warning': return theme.colors.warning;
-        case 'error': return theme.colors.error;
-        default: return theme.colors.primary;
+        case 'primary':
+          onColor = theme.colors.primary;
+          break;
+        case 'success':
+          onColor = theme.colors.success;
+          break;
+        case 'warning':
+          onColor = theme.colors.warning;
+          break;
+        case 'error':
+          onColor = theme.colors.error;
+          break;
+        default:
+          onColor = '#34C759'; // iOS green
       }
     }
-    return trackColor?.false || theme.colors.border;
+
+    return { offColor, onColor };
   };
 
-  const getThumbColor = () => {
-    if (thumbColor) return thumbColor;
-    return disabled ? theme.colors.textSecondary : '#FFFFFF';
-  };
+  const { offColor, onColor } = getTrackColors();
+  const thumbColorValue = thumbColor || '#FFFFFF';
 
-  const trackStyle = [
-    styles.track,
-    styles[size],
-    {
-      backgroundColor: getTrackColor(), // ✅ Selalu update berdasarkan prop value
+  // Animated styles
+  const trackAnimatedStyle = useAnimatedStyle(() => {
+    const backgroundColor = disabled
+      ? theme.colors.border
+      : interpolateColor(switchValue.value, [0, 1], [offColor, onColor]);
+
+    return {
+      backgroundColor,
       opacity: disabled ? 0.5 : 1,
-    },
-    style,
-  ];
-
-  const thumbTranslateX = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [2, styles[size].width - styles[`${size}Thumb`].width - 2],
+      transform: [{ scale: pressScale.value }],
+    };
   });
 
-  const thumbStyle = [
-    styles.thumb,
-    styles[`${size}Thumb`],
-    {
-      backgroundColor: getThumbColor(),
-      transform: [{ translateX: thumbTranslateX }],
-    },
-  ];
+  const thumbAnimatedStyle = useAnimatedStyle(() => {
+    const translateX = interpolate(
+      switchValue.value,
+      [0, 1],
+      [2, styles[size].width - styles[`${size}Thumb`].width - 2]
+    );
+
+    return {
+      transform: [{ translateX }, { scale: thumbScale.value }],
+      backgroundColor: disabled ? theme.colors.textSecondary : thumbColorValue,
+    };
+  });
+
+  // Handle press with haptic-like feedback
+  const handlePress = () => {
+    if (disabled || !onValueChange) return;
+
+    // Micro-interactions for better feel
+    thumbScale.value = withSpring(0.9, { damping: 20, stiffness: 300 }, () => {
+      thumbScale.value = withSpring(1, { damping: 20, stiffness: 300 });
+    });
+
+    pressScale.value = withSpring(0.95, { damping: 20, stiffness: 300 }, () => {
+      pressScale.value = withSpring(1, { damping: 20, stiffness: 300 });
+    });
+
+    // Trigger callback
+    runOnJS(onValueChange)(!value);
+  };
+
+  const handlePressIn = () => {
+    if (disabled) return;
+    pressScale.value = withSpring(0.95, { damping: 20, stiffness: 300 });
+  };
+
+  const handlePressOut = () => {
+    if (disabled) return;
+    pressScale.value = withSpring(1, { damping: 20, stiffness: 300 });
+  };
+
+  const trackStyle = [styles.track, styles[size], style];
+
+  const thumbStyle = [styles.thumb, styles[`${size}Thumb`]];
 
   return (
-    <TouchableOpacity
-      style={trackStyle}
+    <AnimatedTouchableOpacity
+      style={[trackStyle, trackAnimatedStyle]}
       onPress={handlePress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
       disabled={disabled}
-      activeOpacity={0.8}
-      {...props}
+      activeOpacity={1}
     >
-      <Animated.View style={thumbStyle} />
-    </TouchableOpacity>
+      <Animated.View style={[thumbStyle, thumbAnimatedStyle]} />
+    </AnimatedTouchableOpacity>
   );
 };
 
@@ -133,13 +178,12 @@ const SwitcherLabel: React.FC<SwitcherLabelProps> = ({
   style,
   ...props
 }) => {
-  const { theme } = useTheme();
   const styles = useThemedStyles(createSwitcherLabelStyles);
 
   return (
-    <View style={[styles.label, styles[position], style]} {...props}>
+    <Animated.View style={[styles.label, styles[position], style]} {...props}>
       {children}
-    </View>
+    </Animated.View>
   );
 };
 
@@ -148,43 +192,50 @@ const createSwitcherStyles = (theme: Theme) => ({
     borderRadius: theme.borderRadius.full,
     justifyContent: 'center' as const,
     position: 'relative' as const,
+    // iOS-like styling
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    elevation: 1,
   },
   thumb: {
     borderRadius: theme.borderRadius.full,
     position: 'absolute' as const,
+    // Enhanced iOS-like shadow
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 4,
   },
-  // Sizes
+  // Sizes - optimized for iOS feel and professional proportions
   sm: {
-    width: 32,
-    height: 18,
+    width: 28,
+    height: 16,
   },
   md: {
     width: 44,
-    height: 24,
+    height: 26,
   },
   lg: {
-    width: 56,
-    height: 30,
+    width: 52,
+    height: 32,
   },
-  // Thumb sizes
+  // Thumb sizes - better proportions
   smThumb: {
-    width: 14,
-    height: 14,
+    width: 12,
+    height: 12,
     top: 2,
   },
   mdThumb: {
-    width: 20,
-    height: 20,
+    width: 22,
+    height: 22,
     top: 2,
   },
   lgThumb: {
-    width: 26,
-    height: 26,
+    width: 28,
+    height: 28,
     top: 2,
   },
 });
@@ -201,9 +252,4 @@ const createSwitcherLabelStyles = (theme: Theme) => ({
   },
 });
 
-export {
-  Switcher,
-  SwitcherLabel,
-  type SwitcherProps,
-  type SwitcherLabelProps,
-};
+export { Switcher, SwitcherLabel, type SwitcherProps, type SwitcherLabelProps };
