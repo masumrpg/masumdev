@@ -3,6 +3,7 @@ import { DimensionValue, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
+import { resolveColor } from '../../../utils/color';
 
 interface BaseLayoutProps {
   children?: React.ReactNode;
@@ -20,11 +21,17 @@ interface BaseLayoutProps {
 interface StackProps extends BaseLayoutProps {
   spacing?: keyof Theme['spacing'];
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
-  justify?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   wrap?: boolean;
 }
 
-type CenterProps = BaseLayoutProps
+type CenterProps = BaseLayoutProps;
 
 interface BoxProps extends BaseLayoutProps {
   borderWidth?: number;
@@ -33,14 +40,6 @@ interface BoxProps extends BaseLayoutProps {
   elevation?: number;
   variant?: 'default' | 'card' | 'surface';
 }
-
-// Helper function untuk resolve color dari theme
-const resolveColor = (color: string | keyof Theme['colors'] | undefined, theme: Theme, fallback?: string): string | undefined => {
-  if (!color) return fallback;
-  if (typeof color === 'string' && color.startsWith('#')) return color;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (theme.colors as any)[color] || color;
-};
 
 // HStack - Horizontal Stack
 const HStack: React.FC<StackProps> = ({
@@ -71,7 +70,11 @@ const HStack: React.FC<StackProps> = ({
     gap: spacing ? theme.spacing[spacing] : 0,
     padding: padding ? theme.spacing[padding] : undefined,
     margin: margin ? theme.spacing[margin] : undefined,
-    backgroundColor: resolveColor(backgroundColor, theme, themed ? theme.colors.background : undefined),
+    backgroundColor: resolveColor(
+      theme,
+      backgroundColor,
+      themed ? theme.colors.background : 'transparent'
+    ),
     borderRadius: borderRadius ? theme.borderRadius[borderRadius] : undefined,
     flex,
     width,
@@ -114,7 +117,11 @@ const VStack: React.FC<StackProps> = ({
     gap: spacing ? theme.spacing[spacing] : 0,
     padding: padding ? theme.spacing[padding] : undefined,
     margin: margin ? theme.spacing[margin] : undefined,
-    backgroundColor: resolveColor(backgroundColor, theme, themed ? theme.colors.background : undefined),
+    backgroundColor: resolveColor(
+      theme,
+      backgroundColor,
+      themed ? theme.colors.background : 'transparent'
+    ),
     borderRadius: borderRadius ? theme.borderRadius[borderRadius] : undefined,
     flex,
     width,
@@ -149,7 +156,11 @@ const ZStack: React.FC<BaseLayoutProps> = ({
     ...styles.base,
     padding: padding ? theme.spacing[padding] : undefined,
     margin: margin ? theme.spacing[margin] : undefined,
-    backgroundColor: resolveColor(backgroundColor, theme, themed ? theme.colors.background : undefined),
+    backgroundColor: resolveColor(
+      theme,
+      backgroundColor,
+      themed ? theme.colors.background : 'transparent'
+    ),
     borderRadius: borderRadius ? theme.borderRadius[borderRadius] : undefined,
     flex,
     width,
@@ -184,7 +195,11 @@ const Center: React.FC<CenterProps> = ({
     ...styles.base,
     padding: padding ? theme.spacing[padding] : undefined,
     margin: margin ? theme.spacing[margin] : undefined,
-    backgroundColor: resolveColor(backgroundColor, theme, themed ? theme.colors.background : undefined),
+    backgroundColor: resolveColor(
+      theme,
+      backgroundColor,
+      themed ? theme.colors.background : 'transparent'
+    ),
     borderRadius: borderRadius ? theme.borderRadius[borderRadius] : undefined,
     flex,
     width,
@@ -236,10 +251,14 @@ const Box: React.FC<BoxProps> = ({
     ...getVariantStyle(),
     padding: padding ? theme.spacing[padding] : undefined,
     margin: margin ? theme.spacing[margin] : undefined,
-    backgroundColor: resolveColor(backgroundColor, theme, themed ? theme.colors.surface : undefined),
+    backgroundColor: resolveColor(
+      theme,
+      backgroundColor,
+      themed ? theme.colors.surface : 'transparent'
+    ),
     borderRadius: borderRadius ? theme.borderRadius[borderRadius] : undefined,
     borderWidth: borderWidth || undefined,
-    borderColor: resolveColor(borderColor, theme, theme.colors.border),
+    borderColor: resolveColor(theme, borderColor, theme.colors.border),
     shadowOpacity: shadowOpacity || undefined,
     elevation: elevation || undefined,
     flex,

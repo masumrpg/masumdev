@@ -3,6 +3,7 @@ import { View, Animated, ViewStyle } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
+import { resolveColor } from '../../../utils/color';
 
 interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg' | number;
@@ -42,22 +43,19 @@ const Spinner: React.FC<SpinnerProps> = ({
   const getSize = () => {
     if (typeof size === 'number') return size;
     switch (size) {
-      case 'sm': return 16;
-      case 'md': return 24;
-      case 'lg': return 32;
-      default: return 24;
+      case 'sm':
+        return 16;
+      case 'md':
+        return 24;
+      case 'lg':
+        return 32;
+      default:
+        return 24;
     }
   };
 
-  const resolveColor = (color: string | keyof Theme['colors'] | undefined): string => {
-    if (!color) return theme.colors.primary;
-    if (typeof color === 'string' && color.startsWith('#')) return color;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (theme.colors as any)[color] || color;
-  };
-
   const spinnerSize = getSize();
-  const spinnerColor = resolveColor(color);
+  const spinnerColor = resolveColor(theme, color, theme.colors.primary);
 
   return (
     <View style={[styles.container, style]} {...props}>

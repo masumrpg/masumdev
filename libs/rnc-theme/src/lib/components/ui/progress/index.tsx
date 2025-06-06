@@ -9,6 +9,7 @@ import Animated, {
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
+import { resolveColor } from '../../../utils/color';
 
 interface ProgressProps {
   children?: React.ReactNode;
@@ -39,13 +40,6 @@ const Progress: React.FC<ProgressProps> = ({
   const { theme } = useTheme();
   const styles = useThemedStyles(createProgressStyles);
 
-  const resolveColor = (color: string | keyof Theme['colors'] | undefined, fallback: string): string => {
-    if (!color) return fallback;
-    if (typeof color === 'string' && color.startsWith('#')) return color;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (theme.colors as any)[color] || color;
-  };
-
   const progressValue = Math.min(Math.max(value, 0), max);
   const percentage = (progressValue / max) * 100;
 
@@ -55,22 +49,27 @@ const Progress: React.FC<ProgressProps> = ({
         styles.container,
         styles[size],
         {
-          backgroundColor: resolveColor(trackColor, theme.colors.border),
+          backgroundColor: resolveColor(theme, trackColor, theme.colors.border),
         },
-        style
+        style,
       ]}
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === ProgressFilledTrack) {
-          return React.cloneElement(child as React.ReactElement<ProgressFilledTrackProps & {
-            percentage?: number;
-            variant?: string;
-            animated?: boolean;
-          }>, {
-            percentage,
-            variant,
-            animated,
-          });
+          return React.cloneElement(
+            child as React.ReactElement<
+              ProgressFilledTrackProps & {
+                percentage?: number;
+                variant?: string;
+                animated?: boolean;
+              }
+            >,
+            {
+              percentage,
+              variant,
+              animated,
+            }
+          );
         }
         return child;
       })}

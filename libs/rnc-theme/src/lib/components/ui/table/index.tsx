@@ -19,6 +19,7 @@ interface TableHeaderProps {
 interface TableBodyProps {
   children?: React.ReactNode;
   style?: ViewStyle;
+  striped?: boolean; // Added missing property
 }
 
 interface TableFooterProps {
@@ -74,7 +75,10 @@ const Table: React.FC<TableProps> = ({
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === TableBody) {
-          return React.cloneElement(child, { striped });
+          return React.cloneElement(
+            child as React.ReactElement<TableBodyProps>,
+            { striped }
+          );
         }
         return child;
       })}
@@ -103,7 +107,10 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     <View style={[styles.header, style]} {...props}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === TableRow) {
-          return React.cloneElement(child, { isHeader: true });
+          return React.cloneElement(
+            child as React.ReactElement<TableRowProps>,
+            { isHeader: true }
+          );
         }
         return child;
       })}
@@ -123,9 +130,12 @@ const TableBody: React.FC<TableBodyProps> = ({
     <View style={[styles.body, style]} {...props}>
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child) && child.type === TableRow) {
-          return React.cloneElement(child, {
-            isEven: striped && index % 2 === 0
-          });
+          return React.cloneElement(
+            child as React.ReactElement<TableRowProps>,
+            {
+              isEven: striped && index % 2 === 0,
+            }
+          );
         }
         return child;
       })}

@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, Text, ViewStyle, TextStyle } from 'react-native';
-import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { Theme } from '../../../types/theme';
+import { resolveColor } from '../../../utils/color';
 
 interface BadgeProps {
   children?: React.ReactNode;
-  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'error';
   size?: 'sm' | 'md' | 'lg';
   style?: ViewStyle;
   rounded?: boolean;
@@ -40,7 +46,7 @@ const Badge: React.FC<BadgeProps> = ({
         styles[variant],
         styles[size],
         rounded && styles.rounded,
-        style
+        style,
       ]}
       {...props}
     >
@@ -49,11 +55,7 @@ const Badge: React.FC<BadgeProps> = ({
   );
 };
 
-const BadgeText: React.FC<BadgeTextProps> = ({
-  children,
-  style,
-  ...props
-}) => {
+const BadgeText: React.FC<BadgeTextProps> = ({ children, style, ...props }) => {
   const styles = useThemedStyles(createBadgeTextStyles);
 
   return (
@@ -72,14 +74,7 @@ const BadgeIcon: React.FC<BadgeIconProps> = ({
   const styles = useThemedStyles(createBadgeIconStyles);
 
   return (
-    <View
-      style={[
-        styles.icon,
-        styles[position],
-        style
-      ]}
-      {...props}
-    >
+    <View style={[styles.icon, styles[position], style]} {...props}>
       {children}
     </View>
   );
@@ -142,7 +137,7 @@ const createBadgeTextStyles = (theme: Theme) => ({
     fontSize: theme.typography.body.fontSize,
     lineHeight: theme.typography.body.lineHeight,
     fontWeight: '600' as const,
-    color: '#FFFFFF',
+    color: resolveColor(theme, theme.colors.text, theme.colors.primary),
   },
 });
 
