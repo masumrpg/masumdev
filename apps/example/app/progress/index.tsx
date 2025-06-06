@@ -18,7 +18,7 @@ interface TaskProgress {
   category: 'development' | 'design' | 'testing' | 'deployment';
 }
 
-const ProgressDashboardExample = () => {
+const ProgressScreen = () => {
   const [tasks, setTasks] = useState<TaskProgress[]>([
     {
       id: '1',
@@ -325,4 +325,4 @@ const createStyles = (theme: Theme) => ({
   },
 });
 
-export default ProgressDashboardExample;
+export default ProgressScreen;

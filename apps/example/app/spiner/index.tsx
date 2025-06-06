@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Spinner, useThemedStyles, Theme } from 'rnc-theme';
 
-const SpinnerLoadingScreen: React.FC = () => {
+const SpinnerScreen: React.FC = () => {
   const styles = useThemedStyles(createStyles);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStates, setLoadingStates] = useState({
@@ -202,4 +202,4 @@ const createStyles = (theme: Theme) => ({
   },
 });
 
-export default SpinnerLoadingScreen;
+export default SpinnerScreen;

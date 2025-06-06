@@ -11,7 +11,7 @@ interface NotificationItem {
   isRead: boolean;
 }
 
-const BadgeWithIconScreen: React.FC = () => {
+const BadgeScreen: React.FC = () => {
   const styles = useThemedStyles(createStyles);
   const [notifications, setNotifications] = useState<NotificationItem[]>([
     { id: '1', type: 'message', count: 5, title: 'Messages', isRead: false },
@@ -277,4 +277,4 @@ const createStyles = (theme: Theme) => ({
   },
 });
 
-export default BadgeWithIconScreen;
+export default BadgeScreen;

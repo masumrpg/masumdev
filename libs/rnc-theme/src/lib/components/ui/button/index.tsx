@@ -7,12 +7,13 @@ import {
   TouchableOpacityProps,
   View,
   TextStyle,
-  ActivityIndicator,
   Text,
 } from 'react-native';
 import { Theme } from '../../../types/theme';
 import { useTheme } from '../../../context/ThemeContext';
-import { LucideProps, Plus } from 'lucide-react-native';
+import { useThemedStyles } from '../../../hooks/useThemedStyles';
+import { resolveColor } from '../../../utils/color';
+import { Spinner } from '../spinner';
 
 type ButtonVariant =
   | 'primary'
@@ -38,8 +39,20 @@ interface BaseButtonProps {
   component?: ButtonComponent;
 }
 
-type ButtonProps = BaseButtonProps & (PressableProps | TouchableOpacityProps);
+// Separate interfaces for cleaner type definitions
+interface PressableButtonProps
+  extends BaseButtonProps,
+    Omit<PressableProps, keyof BaseButtonProps> {
+  component?: 'pressable';
+}
 
+interface TouchableButtonProps
+  extends BaseButtonProps,
+    Omit<TouchableOpacityProps, keyof BaseButtonProps> {
+  component: 'touchable';
+}
+
+type ButtonProps = PressableButtonProps | TouchableButtonProps;
 
 type IconPosition = 'left' | 'right' | 'center';
 
@@ -77,225 +90,70 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
+  const styles = useThemedStyles(createButtonStyles);
 
-  const getVariantStyles = (): {
-    backgroundColor: string;
-    borderColor: string;
-  } => {
-    switch (variant) {
-      case 'primary':
-        return {
-          backgroundColor: theme.colors.primary,
-          borderColor: theme.colors.primary,
-        };
-      case 'secondary':
-        return {
-          backgroundColor: theme.colors.secondary,
-          borderColor: theme.colors.secondary,
-        };
-      case 'outline':
-        return {
-          backgroundColor: 'transparent',
-          borderColor: theme.colors.primary,
-        };
-      case 'ghost':
-        return {
-          backgroundColor: 'transparent',
-          borderColor: 'transparent',
-        };
-      case 'success':
-        return {
-          backgroundColor: theme.colors.success,
-          borderColor: theme.colors.success,
-        };
-      case 'error':
-        return {
-          backgroundColor: theme.colors.error,
-          borderColor: theme.colors.error,
-        };
-      case 'warning':
-        return {
-          backgroundColor: theme.colors.warning,
-          borderColor: theme.colors.warning,
-        };
-      case 'info':
-        return {
-          backgroundColor: theme.colors.info,
-          borderColor: theme.colors.info,
-        };
-      default:
-        return {
-          backgroundColor: theme.colors.primary,
-          borderColor: theme.colors.primary,
-        };
-    }
-  };
-
-  const getSizeStyles = (): { padding: number } => {
-    switch (size) {
-      case 'sm':
-        return {
-          padding: theme.spacing.sm,
-        };
-      case 'md':
-        return {
-          padding: theme.spacing.md,
-        };
-      case 'lg':
-        return {
-          padding: theme.spacing.lg,
-        };
-      default:
-        return {
-          padding: theme.spacing.md,
-        };
-    }
-  };
-
-  const variantStyles = getVariantStyles();
-  const sizeStyles = getSizeStyles();
-
-  const buttonStyle: ViewStyle = {
-    backgroundColor: disabled
-      ? theme.colors.border
-      : variantStyles.backgroundColor,
-    borderWidth: variant === 'outline' ? 1 : 0,
-    borderColor: disabled ? theme.colors.border : variantStyles.borderColor,
+  const baseStyle: ViewStyle = {
+    ...styles.base,
+    ...styles[variant],
+    ...styles[size],
     borderRadius: theme.borderRadius[borderRadius],
-    padding: sizeStyles.padding,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...(fullWidth && { width: '100%' as const }),
     opacity: disabled ? 0.6 : 1,
-    width: fullWidth ? '100%' : undefined,
-    flexDirection: 'row',
+    ...(style as ViewStyle),
   };
 
-  // Define specific types for component props
-  type PressableComponentProps = {
-    disabled: boolean;
-    style: (state: { pressed: boolean }) => ViewStyle[];
-  } & Omit<PressableProps, 'disabled' | 'style'>;
+  const isDisabled = disabled || loading;
 
-  type TouchableComponentProps = {
-    disabled: boolean;
-    activeOpacity: number;
-    style: ViewStyle[];
-  } & Omit<TouchableOpacityProps, 'disabled' | 'style' | 'activeOpacity'>;
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      if (child.type === ButtonText) {
+        return React.cloneElement(
+          child as React.ReactElement<ButtonTextProps>,
+          {
+            variant,
+            size,
+            disabled,
+            loading,
+          }
+        );
+      }
+      if (child.type === ButtonIcon) {
+        return React.cloneElement(
+          child as React.ReactElement<ButtonIconProps>,
+          {
+            variant,
+            size,
+            disabled,
+          }
+        );
+      }
+    }
+    return child;
+  });
 
-  const ButtonComponent =
-    component === 'pressable' ? Pressable : TouchableOpacity;
+  if (component === 'touchable') {
+    // Type assertion for TouchableOpacity props
+    const touchableProps = props as Omit<
+      TouchableOpacityProps,
+      keyof BaseButtonProps
+    >;
+    return (
+      <TouchableOpacity
+        style={baseStyle}
+        disabled={isDisabled}
+        {...touchableProps}
+      >
+        {childrenWithProps}
+      </TouchableOpacity>
+    );
+  }
 
-  const componentProps: PressableComponentProps | TouchableComponentProps =
-    component === 'pressable'
-      ? ({
-          disabled: disabled || loading,
-          style: ({ pressed }: { pressed: boolean }) => [
-            buttonStyle,
-            pressed && { opacity: 0.7 },
-            style,
-          ],
-          ...(props as PressableProps),
-        } as PressableComponentProps)
-      : ({
-          disabled: disabled || loading,
-          activeOpacity: 0.7,
-          style: [buttonStyle, style],
-          ...(props as TouchableOpacityProps),
-        } as TouchableComponentProps);
-
+  // Default to Pressable
+  const pressableProps = props as Omit<PressableProps, keyof BaseButtonProps>;
   return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <ButtonComponent {...(componentProps as any)}>{children}</ButtonComponent>
-  );
-};
-
-const ButtonIcon: React.FC<ButtonIconProps> = ({
-  icon,
-  variant = 'primary',
-  size = 'md',
-  disabled = false,
-  style,
-  position = 'center',
-  marginLeft,
-  marginRight,
-  ...props
-}) => {
-  const { theme } = useTheme();
-
-  const getVariantIconColor = (): string => {
-    switch (variant) {
-      case 'primary':
-      case 'secondary':
-      case 'success':
-      case 'error':
-      case 'warning':
-      case 'info':
-        return '#FFFFFF';
-      case 'outline':
-      case 'ghost':
-        return theme.colors.primary;
-      default:
-        return '#FFFFFF';
-    }
-  };
-
-  const getSizeStyles = (): { iconSize: number } => {
-    switch (size) {
-      case 'sm':
-        return {
-          iconSize: 16,
-        };
-      case 'md':
-        return {
-          iconSize: 20,
-        };
-      case 'lg':
-        return {
-          iconSize: 24,
-        };
-      default:
-        return {
-          iconSize: 20,
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles();
-  const iconColor = disabled
-    ? theme.colors.textSecondary
-    : getVariantIconColor();
-
-  const containerStyle: ViewStyle = {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: marginLeft ? theme.spacing[marginLeft] : undefined,
-    marginRight: marginRight ? theme.spacing[marginRight] : undefined,
-  };
-
-  // Default icon jika tidak ada icon yang diberikan
-  const defaultIcon = <Plus size={sizeStyles.iconSize} color={iconColor} />;
-
-  // Clone icon dengan props yang sesuai jika icon adalah React element
-  const renderIcon = () => {
-    if (!icon) {
-      return defaultIcon;
-    }
-
-    if (React.isValidElement(icon)) {
-      return React.cloneElement(icon as React.ReactElement<LucideProps>, {
-        size: sizeStyles.iconSize,
-        color: iconColor,
-        ...((icon as React.ReactElement<LucideProps>).props || {}),
-      });
-    }
-
-    return icon;
-  };
-
-  return (
-    <View style={[containerStyle, style]} {...props}>
-      {renderIcon()}
-    </View>
+    <Pressable style={baseStyle} disabled={isDisabled} {...pressableProps}>
+      {childrenWithProps}
+    </Pressable>
   );
 };
 
@@ -309,67 +167,20 @@ const ButtonText: React.FC<ButtonTextProps> = ({
   showLoadingIndicator = true,
   ...props
 }) => {
-  const { theme } = useTheme();
-
-  const getVariantTextColor = (): string => {
-    switch (variant) {
-      case 'primary':
-      case 'secondary':
-      case 'success':
-      case 'error':
-      case 'warning':
-      case 'info':
-        return '#FFFFFF';
-      case 'outline':
-      case 'ghost':
-        return theme.colors.primary;
-      default:
-        return '#FFFFFF';
-    }
-  };
-
-  const getSizeStyles = (): { fontSize: number } => {
-    switch (size) {
-      case 'sm':
-        return {
-          fontSize: theme.typography.small.fontSize,
-        };
-      case 'md':
-        return {
-          fontSize: theme.typography.body.fontSize,
-        };
-      case 'lg':
-        return {
-          fontSize: theme.typography.subtitle.fontSize,
-        };
-      default:
-        return {
-          fontSize: theme.typography.body.fontSize,
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles();
-  const textColor = disabled
-    ? theme.colors.textSecondary
-    : getVariantTextColor();
-
-  const textStyle: TextStyle = {
-    color: textColor,
-    fontSize: sizeStyles.fontSize,
-    fontWeight: '600',
-    textAlign: 'center',
-  };
+  const styles = useThemedStyles(createButtonTextStyles);
 
   if (loading && showLoadingIndicator) {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <ActivityIndicator
-          size="small"
-          color={textColor}
-          style={{ marginRight: theme.spacing.xs }}
+      <View style={styles.loadingContainer}>
+        <Spinner
+          size={size === 'sm' ? 16 : size === 'md' ? 20 : 24}
+          color={styles[variant].color}
+          style={styles.loadingIndicator}
         />
-        <Text style={[textStyle, style]} {...props}>
+        <Text
+          style={[styles.base, styles[variant], styles[size], style]}
+          {...props}
+        >
           {children}
         </Text>
       </View>
@@ -377,16 +188,178 @@ const ButtonText: React.FC<ButtonTextProps> = ({
   }
 
   return (
-    <Text style={[textStyle, style]} {...props}>
+    <Text
+      style={[styles.base, styles[variant], styles[size], style]}
+      {...props}
+    >
       {children}
     </Text>
   );
 };
 
-export {
-  Button, ButtonIcon, ButtonText
+const ButtonIcon: React.FC<ButtonIconProps> = ({
+  icon,
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  style,
+  position = 'left',
+  marginLeft,
+  marginRight,
+  ...props
+}) => {
+  const { theme } = useTheme();
+  const styles = useThemedStyles(createButtonIconStyles);
+
+  const iconStyle = {
+    marginLeft: marginLeft
+      ? theme.spacing[marginLeft]
+      : position === 'right'
+      ? theme.spacing.xs
+      : 0,
+    marginRight: marginRight
+      ? theme.spacing[marginRight]
+      : position === 'left'
+      ? theme.spacing.xs
+      : 0,
+  };
+
+  return (
+    <View style={[styles.base, styles[size], iconStyle, style]} {...props}>
+      {icon}
+    </View>
+  );
 };
 
-export type {
-  ButtonProps, ButtonIconProps, ButtonTextProps
-}
+const createButtonStyles = (theme: Theme) => ({
+  base: {
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    borderWidth: 1,
+  },
+  // Variants
+  primary: {
+    backgroundColor: resolveColor(theme, 'primary', theme.colors.primary),
+    borderColor: resolveColor(theme, 'primary', theme.colors.primary),
+  },
+  secondary: {
+    backgroundColor: resolveColor(theme, 'secondary', theme.colors.secondary),
+    borderColor: resolveColor(theme, 'secondary', theme.colors.secondary),
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderColor: resolveColor(theme, 'primary', theme.colors.primary),
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  },
+  success: {
+    backgroundColor: resolveColor(theme, 'success', '#10B981'),
+    borderColor: resolveColor(theme, 'success', '#10B981'),
+  },
+  error: {
+    backgroundColor: resolveColor(theme, 'error', theme.colors.error),
+    borderColor: resolveColor(theme, 'error', theme.colors.error),
+  },
+  warning: {
+    backgroundColor: resolveColor(theme, 'warning', '#F59E0B'),
+    borderColor: resolveColor(theme, 'warning', '#F59E0B'),
+  },
+  info: {
+    backgroundColor: resolveColor(theme, 'info', '#3B82F6'),
+    borderColor: resolveColor(theme, 'info', '#3B82F6'),
+  },
+  // Sizes
+  sm: {
+    paddingHorizontal: theme.spacing.sm,
+    paddingVertical: theme.spacing.xs,
+    minHeight: 32,
+  },
+  md: {
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    minHeight: 40,
+  },
+  lg: {
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    minHeight: 48,
+  },
+});
+
+const createButtonTextStyles = (theme: Theme) => ({
+  base: {
+    fontWeight: '600' as const,
+    textAlign: 'center' as const,
+  },
+  loadingContainer: {
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
+  },
+  loadingIndicator: {
+    marginRight: theme.spacing.xs,
+  },
+  // Variants
+  primary: {
+    color: '#FFFFFF',
+  },
+  secondary: {
+    color: '#FFFFFF',
+  },
+  outline: {
+    color: resolveColor(theme, 'primary', theme.colors.primary),
+  },
+  ghost: {
+    color: resolveColor(theme, 'text', theme.colors.text),
+  },
+  success: {
+    color: '#FFFFFF',
+  },
+  error: {
+    color: '#FFFFFF',
+  },
+  warning: {
+    color: '#FFFFFF',
+  },
+  info: {
+    color: '#FFFFFF',
+  },
+  // Sizes
+  sm: {
+    fontSize: theme.typography.small.fontSize,
+    lineHeight: theme.typography.small.lineHeight,
+  },
+  md: {
+    fontSize: theme.typography.body.fontSize,
+    lineHeight: theme.typography.body.lineHeight,
+  },
+  lg: {
+    fontSize: theme.typography.subtitle.fontSize,
+    lineHeight: theme.typography.subtitle.lineHeight,
+  },
+});
+
+const createButtonIconStyles = (theme: Theme) => ({
+  base: {
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+  },
+  sm: {
+    width: 16,
+    height: 16,
+  },
+  md: {
+    width: 20,
+    height: 20,
+  },
+  lg: {
+    width: 24,
+    height: 24,
+  },
+});
+
+export { Button, ButtonIcon, ButtonText };
+
+export type { ButtonProps, ButtonIconProps, ButtonTextProps };

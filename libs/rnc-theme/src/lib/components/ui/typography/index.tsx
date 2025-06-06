@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, TextStyle } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
+import { useThemedStyles } from '../../../hooks/useThemedStyles';
+import { resolveColor } from '../../../utils/color';
+import { Theme } from '../../../types/theme';
 
 type TypographyVariant = 'small' | 'body' | 'subtitle' | 'title' | 'heading';
 type TypographyWeight = '400' | '500' | '600' | '700' | 'bold' | 'normal';
@@ -33,25 +36,20 @@ const Typography: React.FC<TypographyProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
-
-  const getVariantStyles = (): TextStyle => {
-    const typography = theme.typography[variant];
-    return {
-      fontSize: typography.fontSize,
-      lineHeight: typography.lineHeight,
-      fontWeight: weight || typography.fontWeight || '400',
-    };
-  };
-
-  const textStyle: TextStyle = {
-    ...getVariantStyles(),
-    color: color || theme.colors.text,
-    textAlign: align,
-  };
+  const styles = useThemedStyles(createTypographyStyles);
 
   return (
     <Text
-      style={[textStyle, style]}
+      style={[
+        styles.base,
+        styles[variant],
+        {
+          fontWeight: weight || styles[variant].fontWeight || '400',
+          color: resolveColor(theme, color, theme.colors.text),
+          textAlign: align,
+        },
+        style,
+      ]}
       numberOfLines={numberOfLines}
       ellipsizeMode={ellipsizeMode}
       selectable={selectable}
@@ -62,6 +60,35 @@ const Typography: React.FC<TypographyProps> = ({
     </Text>
   );
 };
+
+const createTypographyStyles = (theme: Theme) => ({
+  base: {},
+  small: {
+    fontSize: theme.typography.small.fontSize,
+    lineHeight: theme.typography.small.lineHeight,
+    fontWeight: theme.typography.small.fontWeight || '400',
+  },
+  body: {
+    fontSize: theme.typography.body.fontSize,
+    lineHeight: theme.typography.body.lineHeight,
+    fontWeight: theme.typography.body.fontWeight || '400',
+  },
+  subtitle: {
+    fontSize: theme.typography.subtitle.fontSize,
+    lineHeight: theme.typography.subtitle.lineHeight,
+    fontWeight: theme.typography.subtitle.fontWeight || '500',
+  },
+  title: {
+    fontSize: theme.typography.title.fontSize,
+    lineHeight: theme.typography.title.lineHeight,
+    fontWeight: theme.typography.title.fontWeight || '600',
+  },
+  heading: {
+    fontSize: theme.typography.heading.fontSize,
+    lineHeight: theme.typography.heading.lineHeight,
+    fontWeight: theme.typography.heading.fontWeight || '700',
+  },
+});
 
 // Komponen khusus untuk setiap variant
 const Heading: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
@@ -87,17 +114,32 @@ const Small: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
 // Komponen untuk teks dengan warna semantik
 const TextPrimary: React.FC<Omit<TypographyProps, 'color'>> = (props) => {
   const { theme } = useTheme();
-  return <Typography color={theme.colors.primary} {...props} />;
+  return (
+    <Typography
+      color={resolveColor(theme, 'primary', theme.colors.primary)}
+      {...props}
+    />
+  );
 };
 
 const TextSecondary: React.FC<Omit<TypographyProps, 'color'>> = (props) => {
   const { theme } = useTheme();
-  return <Typography color={theme.colors.textSecondary} {...props} />;
+  return (
+    <Typography
+      color={resolveColor(theme, 'textSecondary', theme.colors.textSecondary)}
+      {...props}
+    />
+  );
 };
 
 const TextError: React.FC<Omit<TypographyProps, 'color'>> = (props) => {
   const { theme } = useTheme();
-  return <Typography color={theme.colors.error} {...props} />;
+  return (
+    <Typography
+      color={resolveColor(theme, 'error', theme.colors.error)}
+      {...props}
+    />
+  );
 };
 
 const TextSuccess: React.FC<Omit<TypographyProps, 'color'>> = (props) => {

@@ -3,12 +3,14 @@ import React from 'react'
 import { Input, InputPassword, InputSearch, InputTextArea, useTheme } from 'rnc-theme';
 import { SearchIcon, X } from 'lucide-react-native';
 
-export default function index() {
+export default function InputScreen() {
   const { theme } = useTheme();
   const [value, setValue] = React.useState('');
 
   return (
-    <View style={{flex: 1, padding: 16, backgroundColor: theme.colors.background}}>
+    <View
+      style={{ flex: 1, padding: 16, backgroundColor: theme.colors.background }}
+    >
       <Input
         label="Email"
         placeholder="Enter your email"

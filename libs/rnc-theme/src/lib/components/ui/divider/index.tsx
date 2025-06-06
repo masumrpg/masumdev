@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, ViewStyle, DimensionValue } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
+import { useThemedStyles } from '../../../hooks/useThemedStyles';
+import { resolveColor } from '../../../utils/color';
 import { Theme } from '../../../types/theme';
 
 interface DividerProps {
@@ -34,12 +36,21 @@ const Divider: React.FC<DividerProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
+  const styles = useThemedStyles(createDividerStyles);
 
   const dividerStyle: ViewStyle = {
-    backgroundColor: color || theme.colors.border,
+    backgroundColor: resolveColor(theme, color, theme.colors.border),
     margin: margin ? theme.spacing[margin] : undefined,
-    marginHorizontal: marginHorizontal ? theme.spacing[marginHorizontal] : (orientation === 'horizontal' ? theme.spacing.md : undefined),
-    marginVertical: marginVertical ? theme.spacing[marginVertical] : (orientation === 'vertical' ? theme.spacing.md : undefined),
+    marginHorizontal: marginHorizontal
+      ? theme.spacing[marginHorizontal]
+      : orientation === 'horizontal'
+      ? theme.spacing.md
+      : undefined,
+    marginVertical: marginVertical
+      ? theme.spacing[marginVertical]
+      : orientation === 'vertical'
+      ? theme.spacing.md
+      : undefined,
     marginLeft: marginLeft ? theme.spacing[marginLeft] : undefined,
     marginRight: marginRight ? theme.spacing[marginRight] : undefined,
     marginTop: marginTop ? theme.spacing[marginTop] : undefined,
@@ -54,8 +65,12 @@ const Divider: React.FC<DividerProps> = ({
     dividerStyle.height = length || '100%';
   }
 
-  return <View style={[dividerStyle, style]} {...props} />;
+  return <View style={[styles.base, dividerStyle, style]} {...props} />;
 };
+
+const createDividerStyles = (_: Theme) => ({
+  base: {},
+});
 
 // Shortcut components dengan margin default yang lebih baik
 const HDivider: React.FC<Omit<DividerProps, 'orientation'>> = (props) => (

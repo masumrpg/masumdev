@@ -12,8 +12,14 @@ import {
 import { useTheme, useThemedStyles, Theme } from 'rnc-theme';
 
 const ThemeScreen: React.FC = () => {
-  const { theme, themeMode, setThemeMode, isDark, updateCustomTheme, resetTheme } =
-    useTheme();
+  const {
+    theme,
+    themeMode,
+    setThemeMode,
+    isDark,
+    updateCustomTheme,
+    resetTheme,
+  } = useTheme();
   const styles = useThemedStyles(createStyles);
   const [inputText, setInputText] = useState('');
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
@@ -42,6 +48,7 @@ const ThemeScreen: React.FC = () => {
         md: 8,
         lg: 16,
         xl: 24,
+        full: 9999, // Added missing 'full' property
       },
       spacing: {
         xs: 4,
@@ -75,6 +82,7 @@ const ThemeScreen: React.FC = () => {
         md: 4,
         lg: 8,
         xl: 12,
+        full: 9999, // Added missing 'full' property
       },
       spacing: {
         xs: 4,
@@ -108,6 +116,7 @@ const ThemeScreen: React.FC = () => {
         md: 10,
         lg: 14,
         xl: 20,
+        full: 9999, // Added missing 'full' property
       },
       spacing: {
         xs: 4,
@@ -141,6 +150,7 @@ const ThemeScreen: React.FC = () => {
         md: 4,
         lg: 8,
         xl: 16,
+        full: 9999, // Added missing 'full' property
       },
       spacing: {
         xs: 4,
@@ -163,7 +173,6 @@ const ThemeScreen: React.FC = () => {
     };
     Alert.alert('Notifikasi', messages[type]);
   };
-
 
   return (
     <ScrollView style={styles.container}>
@@ -377,6 +386,17 @@ const ThemeScreen: React.FC = () => {
             />
             <Text style={styles.radiusLabel}>
               XLarge ({theme.borderRadius.xl}px)
+            </Text>
+          </View>
+          <View style={styles.radiusItem}>
+            <View
+              style={[
+                styles.radiusBox,
+                { borderRadius: theme.borderRadius.full },
+              ]}
+            />
+            <Text style={styles.radiusLabel}>
+              Full ({theme.borderRadius.full}px)
             </Text>
           </View>
         </View>

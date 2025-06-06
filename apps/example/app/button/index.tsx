@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Switch } from 'react-native';
-import { Heart, Star, Settings, Download, Plus, Edit, Trash2, Save } from 'lucide-react-native';
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
+  Heart,
+  Star,
+  Settings,
+  Download,
+  Plus,
+  Edit,
+  Trash2,
+  Save,
+} from 'lucide-react-native';
+import {
   ButtonText,
   Button,
   ButtonIcon,
-  useTheme
+  useTheme,
 } from 'rnc-theme';
 
-export const ComponentDemo: React.FC = () => {
+const ButtonScreen: React.FC = () => {
   const { theme, themeMode, setThemeMode } = useTheme();
   const [loading, setLoading] = useState(false);
 
@@ -87,42 +92,12 @@ export const ComponentDemo: React.FC = () => {
         <Switch
           value={themeMode === 'dark'}
           onValueChange={toggleTheme}
-          trackColor={{ false: theme.colors.border, true: theme.colors.primary }}
+          trackColor={{
+            false: theme.colors.border,
+            true: theme.colors.primary,
+          }}
           thumbColor={theme.colors.surface}
         />
-      </View>
-
-      {/* Card Demo */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Card Components</Text>
-
-        <Card style={{ marginBottom: theme.spacing.md }}>
-          <CardHeader
-            title="Card dengan Header"
-            subtitle="Ini adalah subtitle dari card"
-          />
-          <CardContent>
-            <Text style={{ color: theme.colors.text, fontSize: theme.typography.body.fontSize }}>
-              Ini adalah konten dari card. Anda dapat menempatkan berbagai komponen di sini.
-            </Text>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" size="sm">
-              <ButtonText variant="outline" size="sm">Cancel</ButtonText>
-            </Button>
-            <Button variant="primary" size="sm" style={{ marginLeft: theme.spacing.sm }}>
-              <ButtonText variant="primary" size="sm">Save</ButtonText>
-            </Button>
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardContent>
-            <Text style={{ color: theme.colors.text, fontSize: theme.typography.body.fontSize }}>
-              Card sederhana tanpa header dan footer.
-            </Text>
-          </CardContent>
-        </Card>
       </View>
 
       {/* Button Variants Demo */}
@@ -172,15 +147,21 @@ export const ComponentDemo: React.FC = () => {
 
         <View style={styles.buttonRow}>
           <Button variant="primary" size="sm">
-            <ButtonText variant="primary" size="sm">Small</ButtonText>
+            <ButtonText variant="primary" size="sm">
+              Small
+            </ButtonText>
           </Button>
 
           <Button variant="primary" size="md">
-            <ButtonText variant="primary" size="md">Medium</ButtonText>
+            <ButtonText variant="primary" size="md">
+              Medium
+            </ButtonText>
           </Button>
 
           <Button variant="primary" size="lg">
-            <ButtonText variant="primary" size="lg">Large</ButtonText>
+            <ButtonText variant="primary" size="lg">
+              Large
+            </ButtonText>
           </Button>
         </View>
       </View>
@@ -191,22 +172,38 @@ export const ComponentDemo: React.FC = () => {
 
         <View style={styles.buttonGrid}>
           <Button variant="primary">
-            <ButtonIcon icon={<Heart />} variant="primary" marginRight="xs" />
+            <ButtonIcon
+              icon={<Heart color={'#fff'} />}
+              variant="primary"
+              marginRight="xs"
+            />
             <ButtonText variant="primary">Like</ButtonText>
           </Button>
 
           <Button variant="secondary">
-            <ButtonIcon icon={<Star />} variant="secondary" marginRight="xs" />
+            <ButtonIcon
+              icon={<Star color={'#fff'} />}
+              variant="secondary"
+              marginRight="xs"
+            />
             <ButtonText variant="secondary">Favorite</ButtonText>
           </Button>
 
           <Button variant="outline">
-            <ButtonIcon icon={<Settings />} variant="outline" marginRight="xs" />
+            <ButtonIcon
+              icon={<Settings color={'#fff'} />}
+              variant="outline"
+              marginRight="xs"
+            />
             <ButtonText variant="outline">Settings</ButtonText>
           </Button>
 
           <Button variant="success">
-            <ButtonIcon icon={<Download />} variant="success" marginRight="xs" />
+            <ButtonIcon
+              icon={<Download color={'#fff'} />}
+              variant="success"
+              marginRight="xs"
+            />
             <ButtonText variant="success">Download</ButtonText>
           </Button>
         </View>
@@ -214,19 +211,19 @@ export const ComponentDemo: React.FC = () => {
         {/* Icon Only Buttons */}
         <View style={styles.buttonRow}>
           <Button variant="primary" style={{ width: 48, height: 48 }}>
-            <ButtonIcon icon={<Plus />} variant="primary" />
+            <ButtonIcon icon={<Plus color={'#fff'} />} variant="primary" />
           </Button>
 
           <Button variant="secondary" style={{ width: 48, height: 48 }}>
-            <ButtonIcon icon={<Edit />} variant="secondary" />
+            <ButtonIcon icon={<Edit color={'#fff'} />} variant="secondary" />
           </Button>
 
           <Button variant="error" style={{ width: 48, height: 48 }}>
-            <ButtonIcon icon={<Trash2 />} variant="error" />
+            <ButtonIcon icon={<Trash2 color={'#fff'} />} variant="error" />
           </Button>
 
           <Button variant="success" style={{ width: 48, height: 48 }}>
-            <ButtonIcon icon={<Save />} variant="success" />
+            <ButtonIcon icon={<Save color={'#fff'} />} variant="success" />
           </Button>
         </View>
       </View>
@@ -237,11 +234,22 @@ export const ComponentDemo: React.FC = () => {
 
         <View style={styles.buttonGrid}>
           <Button variant="primary" disabled>
-            <ButtonText variant="primary" disabled>Disabled</ButtonText>
+            <ButtonText variant="primary" disabled>
+              Disabled
+            </ButtonText>
           </Button>
 
-          <Button variant="primary" loading={loading} onPress={handleLoadingDemo}>
-            <ButtonText variant="primary" loading={loading} showLoadingIndicator>
+          <Button
+            variant="primary"
+            loading={loading}
+            disabled={loading}
+            onPress={handleLoadingDemo}
+          >
+            <ButtonText
+              variant="primary"
+              loading={loading}
+              showLoadingIndicator
+            >
               {loading ? 'Loading...' : 'Click for Loading'}
             </ButtonText>
           </Button>
@@ -268,7 +276,11 @@ export const ComponentDemo: React.FC = () => {
         <Text style={styles.sectionTitle}>Full Width Button</Text>
 
         <Button variant="primary" fullWidth>
-          <ButtonIcon icon={<Plus />} variant="primary" marginRight="xs" />
+          <ButtonIcon
+            icon={<Plus color={'#fff'} />}
+            variant="primary"
+            marginRight="xs"
+          />
           <ButtonText variant="primary">Full Width Button</ButtonText>
         </Button>
       </View>
@@ -276,4 +288,4 @@ export const ComponentDemo: React.FC = () => {
   );
 };
 
-export default ComponentDemo;
+export default ButtonScreen;

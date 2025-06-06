@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, TextStyle, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../../context/ThemeContext';
+import { useThemedStyles } from '../../../hooks/useThemedStyles';
+import { resolveColor } from '../../../utils/color';
 import { Theme } from '../../../types/theme';
 
 interface CardProps {
@@ -59,23 +61,28 @@ const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
-
-  const cardStyle: ViewStyle = {
-    backgroundColor: backgroundColor || theme.colors.surface,
-    borderRadius: theme.borderRadius[borderRadius],
-    padding: theme.spacing[padding],
-    marginBottom: margin ? theme.spacing[margin] : undefined,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    shadowColor: theme.colors.text,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity,
-    shadowRadius: 4,
-    elevation,
-  };
+  const styles = useThemedStyles(createCardStyles);
 
   return (
-    <View style={[cardStyle, style]} {...props}>
+    <View
+      style={[
+        styles.base,
+        {
+          backgroundColor: resolveColor(
+            theme,
+            backgroundColor,
+            theme.colors.surface
+          ),
+          borderRadius: theme.borderRadius[borderRadius],
+          padding: theme.spacing[padding],
+          marginBottom: margin ? theme.spacing[margin] : undefined,
+          shadowOpacity,
+          elevation,
+        },
+        style,
+      ]}
+      {...props}
+    >
       {children}
     </View>
   );
@@ -88,17 +95,37 @@ const CardContent: React.FC<CardContentProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
-
-  const contentStyle: ViewStyle = {
-    padding: theme.spacing[padding],
-  };
+  const styles = useThemedStyles(createCardContentStyles);
 
   return (
-    <View style={[contentStyle, style]} {...props}>
+    <View
+      style={[
+        styles.base,
+        {
+          padding: theme.spacing[padding],
+        },
+        style,
+      ]}
+      {...props}
+    >
       {children}
     </View>
   );
 };
+
+const createCardStyles = (theme: Theme) => ({
+  base: {
+    borderWidth: 1,
+    borderColor: resolveColor(theme, 'border', theme.colors.border),
+    shadowColor: resolveColor(theme, 'text', theme.colors.text),
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+  },
+});
+
+const createCardContentStyles = (_: Theme) => ({
+  base: {},
+});
 
 const CardFooter: React.FC<CardFooterProps> = ({
   children,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { VStack, HStack, Box, Center, HDivider, VDivider } from 'rnc-theme';
 
-const LayoutScreen = () => {
+const DividerScreen = () => {
   return (
     <VStack flex={1} padding="lg" spacing="md">
       {/* Header */}
@@ -47,4 +47,4 @@ const LayoutScreen = () => {
   );
 };
 
-export default LayoutScreen;
+export default DividerScreen;

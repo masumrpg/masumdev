@@ -2,10 +2,10 @@ import { View } from 'react-native'
 import React from 'react'
 import { Body, Heading, Small, Subtitle, TextError, TextPrimary, TextSuccess, TextWarning, Title, Typography, useTheme } from 'rnc-theme'
 
-export default function index() {
-  const {theme} = useTheme()
+export default function TypographyScreen() {
+  const { theme } = useTheme();
   return (
-    <View style={{backgroundColor: theme.colors.background}}>
+    <View style={{ backgroundColor: theme.colors.background }}>
       <Typography variant="heading">Judul Utama</Typography>
       <Typography variant="body" color={theme.colors.textSecondary}>
         Teks body dengan warna sekunder

@@ -32,9 +32,9 @@ interface Employee {
   joinDate: string;
 }
 
-const TableComplexScreen: React.FC = () => {
+const TableScreen: React.FC = () => {
   const styles = useThemedStyles(createStyles);
-  const [employees, setEmployees] = useState<Employee[]>([
+  const [employees] = useState<Employee[]>([
     {
       id: '1',
       name: 'John Doe',
@@ -473,4 +473,4 @@ const createStyles = (theme: Theme) => ({
   },
 });
 
-export default TableComplexScreen;
+export default TableScreen;
