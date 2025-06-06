@@ -5,8 +5,20 @@ import { useThemedStyles } from '../../../hooks/useThemedStyles';
 import { resolveColor } from '../../../utils/color';
 import { Theme } from '../../../types/theme';
 
-type TypographyVariant = 'small' | 'body' | 'subtitle' | 'title' | 'heading';
-type TypographyWeight = '400' | '500' | '600' | '700' | 'bold' | 'normal';
+type TypographyVariant =
+  | 'small'
+  | 'body'
+  | 'subtitle'
+  | 'title'
+  | 'heading'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6';
+
+type TypographyWeight = TextStyle['fontWeight'];
 type TypographyAlign = 'left' | 'center' | 'right' | 'justify';
 
 interface TypographyProps {
@@ -62,32 +74,68 @@ const Typography: React.FC<TypographyProps> = ({
 };
 
 const createTypographyStyles = (theme: Theme) => ({
-  base: {},
+  base: {} as TextStyle,
   small: {
     fontSize: theme.typography.small.fontSize,
     lineHeight: theme.typography.small.lineHeight,
-    fontWeight: theme.typography.small.fontWeight || '400',
-  },
+    fontWeight: (theme.typography.small.fontWeight ||
+      '400') as TextStyle['fontWeight'],
+  } as TextStyle,
   body: {
     fontSize: theme.typography.body.fontSize,
     lineHeight: theme.typography.body.lineHeight,
-    fontWeight: theme.typography.body.fontWeight || '400',
-  },
+    fontWeight: (theme.typography.body.fontWeight ||
+      '400') as TextStyle['fontWeight'],
+  } as TextStyle,
   subtitle: {
     fontSize: theme.typography.subtitle.fontSize,
     lineHeight: theme.typography.subtitle.lineHeight,
-    fontWeight: theme.typography.subtitle.fontWeight || '500',
-  },
+    fontWeight: (theme.typography.subtitle.fontWeight ||
+      '500') as TextStyle['fontWeight'],
+  } as TextStyle,
   title: {
     fontSize: theme.typography.title.fontSize,
     lineHeight: theme.typography.title.lineHeight,
-    fontWeight: theme.typography.title.fontWeight || '600',
-  },
+    fontWeight: (theme.typography.title.fontWeight ||
+      '600') as TextStyle['fontWeight'],
+  } as TextStyle,
   heading: {
     fontSize: theme.typography.heading.fontSize,
     lineHeight: theme.typography.heading.lineHeight,
-    fontWeight: theme.typography.heading.fontWeight || '700',
-  },
+    fontWeight: (theme.typography.heading.fontWeight ||
+      '700') as TextStyle['fontWeight'],
+  } as TextStyle,
+  // Heading variants H1-H6
+  h1: {
+    fontSize: 32,
+    lineHeight: 40,
+    fontWeight: '700' as TextStyle['fontWeight'],
+  } as TextStyle,
+  h2: {
+    fontSize: 28,
+    lineHeight: 36,
+    fontWeight: '700' as TextStyle['fontWeight'],
+  } as TextStyle,
+  h3: {
+    fontSize: 24,
+    lineHeight: 32,
+    fontWeight: '600' as TextStyle['fontWeight'],
+  } as TextStyle,
+  h4: {
+    fontSize: 20,
+    lineHeight: 28,
+    fontWeight: '600' as TextStyle['fontWeight'],
+  } as TextStyle,
+  h5: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '500' as TextStyle['fontWeight'],
+  } as TextStyle,
+  h6: {
+    fontSize: 16,
+    lineHeight: 22,
+    fontWeight: '500' as TextStyle['fontWeight'],
+  } as TextStyle,
 });
 
 // Komponen khusus untuk setiap variant
@@ -109,6 +157,31 @@ const Body: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
 
 const Small: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
   <Typography variant="small" {...props} />
+);
+
+// Komponen H1-H6 yang diinginkan
+const H1: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h1" {...props} />
+);
+
+const H2: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h2" {...props} />
+);
+
+const H3: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h3" {...props} />
+);
+
+const H4: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h4" {...props} />
+);
+
+const H5: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h5" {...props} />
+);
+
+const H6: React.FC<Omit<TypographyProps, 'variant'>> = (props) => (
+  <Typography variant="h6" {...props} />
 );
 
 // Komponen untuk teks dengan warna semantik
@@ -164,6 +237,12 @@ export {
   Subtitle,
   Body,
   Small,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
   TextPrimary,
   TextSecondary,
   TextError,

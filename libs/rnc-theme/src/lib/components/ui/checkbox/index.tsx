@@ -12,7 +12,8 @@ import Animated, {
   withSpring,
   withTiming,
   interpolate,
-  Extrapolation
+  Extrapolation,
+  runOnJS,
 } from 'react-native-reanimated';
 import { useTheme } from '../../../context/ThemeContext';
 import { useThemedStyles } from '../../../hooks/useThemedStyles';
@@ -65,7 +66,9 @@ interface CheckboxGroupContextType {
   disabled: boolean;
 }
 
-const CheckboxGroupContext = createContext<CheckboxGroupContextType | null>(null);
+const CheckboxGroupContext = createContext<CheckboxGroupContextType | null>(
+  null
+);
 
 const useCheckboxGroup = () => {
   return useContext(CheckboxGroupContext);
@@ -83,7 +86,11 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
   const contextValue: CheckboxGroupContextType = {
     value,
-    onValueChange: onValueChange || (() => { /* no-op */ }),
+    onValueChange:
+      onValueChange ||
+      (() => {
+        /* no-op */
+      }),
     disabled,
   };
 
@@ -111,10 +118,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const styles = useThemedStyles(createCheckboxStyles);
   const groupContext = useCheckboxGroup();
 
-  // Animation values
+  // Animation values - Improved spring configuration
   const scale = useSharedValue(1);
   const checkProgress = useSharedValue(0);
   const backgroundProgress = useSharedValue(0);
+  const borderProgress = useSharedValue(0);
 
   // Determine if checkbox is checked
   const isChecked = groupContext
@@ -124,29 +132,49 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // Determine if checkbox is disabled
   const isDisabled = groupContext ? groupContext.disabled : checkboxDisabled;
 
-  // Update animations when checked state changes
+  // Update animations when checked state changes - Much smoother config
   React.useEffect(() => {
+    // Super smooth spring animation untuk check mark
     checkProgress.value = withSpring(isChecked ? 1 : 0, {
-      damping: 15,
-      stiffness: 200,
+      damping: 20,
+      stiffness: 300,
+      mass: 0.8,
     });
+
+    // Faster background transition
     backgroundProgress.value = withTiming(isChecked ? 1 : 0, {
-      duration: 200,
+      duration: 150,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // Border animation
+    borderProgress.value = withTiming(isChecked ? 1 : 0, {
+      duration: 120,
+    });
   }, [isChecked]);
 
   const handlePress = () => {
     if (isDisabled) return;
 
-    // Scale animation on press
-    scale.value = withSpring(0.95, { duration: 100 }, () => {
-      scale.value = withSpring(1, { duration: 100 });
-    });
+    // Instant feedback dengan scale animation yang lebih halus
+    scale.value = withSpring(
+      0.92,
+      {
+        damping: 25,
+        stiffness: 400,
+        mass: 0.5,
+      },
+      () => {
+        scale.value = withSpring(1, {
+          damping: 20,
+          stiffness: 300,
+          mass: 0.7,
+        });
+      }
+    );
 
     if (groupContext) {
       const newValue = isChecked
-        ? groupContext.value.filter(v => v !== value)
+        ? groupContext.value.filter((v) => v !== value)
         : [...groupContext.value, value];
       groupContext.onValueChange(newValue);
     } else if (onCheckedChange) {
@@ -154,7 +182,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     }
   };
 
-  // Animated styles
+  // Animated styles - Optimized interpolations
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: scale.value }],
@@ -162,44 +190,67 @@ const Checkbox: React.FC<CheckboxProps> = ({
   });
 
   const animatedCheckboxStyle = useAnimatedStyle(() => {
-    const backgroundColor = interpolate(
+    const bgProgress = interpolate(
       backgroundProgress.value,
       [0, 1],
       [0, 1],
       Extrapolation.CLAMP
     );
 
-    // Get the variant color
-    const variantColors = {
-      default: styles.primaryBackground.backgroundColor,
-      primary: styles.primaryBackground.backgroundColor,
-      success: styles.successBackground.backgroundColor,
-      warning: styles.warningBackground.backgroundColor,
-      error: styles.errorBackground.backgroundColor,
+    // Get the variant colors
+    const variantBackgroundColors = {
+      default: styles.primaryBackground.backgroundColor as string,
+      primary: styles.primaryBackground.backgroundColor as string,
+      success: styles.successBackground.backgroundColor as string,
+      warning: styles.warningBackground.backgroundColor as string,
+      error: styles.errorBackground.backgroundColor as string,
+    };
+
+    const variantBorderColors = {
+      default: styles.default.borderColor as string,
+      primary: styles.primary.borderColor as string,
+      success: styles.success.borderColor as string,
+      warning: styles.warning.borderColor as string,
+      error: styles.error.borderColor as string,
     };
 
     return {
-      backgroundColor: backgroundColor > 0.5 ? variantColors[variant] : 'transparent',
+      backgroundColor:
+        bgProgress > 0.1 ? variantBackgroundColors[variant] : 'transparent',
+      borderColor:
+        bgProgress > 0.5
+          ? variantBackgroundColors[variant]
+          : variantBorderColors[variant],
+      borderWidth: 2,
     };
   });
 
   const animatedCheckStyle = useAnimatedStyle(() => {
-    const scale = interpolate(
+    // Bouncy scale animation untuk check mark
+    const checkScale = interpolate(
       checkProgress.value,
-      [0, 0.5, 1],
-      [0, 1.2, 1],
+      [0, 0.3, 0.7, 1],
+      [0, 0.2, 1.1, 1],
       Extrapolation.CLAMP
     );
 
     const opacity = interpolate(
       checkProgress.value,
-      [0, 1],
-      [0, 1],
+      [0, 0.2, 1],
+      [0, 0.8, 1],
+      Extrapolation.CLAMP
+    );
+
+    // Rotation effect untuk lebih dynamic
+    const rotation = interpolate(
+      checkProgress.value,
+      [0, 0.5, 1],
+      [0, -5, 0],
       Extrapolation.CLAMP
     );
 
     return {
-      transform: [{ scale }],
+      transform: [{ scale: checkScale }, { rotate: `${rotation}deg` }],
       opacity,
     };
   });
@@ -218,12 +269,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
       style={[styles.container, styles[`${size}Container`]]}
       onPress={handlePress}
       disabled={isDisabled}
-      activeOpacity={0.7}
+      activeOpacity={0.8}
       {...props}
     >
       <Animated.View style={[animatedContainerStyle]}>
         <Animated.View style={[checkboxStyle, animatedCheckboxStyle]}>
-          {/* Animated check icon */}
+          {/* Animated check icon with improved animation */}
           <Animated.View style={[styles.iconContainer, animatedCheckStyle]}>
             <CheckboxIcon size={size} variant={variant} />
           </Animated.View>
@@ -239,11 +290,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
   );
 };
 
-const CheckboxIndicator: React.FC<CheckboxIndicatorProps & {
-  checked?: boolean;
-  size?: CheckboxSize;
-  variant?: CheckboxVariant;
-}> = ({
+const CheckboxIndicator: React.FC<
+  CheckboxIndicatorProps & {
+    checked?: boolean;
+    size?: CheckboxSize;
+    variant?: CheckboxVariant;
+  }
+> = ({
   children,
   style,
   checked = false,
@@ -257,49 +310,44 @@ const CheckboxIndicator: React.FC<CheckboxIndicatorProps & {
 
   return (
     <View
-      style={[
-        styles.indicator,
-        styles[size],
-        styles[variant],
-        style,
-      ]}
+      style={[styles.indicator, styles[size], styles[variant], style]}
       {...props}
     >
-      {children || <Check size={size === 'sm' ? 12 : size === 'md' ? 16 : 20} color="white" />}
+      {children || (
+        <Check
+          size={size === 'sm' ? 12 : size === 'md' ? 16 : 20}
+          color="white"
+        />
+      )}
     </View>
   );
 };
 
-const CheckboxIcon: React.FC<CheckboxIconProps & {
-  size?: CheckboxSize;
-  variant?: CheckboxVariant;
-}> = ({
-  icon,
-  style,
-  size = 'md',
-  variant = 'default',
-  ...props
-}) => {
+const CheckboxIcon: React.FC<
+  CheckboxIconProps & {
+    size?: CheckboxSize;
+    variant?: CheckboxVariant;
+  }
+> = ({ icon, style, size = 'md', variant = 'default', ...props }) => {
   const iconSize = size === 'sm' ? 12 : size === 'md' ? 16 : 20;
   const iconColor = 'white';
 
   return (
-    <View style={[{ alignItems: 'center', justifyContent: 'center' }, style]} {...props}>
-      {icon || <Check size={iconSize} color={iconColor} />}
+    <View
+      style={[{ alignItems: 'center', justifyContent: 'center' }, style]}
+      {...props}
+    >
+      {icon || <Check size={iconSize} color={iconColor} strokeWidth={2.5} />}
     </View>
   );
 };
 
-const CheckboxLabel: React.FC<CheckboxLabelProps & {
-  disabled?: boolean;
-  size?: CheckboxSize;
-}> = ({
-  children,
-  style,
-  disabled = false,
-  size = 'md',
-  ...props
-}) => {
+const CheckboxLabel: React.FC<
+  CheckboxLabelProps & {
+    disabled?: boolean;
+    size?: CheckboxSize;
+  }
+> = ({ children, style, disabled = false, size = 'md', ...props }) => {
   const { theme } = useTheme();
   const styles = useThemedStyles(createCheckboxLabelStyles);
 
