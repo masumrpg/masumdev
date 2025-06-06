@@ -9,3 +9,4 @@ export * from './table';
 export * from './spinner';
 export * from './progress';
 export * from './switcher';
+export * from './checkbox';

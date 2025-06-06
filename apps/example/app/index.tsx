@@ -12,6 +12,7 @@ import {
   Badge,
   Bell,
   CardSim,
+  CheckSquare,
   CirclePlus,
   GalleryHorizontal,
   GitPullRequestClosedIcon,
@@ -135,6 +136,12 @@ export default function HomeScreen() {
     },
     {
       id: 17,
+      title: 'Checkbox',
+      path: '/checkbox',
+      icon: <CheckSquare size={30} color={'black'} />,
+    },
+    {
+      id: 18,
       title: 'Switcher',
       path: '/switcher',
       icon: <ToggleLeft size={30} color={'black'} />,
