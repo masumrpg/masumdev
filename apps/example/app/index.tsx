@@ -4,18 +4,23 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import { Href, Link } from 'expo-router';
 import {
   AlignVerticalJustifyEnd,
+  Badge,
   Bell,
   CardSim,
   CirclePlus,
   GalleryHorizontal,
   LayoutDashboard,
   LetterText,
+  Loader,
   Palette,
+  ParkingCircleOff,
   QrCode,
+  Table,
   TextCursorInput,
 } from 'lucide-react-native';
 import { ReactElement } from 'react';
@@ -89,21 +94,47 @@ export default function HomeScreen() {
       path: '/layout',
       icon: <LayoutDashboard size={30} color={'black'} />,
     },
+    {
+      id: 11,
+      title: 'Badge',
+      path: '/badge',
+      icon: <Badge size={30} color={'black'} />,
+    },
+    {
+      id: 12,
+      title: 'Spiner',
+      path: '/spiner',
+      icon: <Loader size={30} color={'black'} />,
+    },
+    {
+      id: 13,
+      title: 'Table',
+      path: '/table',
+      icon: <Table size={30} color={'black'} />,
+    },
+    {
+      id: 14,
+      title: 'Progress',
+      path: '/progress',
+      icon: <ParkingCircleOff size={30} color={'black'} />,
+    },
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.gridContainer}>
-        {listLibrary.map((item) => (
-          <Link href={item.path} key={item.id} asChild>
-            <TouchableOpacity style={styles.gridItem}>
-              {item.icon}
-              <Text style={styles.gridItemText}>{item.title}</Text>
-            </TouchableOpacity>
-          </Link>
-        ))}
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.gridContainer}>
+          {listLibrary.map((item) => (
+            <Link href={item.path} key={item.id} asChild>
+              <TouchableOpacity style={styles.gridItem}>
+                {item.icon}
+                <Text style={styles.gridItemText}>{item.title}</Text>
+              </TouchableOpacity>
+            </Link>
+          ))}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

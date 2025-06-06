@@ -41,13 +41,34 @@ export interface Theme {
     md: number;
     lg: number;
     xl: number;
+    full: number;
   };
   typography: {
-    small: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
-    body: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
-    subtitle: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
-    title: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
-    heading: { fontSize: number; lineHeight: number; fontWeight: TextStyle['fontWeight'] };
+    small: {
+      fontSize: number;
+      lineHeight: number;
+      fontWeight: TextStyle['fontWeight'];
+    };
+    body: {
+      fontSize: number;
+      lineHeight: number;
+      fontWeight: TextStyle['fontWeight'];
+    };
+    subtitle: {
+      fontSize: number;
+      lineHeight: number;
+      fontWeight: TextStyle['fontWeight'];
+    };
+    title: {
+      fontSize: number;
+      lineHeight: number;
+      fontWeight: TextStyle['fontWeight'];
+    };
+    heading: {
+      fontSize: number;
+      lineHeight: number;
+      fontWeight: TextStyle['fontWeight'];
+    };
   };
 }
 

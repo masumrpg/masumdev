@@ -35,6 +35,7 @@ export const lightTheme: Theme = {
     md: 10,
     lg: 14,
     xl: 20,
+    full: 40,
   },
   typography: {
     small: { fontSize: 12, lineHeight: 16, fontWeight: '400' },

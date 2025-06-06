@@ -4,3 +4,7 @@ export * from './typography';
 export * from './input';
 export * from './layout';
 export * from './divider';
+export * from './badge';
+export * from './table';
+export * from './spinner';
+export * from './progress';
