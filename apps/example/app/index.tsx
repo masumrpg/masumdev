@@ -24,6 +24,7 @@ import {
   QrCode,
   Table,
   TextCursorInput,
+  ToggleLeft,
 } from 'lucide-react-native';
 import { ReactElement } from 'react';
 
@@ -131,6 +132,12 @@ export default function HomeScreen() {
       title: 'Divider',
       path: '/divider',
       icon: <Minus size={30} color={'black'} />,
+    },
+    {
+      id: 17,
+      title: 'Switcher',
+      path: '/switcher',
+      icon: <ToggleLeft size={30} color={'black'} />,
     },
   ];
 

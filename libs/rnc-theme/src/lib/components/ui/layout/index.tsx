@@ -56,7 +56,7 @@ const HStack: React.FC<StackProps> = ({
   flex,
   width,
   height,
-  themed = true,
+  themed = false,
   ...props
 }) => {
   const { theme } = useTheme();
@@ -103,7 +103,7 @@ const VStack: React.FC<StackProps> = ({
   flex,
   width,
   height,
-  themed = true,
+  themed = false,
   ...props
 }) => {
   const { theme } = useTheme();
@@ -146,7 +146,7 @@ const ZStack: React.FC<BaseLayoutProps> = ({
   flex,
   width,
   height,
-  themed = true,
+  themed = false,
   ...props
 }) => {
   const { theme } = useTheme();
